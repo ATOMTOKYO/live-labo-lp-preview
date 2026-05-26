@@ -456,19 +456,19 @@
     box-shadow:0 3px 10px rgba(255,184,0,.5);
   }
   /* Individual platform icons (brand-color approximations) */
-  .picon-tiktok-art{
-    background:#010101;
-    background-image:
-      radial-gradient(circle at 32% 38%, rgba(37,244,238,.85) 0%, transparent 35%),
-      radial-gradient(circle at 68% 62%, rgba(254,44,85,.85) 0%, transparent 35%),
-      #010101;
+  /* 実ロゴ画像を入れたカード共通 */
+  .picon-img{
+    width:100%;height:100%;object-fit:contain;display:block;
+    padding:14%;box-sizing:border-box;
   }
-  .picon-tiktok-art::after{
-    content:"♪";font-size:1.4em;color:#fff;text-shadow:2px 0 #25f4ee,-2px 0 #fe2c55;
-  }
+  .picon-tiktok-art{background:#010101}
+  .picon-tiktok-art .picon-img{padding:18%;background:#010101}
+  .picon-17live-art{background:#fff}
+  .picon-17live-art .picon-img{padding:0}
+  .picon-iriam-art{background:#fff}
+  .picon-iriam-art .picon-img{padding:0}
   .picon-pococha-art{background:#fff;color:#000}
-  .picon-17live-art{background:#ff2d2d;color:#fff}
-  .picon-iriam-art{background:linear-gradient(135deg,#a3d977 0%,#7bc043 100%);color:#fff}
+  /* 17LIVE / IRIAM はロゴ自体に背景色あり */
   .picon-reality-art{background:linear-gradient(135deg,#ff7eb6 0%,#7eccff 100%);color:#fff}
   .picon-mixch-art{background:linear-gradient(135deg,#ff7e5f 0%,#feb47b 100%);color:#fff}
   .picon-everylive-art{background:#fff;color:#1ab7ea}
@@ -1029,7 +1029,7 @@
     </div>
     <div class="platform-icons">
       <a class="picon picon-tiktok" data-rank="推し No.1" title="TikTok LIVE">
-        <div class="picon-art picon-tiktok-art" aria-hidden="true"></div>
+        <div class="picon-art picon-tiktok-art" aria-hidden="true"><img src="assets/logos/tiktok.avif" alt="TikTok LIVE" class="picon-img"></div>
         <span class="picon-name">TikTok LIVE</span>
       </a>
       <a class="picon picon-pococha" data-rank="推し No.2" title="Pococha">
@@ -1037,11 +1037,11 @@
         <span class="picon-name">Pococha</span>
       </a>
       <a class="picon" title="17LIVE">
-        <div class="picon-art picon-17live-art" aria-hidden="true">17</div>
+        <div class="picon-art picon-17live-art" aria-hidden="true"><img src="assets/logos/17live.webp" alt="17LIVE" class="picon-img"></div>
         <span class="picon-name">17LIVE</span>
       </a>
       <a class="picon" title="IRIAM">
-        <div class="picon-art picon-iriam-art" aria-hidden="true">I</div>
+        <div class="picon-art picon-iriam-art" aria-hidden="true"><img src="assets/logos/iriam.webp" alt="IRIAM" class="picon-img"></div>
         <span class="picon-name">IRIAM</span>
       </a>
       <a class="picon" title="REALITY">
