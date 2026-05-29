@@ -721,6 +721,37 @@
     .cta-final-buttons{flex-direction:column}
     .cta-final-buttons .btn{width:100%}
   }
+
+  /* ========== ▼ 追加: 321ver 強化（スマホ最適化 / 写真帯2段 / 雑誌風） ========== */
+  /* 雑誌風の見出しキッカー（赤いダッシュ） */
+  .section-eyebrow::before,.marquee-eyebrow::before{
+    content:"";display:inline-block;width:26px;height:2px;
+    background:var(--red);vertical-align:middle;margin-right:10px;transform:translateY(-2px);
+  }
+  /* ライバー写真帯：見出し + 2段（上下で反対方向にスクロール） */
+  .marquee-head{text-align:center;padding:56px 24px 30px}
+  .marquee-eyebrow{font-family:Inter,sans-serif;color:var(--red);font-weight:900;font-size:13px;letter-spacing:.26em}
+  .marquee-title{margin-top:10px;color:#fff;font-weight:900;line-height:1.3;font-size:clamp(24px,3.6vw,40px)}
+  .marquee-title span{color:var(--red)}
+  .liver-marquee{padding-bottom:50px}
+  .marquee-viewport + .marquee-viewport{margin-top:14px}
+  .marquee-track--rev{animation-name:m-scroll-rev}
+  @keyframes m-scroll-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  .marquee-caption{position:static;transform:none;left:auto;bottom:auto;display:block;width:-moz-fit-content;width:fit-content;margin:30px auto 0}
+  /* スマホ用ハンバーガーメニュー */
+  .mobile-menu{display:none}
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{transition:transform .25s var(--ease),top .25s var(--ease),background .2s var(--ease)}
+  @media (max-width:960px){
+    .mobile-menu{display:block;max-height:0;overflow:hidden;background:rgba(255,255,255,.98);border-top:1px solid var(--gray-100);transition:max-height .32s var(--ease)}
+    .site-header.open .mobile-menu{max-height:520px}
+    .mobile-menu nav{display:flex;flex-direction:column;padding:6px 24px 18px}
+    .mobile-menu nav a{padding:15px 2px;font-size:15px;font-weight:700;color:var(--gray-900);border-bottom:1px solid var(--gray-100)}
+    .mobile-menu nav a.header-cta{display:inline-flex;margin-top:16px;border-bottom:none;justify-content:center;color:#fff}
+    .site-header.open .nav-toggle span{background:transparent}
+    .site-header.open .nav-toggle span::before{top:0;transform:rotate(45deg)}
+    .site-header.open .nav-toggle span::after{top:0;transform:rotate(-45deg)}
+  }
+  /* ========== ▲ 追加ここまで ========== */
 </style>
 </head>
 <body>
@@ -740,7 +771,18 @@
       <a href="#faq">FAQ</a>
     </nav>
     <a href="#contact" class="header-cta">LINEで無料相談</a>
-    <button class="nav-toggle" aria-label="メニュー"><span></span></button>
+    <button class="nav-toggle" aria-label="メニュー" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <nav>
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#platforms">対応アプリ</a>
+      <a href="#livers">所属ライバー</a>
+      <a href="#voice">ライバーの声</a>
+      <a href="#campaign">特典</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="header-cta">LINEで無料相談</a>
+    </nav>
   </div>
 </header>
 
@@ -783,6 +825,10 @@
 
 <!-- ========== Liver Marquee (左に流れるライバー写真ストリップ) ========== -->
 <section class="liver-marquee" aria-label="活躍中の所属ライバー">
+  <div class="marquee-head">
+    <span class="marquee-eyebrow">ACTIVE LIVERS</span>
+    <h2 class="marquee-title">毎日、どこかで<span>輝いてる</span>。</h2>
+  </div>
   <div class="marquee-viewport">
     <div class="marquee-track">
       <!-- セット1 -->
@@ -1362,6 +1408,33 @@
     });
   },{threshold:.15});
   document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+
+  // スマホ: ハンバーガーメニューの開閉
+  const siteHeader = document.querySelector('.site-header');
+  const navToggle = document.querySelector('.nav-toggle');
+  if(siteHeader && navToggle){
+    navToggle.addEventListener('click', ()=>{
+      const open = siteHeader.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.querySelectorAll('#mobileMenu a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        siteHeader.classList.remove('open');
+        navToggle.setAttribute('aria-expanded','false');
+      });
+    });
+  }
+
+  // ライバー写真帯: 2段目を生成（1段目を複製して逆方向にスクロール）
+  const marquee = document.querySelector('.liver-marquee');
+  const firstVp = marquee ? marquee.querySelector('.marquee-viewport') : null;
+  if(firstVp){
+    const secondVp = firstVp.cloneNode(true);
+    const track = secondVp.querySelector('.marquee-track');
+    track.classList.add('marquee-track--rev');
+    Array.from(track.children).reverse().forEach(el=>track.appendChild(el)); // 上下で並び順を変える
+    firstVp.insertAdjacentElement('afterend', secondVp);
+  }
 </script>
 
 </body>
