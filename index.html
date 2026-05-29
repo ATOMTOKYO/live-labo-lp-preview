@@ -24,7 +24,7 @@
     --gray-500:#8a8a92;
     --gray-300:#d8d8de;
     --gray-100:#f4f4f6;
-    --cream:#faf7f2;
+    --cream:#fafafa;
     --line:#06c755;
     --gold:#c8a456;
     --shadow-sm:0 1px 2px rgba(14,14,16,.06),0 2px 8px rgba(14,14,16,.04);
@@ -137,12 +137,6 @@
   .hero-trust-avatars img:first-child{margin-left:0}
   .hero-trust-text{font-size:13px;color:var(--gray-700)}
   .hero-trust-text strong{color:var(--black);font-weight:900}
-  .ed-note{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:18px;height:18px;border-radius:50%;
-    background:#fff4d0;color:#a06700;font-size:10px;margin-left:6px;
-    border:1px dashed #d4a000;cursor:help;
-  }
 
   .hero-visual{position:relative;height:520px}
   .hero-collage{position:absolute;inset:0}
@@ -351,10 +345,14 @@
     transition:transform .2s var(--ease),box-shadow .2s var(--ease);
   }
   .reco-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-  .reco-emoji{
-    font-size:36px;line-height:1;width:64px;height:64px;border-radius:50%;
-    background:var(--red-soft);display:flex;align-items:center;justify-content:center;
+  .reco-icon{
+    width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(135deg,#fff4d0 0%,#ffe27a 100%);
+    display:flex;align-items:center;justify-content:center;
+    color:#1a1a1a;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.05),0 4px 10px rgba(255,210,80,.25);
   }
+  .reco-icon svg{width:30px;height:30px}
   .reco-card h3{margin-top:16px;font-size:18px;font-weight:900;color:var(--black);line-height:1.4}
   .reco-card p{margin-top:8px;font-size:14px;color:var(--gray-700);line-height:1.8}
 
@@ -750,7 +748,7 @@
 <section class="hero" id="top">
   <div class="hero-inner">
     <div>
-      <span class="hero-badge">2026年 新規ライバー大募集中・残り若干名</span>
+      <span class="hero-badge">2026年 新規ライバー募集 — 残り若干名</span>
       <h1>あなたの"好き"を、<br><span class="accent">武器</span>にする。</h1>
       <p class="hero-sub">
         Pococha 歴代1位ライバー多数在籍。<br>
@@ -767,7 +765,7 @@
           <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="">
           <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="">
         </div>
-        <div class="hero-trust-text"><strong>○○名</strong>のライバーが活躍中<span class="ed-note" title="Yokouchiさんへ：実数に差し替えてください">✎</span></div>
+        <div class="hero-trust-text"><strong>○○名</strong>のライバーが活躍中</div>
       </div>
     </div>
     <div class="hero-visual">
@@ -823,7 +821,7 @@
       <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg" alt="" loading="lazy"></a>
     </div>
   </div>
-  <span class="marquee-caption">⚡ 活躍中の所属ライバー — Pococha・TikTok LIVE・17LIVEで毎日配信中</span>
+  <span class="marquee-caption">活躍中の所属ライバー — Pococha・TikTok LIVE・17LIVEで毎日配信中</span>
 </section>
 
 <!-- ========== Trust Strip ========== -->
@@ -1083,32 +1081,32 @@
     <p class="section-lead">少しでも当てはまったら、まずは無料相談から。あなたに合った働き方をご提案します。</p>
     <div class="reco-grid">
       <div class="reco-card">
-        <div class="reco-emoji">⏱</div>
+        <div class="reco-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="11"/><path d="M16 9v7l4 3"/></svg></div>
         <h3>スキマ時間を活用したい</h3>
         <p>家事の合間・通学前・寝る前の30分から。あなたのスケジュールに合わせて配信できます。</p>
       </div>
       <div class="reco-card">
-        <div class="reco-emoji">💰</div>
+        <div class="reco-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4v24M11 9h7a4 4 0 0 1 0 8h-6a4 4 0 0 0 0 8h8"/></svg></div>
         <h3>収入をもう一本増やしたい</h3>
         <p>本業＋副業として、月数万円〜数十万円。会社員・主婦の方が安定して稼げています。</p>
       </div>
       <div class="reco-card">
-        <div class="reco-emoji">🎤</div>
+        <div class="reco-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="4" width="6" height="14" rx="3"/><path d="M9 14a7 7 0 0 0 14 0M16 21v6M11 27h10"/></svg></div>
         <h3>夢・目標を叶えたい</h3>
         <p>歌手・タレント・モデル — ライブ配信は最短のステップ。実際にメジャーデビューしたライバーも。</p>
       </div>
       <div class="reco-card">
-        <div class="reco-emoji">🤝</div>
+        <div class="reco-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="11" r="4"/><circle cx="22" cy="11" r="4"/><path d="M3 26c0-4 3-7 7-7s7 3 7 7M15 26c0-4 3-7 7-7s7 3 7 7"/></svg></div>
         <h3>新しい仲間がほしい</h3>
         <p>所属ライバー専用コミュニティで、コラボ・情報交換・オフ会。リアルでも繋がれます。</p>
       </div>
       <div class="reco-card">
-        <div class="reco-emoji">🌟</div>
+        <div class="reco-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l3.5 8.5L28 13l-7 6 2 9-7-5-7 5 2-9-7-6 8.5-1.5z"/></svg></div>
         <h3>有名になりたい・推されたい</h3>
         <p>SNS総フォロワー10万人を超えるトップライバーも在籍。あなたも"推される側"へ。</p>
       </div>
       <div class="reco-card">
-        <div class="reco-emoji">🎓</div>
+        <div class="reco-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5L3 12l13 7 13-7zM7 16v7l9 5 9-5v-7"/></svg></div>
         <h3>未経験から始めたい</h3>
         <p>初配信からの教育プログラム完備。マネージャーが付きっきりで伴走します。</p>
       </div>
@@ -1332,7 +1330,7 @@
       <a href="#" class="btn btn-primary btn-large btn-arrow">LINEで無料相談</a>
       <a href="#form" class="btn btn-ghost btn-large btn-arrow">フォームから応募</a>
     </div>
-    <p class="cta-final-urgency">⏳ 2026年5月の募集枠 残りわずか</p>
+    <p class="cta-final-urgency">2026年5月 募集枠 残りわずか</p>
     <p class="cta-final-note">© 株式会社Live-Labo｜東京都渋谷区恵比寿南1-1-1 Humax Ebisu 8F</p>
   </div>
 </section>

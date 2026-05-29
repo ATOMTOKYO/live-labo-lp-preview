@@ -1,0 +1,750 @@
+<style>
+  :root{
+    --red:#d4002a;
+    --red-deep:#a40020;
+    --red-soft:#ffeef0;
+    --black:#0e0e10;
+    --gray-900:#1f1f23;
+    --gray-700:#4a4a52;
+    --gray-500:#8a8a92;
+    --gray-300:#d8d8de;
+    --gray-100:#f4f4f6;
+    --cream:#faf7f2;
+    --line:#06c755;
+    --gold:#c8a456;
+    --shadow-sm:0 1px 2px rgba(14,14,16,.06),0 2px 8px rgba(14,14,16,.04);
+    --shadow-md:0 4px 12px rgba(14,14,16,.08),0 12px 32px rgba(14,14,16,.06);
+    --shadow-lg:0 8px 24px rgba(14,14,16,.12),0 24px 64px rgba(14,14,16,.08);
+    --r-sm:8px; --r-md:14px; --r-lg:24px; --r-pill:999px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --container:1200px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif;
+    color:var(--gray-900);
+    background:#fff;
+    line-height:1.7;
+    font-feature-settings:"palt";
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;height:auto;display:block}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  /* ---------- Header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(180%) blur(12px);
+    -webkit-backdrop-filter:saturate(180%) blur(12px);
+    border-bottom:1px solid var(--gray-100);
+  }
+  .header-inner{
+    max-width:var(--container);margin:0 auto;
+    padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--red);font-size:22px;letter-spacing:.02em}
+  .logo img{height:32px;width:auto}
+  .header-nav{display:flex;gap:28px;align-items:center}
+  .header-nav a{font-size:14px;font-weight:500;color:var(--gray-700);transition:color .2s var(--ease)}
+  .header-nav a:hover{color:var(--red)}
+  .header-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 18px;border-radius:var(--r-pill);
+    background:var(--line);color:#fff;font-weight:700;font-size:14px;
+    box-shadow:0 2px 0 #04a847,0 6px 16px rgba(6,199,85,.35);
+    transition:transform .15s var(--ease),box-shadow .15s var(--ease);
+  }
+  .header-cta:hover{transform:translateY(-1px);box-shadow:0 3px 0 #04a847,0 10px 22px rgba(6,199,85,.4)}
+  .header-cta::before{content:"";width:18px;height:18px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M12 2C6.48 2 2 5.86 2 10.6c0 2.74 1.6 5.17 4.09 6.78-.18.6-.65 2.2-.75 2.54-.12.43.16.43.34.32.14-.09 2.27-1.54 3.19-2.16.9.13 1.83.2 2.78.2c5.52 0 10-3.86 10-8.6S17.52 2 12 2z'/></svg>") no-repeat center/contain;display:inline-block}
+  .nav-toggle{display:none;width:40px;height:40px;border-radius:8px;background:var(--gray-100);align-items:center;justify-content:center}
+  .nav-toggle span{display:block;width:18px;height:2px;background:var(--gray-900);position:relative}
+  .nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:100%;height:2px;background:var(--gray-900)}
+  .nav-toggle span::before{top:-6px}.nav-toggle span::after{top:6px}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(1200px 600px at -10% -20%, #ffe7ec 0%, transparent 60%),
+      radial-gradient(900px 500px at 110% 10%, #f3e6d7 0%, transparent 50%),
+      linear-gradient(180deg,#ffffff 0%,#faf7f2 100%);
+    padding:88px 0 96px;
+  }
+  .hero-inner{
+    max-width:var(--container);margin:0 auto;padding:0 24px;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;
+  }
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 14px;border-radius:var(--r-pill);
+    background:#fff;border:1px solid var(--red);color:var(--red);
+    font-size:12px;font-weight:700;letter-spacing:.06em;
+    box-shadow:var(--shadow-sm);
+  }
+  .hero-badge::before{content:"●";font-size:8px;animation:pulse 1.6s var(--ease) infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{
+    margin-top:18px;
+    font-size:clamp(34px,4.6vw,60px);
+    line-height:1.18;letter-spacing:-.01em;font-weight:900;
+    color:var(--black);
+  }
+  .hero h1 .accent{color:var(--red);position:relative;display:inline-block}
+  .hero h1 .accent::after{
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:6px;
+    background:linear-gradient(90deg,var(--red),#ff6680);border-radius:6px;opacity:.25;
+  }
+  .hero-sub{margin-top:22px;font-size:17px;color:var(--gray-700);max-width:520px}
+  .hero-ctas{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    padding:18px 28px;border-radius:var(--r-pill);
+    font-weight:700;font-size:16px;letter-spacing:.02em;
+    transition:transform .15s var(--ease),box-shadow .15s var(--ease),background .2s var(--ease);
+  }
+  .btn-primary{background:var(--line);color:#fff;box-shadow:0 3px 0 #04a847,0 12px 28px rgba(6,199,85,.35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 0 #04a847,0 16px 36px rgba(6,199,85,.4)}
+  .btn-secondary{background:var(--black);color:#fff;box-shadow:0 3px 0 #000,0 12px 28px rgba(0,0,0,.2)}
+  .btn-secondary:hover{transform:translateY(-2px);background:var(--gray-900)}
+  .btn-ghost{background:transparent;color:var(--gray-900);border:1.5px solid var(--gray-300)}
+  .btn-ghost:hover{border-color:var(--black);background:var(--gray-100)}
+  .btn-large{padding:22px 42px;font-size:18px}
+  .btn-arrow::after{content:"→";font-weight:900;transition:transform .2s var(--ease)}
+  .btn-arrow:hover::after{transform:translateX(4px)}
+
+  .hero-trust{margin-top:28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .hero-trust-avatars{display:flex}
+  .hero-trust-avatars img{width:36px;height:36px;border-radius:50%;border:2px solid #fff;margin-left:-10px;object-fit:cover;box-shadow:var(--shadow-sm)}
+  .hero-trust-avatars img:first-child{margin-left:0}
+  .hero-trust-text{font-size:13px;color:var(--gray-700)}
+  .hero-trust-text strong{color:var(--black);font-weight:900}
+
+  .hero-visual{position:relative;height:520px}
+  .hero-collage{position:absolute;inset:0}
+  .hero-collage .ph{
+    position:absolute;border-radius:var(--r-lg);overflow:hidden;
+    box-shadow:var(--shadow-lg);background:var(--gray-100);
+  }
+  .hero-collage .ph img{width:100%;height:100%;object-fit:cover}
+  .hero-collage .ph-1{top:0;left:8%;width:54%;height:72%;transform:rotate(-3deg);z-index:2}
+  .hero-collage .ph-2{top:14%;right:0;width:42%;height:48%;transform:rotate(4deg);z-index:1}
+  .hero-collage .ph-3{bottom:0;left:0;width:38%;height:42%;transform:rotate(2deg);z-index:3}
+  .hero-collage .ph-4{bottom:6%;right:6%;width:46%;height:46%;transform:rotate(-2deg);z-index:2}
+  .hero-tag{
+    position:absolute;z-index:4;
+    background:var(--black);color:#fff;border-radius:var(--r-pill);
+    padding:10px 16px;font-size:13px;font-weight:700;
+    box-shadow:var(--shadow-md);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .hero-tag.t1{top:-12px;right:18%;background:var(--red);transform:rotate(-4deg)}
+  .hero-tag.t2{bottom:30%;left:-14px;background:#fff;color:var(--black);transform:rotate(3deg)}
+  .hero-tag.t3{bottom:0;right:0;background:var(--gold);color:var(--black);transform:rotate(-2deg)}
+
+  /* ---------- Stats ---------- */
+  .stats{background:var(--black);color:#fff;padding:52px 24px}
+  .stats-inner{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .stat{text-align:center}
+  .stat-num{
+    font-family:Inter,sans-serif;font-weight:900;letter-spacing:-.02em;
+    font-size:clamp(36px,4.5vw,56px);line-height:1;
+    background:linear-gradient(180deg,#fff 0%,#ff8fa3 120%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .stat-num small{font-size:.5em;font-weight:700;margin-left:4px;color:#fff;background:none;-webkit-text-fill-color:#fff}
+  .stat-label{margin-top:8px;font-size:13px;color:rgba(255,255,255,.7);letter-spacing:.04em}
+
+  /* ---------- Section common ---------- */
+  section{padding:96px 24px}
+  .section-inner{max-width:var(--container);margin:0 auto}
+  .section-eyebrow{
+    display:inline-block;color:var(--red);font-weight:700;font-size:13px;
+    letter-spacing:.18em;text-transform:uppercase;
+  }
+  .section-title{
+    margin-top:10px;font-size:clamp(28px,3.4vw,42px);
+    line-height:1.3;font-weight:900;letter-spacing:-.005em;color:var(--black);
+  }
+  .section-title .accent{color:var(--red)}
+  .section-lead{margin-top:14px;color:var(--gray-700);font-size:16px;max-width:680px}
+
+  /* ---------- Why (Reasons) ---------- */
+  .reasons{background:var(--cream)}
+  .reasons-grid{
+    margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .reason{
+    background:#fff;border-radius:var(--r-lg);padding:36px 28px;
+    box-shadow:var(--shadow-sm);transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+    position:relative;overflow:hidden;
+  }
+  .reason::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);
+    transform:scaleY(0);transform-origin:top;transition:transform .3s var(--ease);
+  }
+  .reason:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .reason:hover::before{transform:scaleY(1)}
+  .reason-num{
+    font-family:Inter,sans-serif;font-weight:900;color:var(--red);
+    font-size:14px;letter-spacing:.1em;
+  }
+  .reason-icon{
+    width:56px;height:56px;border-radius:14px;background:var(--red-soft);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--red);margin-top:12px;
+  }
+  .reason-icon svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .reason h3{margin-top:18px;font-size:20px;font-weight:900;color:var(--black);line-height:1.4}
+  .reason p{margin-top:10px;font-size:14px;color:var(--gray-700);line-height:1.8}
+
+  /* ---------- Platforms ---------- */
+  .platforms{background:#fff}
+  .platforms-grid{
+    margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  .platform-card{
+    position:relative;overflow:hidden;
+    border-radius:var(--r-lg);padding:36px 28px 30px;
+    background:#fff;border:1px solid var(--gray-300);
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);
+    min-height:170px;display:flex;flex-direction:column;justify-content:center;
+  }
+  .platform-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .platform-badge{
+    position:absolute;top:14px;right:14px;
+    padding:5px 11px;border-radius:var(--r-pill);
+    background:linear-gradient(135deg,#ffd54a 0%,#ffb800 100%);color:#5a3700;
+    font-size:11px;font-weight:900;letter-spacing:.04em;
+    box-shadow:0 2px 6px rgba(255,184,0,.4);
+  }
+  .platform-logo{
+    font-family:Inter,"Noto Sans JP",sans-serif;
+    font-size:clamp(22px,2.4vw,28px);font-weight:900;letter-spacing:-.01em;
+    line-height:1.1;
+  }
+  .platform-tag{margin-top:10px;font-size:13px;color:var(--gray-700);line-height:1.6}
+  .platform-tiktok{
+    background:linear-gradient(135deg,#010101 0%,#1a1a1a 100%);
+    border-color:#000;
+  }
+  .platform-tiktok .platform-logo{
+    background:linear-gradient(90deg,#25f4ee 0%,#fe2c55 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .platform-tiktok .platform-tag{color:rgba(255,255,255,.7)}
+  .platform-pococha{
+    background:linear-gradient(135deg,#fff8f0 0%,#ffe8d4 100%);
+    border-color:#ffb37c;
+  }
+  .platform-pococha .platform-logo{color:#ff6a00}
+  .platform-17live{
+    background:linear-gradient(135deg,#fff5f5 0%,#ffe0e0 100%);
+    border-color:#ffb0b0;
+  }
+  .platform-17live .platform-logo{color:#ff1744}
+  .platform-iriam{
+    background:linear-gradient(135deg,#f3f0ff 0%,#e3dcff 100%);
+    border-color:#b9a8ff;
+  }
+  .platform-iriam .platform-logo{color:#7c3aed}
+  .platform-reality{
+    background:linear-gradient(135deg,#e6faff 0%,#c7f1ff 100%);
+    border-color:#7dd8ee;
+  }
+  .platform-reality .platform-logo{color:#0099cc}
+  .platform-showroom{
+    background:linear-gradient(135deg,#eef5ff 0%,#d9e7ff 100%);
+    border-color:#7fa9e6;
+  }
+  .platform-showroom .platform-logo{color:#0050b3}
+
+  /* ---------- Livers ---------- */
+  .livers{background:var(--cream)}
+  .livers-grid{
+    margin-top:48px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+  }
+  .liver-card{
+    position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:3/4;
+    background:var(--gray-100);box-shadow:var(--shadow-sm);
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+  }
+  .liver-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .liver-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+  .liver-card:hover img{transform:scale(1.05)}
+  .liver-meta{
+    position:absolute;inset:auto 0 0 0;padding:14px 14px 12px;
+    background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.85) 100%);
+    color:#fff;
+  }
+  .liver-rank{
+    display:inline-block;padding:3px 10px;border-radius:var(--r-pill);
+    background:var(--red);font-size:11px;font-weight:700;letter-spacing:.05em;
+  }
+  .liver-name{margin-top:8px;font-weight:700;font-size:14px}
+
+  /* ---------- Campaign Box ---------- */
+  .campaign{background:linear-gradient(135deg,#0e0e10 0%,#2a0510 100%);color:#fff;padding:0}
+  .campaign-inner{
+    max-width:var(--container);margin:0 auto;padding:80px 24px;
+    display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;
+  }
+  .campaign-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:8px 16px;border-radius:var(--r-pill);
+    background:var(--red);font-size:12px;font-weight:700;letter-spacing:.1em;
+  }
+  .campaign-eyebrow::before{content:"●";font-size:8px;animation:pulse 1.6s var(--ease) infinite}
+  .campaign h2{
+    margin-top:18px;font-size:clamp(28px,3.6vw,46px);
+    line-height:1.25;font-weight:900;
+  }
+  .campaign h2 span{
+    background:linear-gradient(90deg,var(--gold) 0%,#f3dca0 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .campaign-list{margin-top:24px;display:grid;gap:12px}
+  .campaign-list li{
+    list-style:none;padding-left:32px;position:relative;font-size:15px;color:rgba(255,255,255,.85);
+  }
+  .campaign-list li::before{
+    content:"✓";position:absolute;left:0;top:0;
+    width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--black);
+    display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;
+  }
+  .campaign-card{
+    background:#fff;color:var(--black);border-radius:var(--r-lg);
+    padding:36px 32px;box-shadow:var(--shadow-lg);text-align:center;
+  }
+  .campaign-card-label{color:var(--red);font-weight:700;font-size:13px;letter-spacing:.1em}
+  .campaign-card-period{margin-top:8px;font-size:14px;color:var(--gray-700)}
+  .campaign-card-bonus{
+    margin-top:16px;font-family:Inter,sans-serif;font-weight:900;
+    font-size:48px;line-height:1;color:var(--black);
+  }
+  .campaign-card-bonus small{font-size:.4em;color:var(--gray-700)}
+  .campaign-card-note{margin-top:8px;font-size:12px;color:var(--gray-500)}
+  .campaign-card .btn{margin-top:20px;width:100%}
+
+  /* ---------- Flow ---------- */
+  .flow{background:var(--cream)}
+  .flow-grid{
+    margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+    position:relative;
+  }
+  .flow-step{
+    background:#fff;border-radius:var(--r-lg);padding:32px 24px;
+    box-shadow:var(--shadow-sm);position:relative;
+  }
+  .flow-step-num{
+    font-family:Inter,sans-serif;font-weight:900;color:var(--gray-300);
+    font-size:48px;line-height:1;letter-spacing:-.02em;
+  }
+  .flow-step h3{margin-top:12px;font-size:18px;font-weight:900;color:var(--black)}
+  .flow-step p{margin-top:8px;font-size:14px;color:var(--gray-700);line-height:1.7}
+  .flow-step:not(:last-child)::after{
+    content:"→";position:absolute;right:-14px;top:50%;transform:translateY(-50%);
+    width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;
+    box-shadow:var(--shadow-sm);z-index:1;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq{background:#fff}
+  .faq-list{margin-top:40px;display:grid;gap:12px}
+  .faq-item{
+    border:1px solid var(--gray-300);border-radius:var(--r-md);
+    overflow:hidden;background:#fff;transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+  }
+  .faq-item[open]{border-color:var(--red);box-shadow:var(--shadow-sm)}
+  .faq-item summary{
+    list-style:none;cursor:pointer;padding:20px 24px;
+    display:flex;align-items:center;gap:16px;font-weight:700;color:var(--black);
+  }
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::before{
+    content:"Q";flex-shrink:0;width:32px;height:32px;border-radius:50%;
+    background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:Inter,sans-serif;font-weight:900;font-size:14px;
+  }
+  .faq-item summary::after{
+    content:"";margin-left:auto;flex-shrink:0;width:12px;height:12px;
+    border-right:2px solid var(--gray-700);border-bottom:2px solid var(--gray-700);
+    transform:rotate(45deg);transition:transform .25s var(--ease);
+  }
+  .faq-item[open] summary::after{transform:rotate(-135deg);border-color:var(--red)}
+  .faq-item .faq-body{padding:0 24px 22px 72px;color:var(--gray-700);font-size:14px;line-height:1.85}
+
+  /* ---------- Bottom CTA ---------- */
+  .cta-final{
+    background:
+      radial-gradient(900px 400px at 20% 0%, rgba(212,0,42,.18) 0%, transparent 60%),
+      radial-gradient(700px 300px at 90% 100%, rgba(200,164,86,.12) 0%, transparent 60%),
+      var(--black);
+    color:#fff;text-align:center;
+  }
+  .cta-final h2{font-size:clamp(28px,3.6vw,46px);font-weight:900;line-height:1.3}
+  .cta-final p{margin-top:18px;color:rgba(255,255,255,.75);font-size:16px}
+  .cta-final-buttons{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .cta-final-buttons .btn-ghost{color:#fff;border-color:rgba(255,255,255,.3)}
+  .cta-final-buttons .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+  .cta-final-note{margin-top:18px;font-size:12px;color:rgba(255,255,255,.5)}
+
+  /* ---------- Footer ---------- */
+  .site-footer{background:#08080a;color:rgba(255,255,255,.6);padding:48px 24px;font-size:13px}
+  .footer-inner{max-width:var(--container);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .footer-links{display:flex;gap:24px;flex-wrap:wrap}
+  .footer-links a:hover{color:#fff}
+
+  /* ---------- Floating CTA (mobile) ---------- */
+  .float-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    background:rgba(255,255,255,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-top:1px solid var(--gray-300);padding:10px 16px;
+    display:none;gap:10px;
+  }
+  .float-cta .btn{flex:1;padding:16px;font-size:15px}
+  .float-cta .btn-secondary{
+    background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);color:#fff;
+    box-shadow:0 3px 0 var(--red-deep),0 12px 24px rgba(212,0,42,.32);
+  }
+  .float-cta .btn-secondary:hover{transform:translateY(-2px);background:linear-gradient(135deg,var(--red-deep) 0%,#7a0017 100%)}
+
+  /* ---------- Animations ---------- */
+  .fade-in{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .fade-in.in{opacity:1;transform:none}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px){
+    .header-nav{display:none}
+    .nav-toggle{display:flex}
+    .hero{padding:48px 0 64px}
+    .hero-inner{grid-template-columns:1fr;gap:36px}
+    .hero-visual{height:380px;order:-1}
+    .hero-collage .ph-1{width:62%;left:6%;height:70%}
+    .hero-collage .ph-2{width:40%;height:48%}
+    .hero-collage .ph-3{width:38%;height:42%}
+    .hero-collage .ph-4{width:48%;height:46%}
+    .stats-inner{grid-template-columns:repeat(2,1fr);gap:28px}
+    section{padding:64px 20px}
+    .reasons-grid{grid-template-columns:1fr;gap:14px}
+    .reason{padding:28px 22px}
+    .livers-grid{grid-template-columns:repeat(2,1fr)}
+    .platforms-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+    .platform-card{padding:28px 20px;min-height:140px}
+    .campaign-inner{grid-template-columns:1fr;padding:56px 20px;gap:32px}
+    .flow-grid{grid-template-columns:1fr;gap:14px}
+    .flow-step:not(:last-child)::after{
+      right:50%;top:auto;bottom:-14px;transform:translateX(50%) rotate(90deg);
+    }
+    .float-cta{display:flex}
+    body{padding-bottom:80px}
+    .header-cta{display:none}
+    .cta-final-buttons{flex-direction:column}
+    .cta-final-buttons .btn{width:100%}
+  }
+</style><!-- ========== Hero ========== -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-badge">新規ライバー大募集中</span>
+      <h1>あなたの"好き"を、<br><span class="accent">武器</span>にする。</h1>
+      <p class="hero-sub">
+        Pococha 歴代1位ライバー多数在籍。<br>
+        Live-Laboは、未経験から3ヶ月でS帯ランクへ。還元率100%・住所提供・確定申告サポートまで、ライバーに必要なすべてを揃えています。
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary btn-arrow">LINEで無料相談</a>
+        <a href="#reasons" class="btn btn-ghost btn-arrow">選ばれる理由を見る</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-avatars">
+          <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="">
+          <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="">
+          <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="">
+          <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="">
+        </div>
+        <div class="hero-trust-text"><strong>○○</strong>名のライバーが活躍中・<strong>★4.8</strong>の満足度</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-collage">
+        <div class="ph ph-1"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt=""></div>
+        <div class="ph ph-2"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt=""></div>
+        <div class="ph ph-3"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt=""></div>
+        <div class="ph ph-4"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt=""></div>
+      </div>
+      <span class="hero-tag t1">Pococha 月間1位</span>
+      <span class="hero-tag t2">還元率 100%</span>
+      <span class="hero-tag t3">未経験OK</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Stats ========== -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">○○<small>+</small></div>
+      <div class="stat-label">所属ライバー数</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100<small>%</small></div>
+      <div class="stat-label">報酬還元率</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1<small>位</small></div>
+      <div class="stat-label">Pochocha マンスリー多数</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3<small>ヶ月</small></div>
+      <div class="stat-label">未経験→S帯ランク達成</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Reasons ========== -->
+<section class="reasons" id="reasons">
+  <div class="section-inner">
+    <span class="section-eyebrow">Why Live-Labo</span>
+    <h2 class="section-title"><span class="accent">"本物のサポート"</span>がここにある</h2>
+    <p class="section-lead">「数字」だけじゃなく「人」を育てる。Live-Laboが10年間で築き上げてきた、5つの強みです。</p>
+    <div class="reasons-grid">
+
+      <article class="reason fade-in">
+        <div class="reason-num">REASON 01</div>
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+        <h3>Pocochaに圧倒的に強い</h3>
+        <p>Pococha歴代1位ライバーを多数輩出。マンスリー1位経験者が在籍しているからこそ、リアルな成功ノウハウを共有できます。</p>
+      </article>
+
+      <article class="reason fade-in">
+        <div class="reason-num">REASON 02</div>
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+        <h3>還元率100%・余計な搾取なし</h3>
+        <p>Pocochaの場合、報酬ダイヤを100%ライバーへ。悪徳事務所にありがちな"見えない手数料"は一切いただきません。</p>
+      </article>
+
+      <article class="reason fade-in">
+        <div class="reason-num">REASON 03</div>
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 9h2v2H9zm4 0h2v2h-2zM9 13h2v2H9zm4 0h2v2h-2z"/></svg></div>
+        <h3>住所提供サービス</h3>
+        <p>ファンレター・プライズの受取に事務所住所が使えます。自宅住所を公開せず、安心して活動できます。</p>
+      </article>
+
+      <article class="reason fade-in">
+        <div class="reason-num">REASON 04</div>
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8"/></svg></div>
+        <h3>確定申告サポート</h3>
+        <p>提携税理士事務所を最大半額以下で利用可能。「お金の手続き」は丸ごとお任せください。</p>
+      </article>
+
+      <article class="reason fade-in">
+        <div class="reason-num">REASON 05</div>
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3"/></svg></div>
+        <h3>未経験から3ヶ月でS帯</h3>
+        <p>初配信前から徹底マネジメント。実績ある専属マネージャーが、あなたの個性に合わせた配信スタイルを一緒に作ります。</p>
+      </article>
+
+      <article class="reason fade-in" style="background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);color:#fff">
+        <div class="reason-num" style="color:rgba(255,255,255,.7)">REASON 06</div>
+        <div class="reason-icon" style="background:rgba(255,255,255,.15);color:#fff"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21V12h6v9 M2 8l10-6 10 6"/></svg></div>
+        <h3 style="color:#fff">提携配信スタジオ<br>無料利用</h3>
+        <p style="color:rgba(255,255,255,.85)"><strong style="color:#fff">ATOM SHINJUKU</strong>・他提携スタジオ多数。プロ仕様の撮影機材・防音空間が無料で使い放題。コラボ配信・オフ会会場としても活用可能。</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== Livers ========== -->
+<section class="livers" id="livers">
+  <div class="section-inner">
+    <span class="section-eyebrow">Active Livers</span>
+    <h2 class="section-title">活躍中の<span class="accent">所属ライバー</span></h2>
+    <p class="section-lead">Pochocha・TikTok LIVE・17LIVEなど、複数プラットフォームでTOPランカーを多数輩出。</p>
+    <div class="livers-grid">
+      <div class="liver-card">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="わらし。">
+        <div class="liver-meta"><span class="liver-rank">RANK #1</span><div class="liver-name">わらし。</div></div>
+      </div>
+      <div class="liver-card">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="あの">
+        <div class="liver-meta"><span class="liver-rank">RANK #2</span><div class="liver-name">あの</div></div>
+      </div>
+      <div class="liver-card">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="ゆいころ">
+        <div class="liver-meta"><span class="liver-rank">TOP TIER</span><div class="liver-name">ゆいころ</div></div>
+      </div>
+      <div class="liver-card">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="遊汰様">
+        <div class="liver-meta"><span class="liver-rank">TOP TIER</span><div class="liver-name">遊汰様</div></div>
+      </div>
+      <div class="liver-card">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="なるみ">
+        <div class="liver-meta"><span class="liver-rank">RISING</span><div class="liver-name">なるみ</div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px">
+      <a href="https://live-labo.jp/liver/" class="btn btn-ghost btn-arrow">所属ライバー一覧を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Platforms ========== -->
+<section class="platforms" id="platforms">
+  <div class="section-inner">
+    <span class="section-eyebrow">Partner Platforms</span>
+    <h2 class="section-title">主要配信アプリ<span class="accent">すべて対応</span></h2>
+    <p class="section-lead">あなたに合ったアプリで、無理なくスタート。Live-Laboは全主要プラットフォームで実績があります。</p>
+    <div class="platforms-grid">
+      <article class="platform-card platform-tiktok">
+        <span class="platform-badge">⭐ 推し No.1</span>
+        <div class="platform-logo">TikTok LIVE</div>
+        <div class="platform-tag">圧倒的バズ力 × 若年層リーチ</div>
+      </article>
+      <article class="platform-card platform-pococha">
+        <span class="platform-badge">⭐ 推し No.2</span>
+        <div class="platform-logo">Pococha</div>
+        <div class="platform-tag">時間ダイヤで安定収入・歴代1位多数</div>
+      </article>
+      <article class="platform-card platform-17live">
+        <div class="platform-logo">17LIVE</div>
+        <div class="platform-tag">アジア最大級・グローバル展開</div>
+      </article>
+      <article class="platform-card platform-iriam">
+        <div class="platform-logo">IRIAM</div>
+        <div class="platform-tag">イラスト1枚でVライバー</div>
+      </article>
+      <article class="platform-card platform-reality">
+        <div class="platform-logo">REALITY</div>
+        <div class="platform-tag">スマホ1台でアバター配信</div>
+      </article>
+      <article class="platform-card platform-showroom">
+        <div class="platform-logo">SHOWROOM</div>
+        <div class="platform-tag">芸能・タレント連携が強い</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Campaign ========== -->
+<section class="campaign" id="campaign">
+  <div class="campaign-inner">
+    <div>
+      <span class="campaign-eyebrow">期間限定キャンペーン</span>
+      <h2>今、デビューする方へ。<br><span>"特別な5大特典"</span>をご用意しました。</h2>
+      <ul class="campaign-list">
+        <li>初配信〜3ヶ月間：専属マネージャーが完全伴走</li>
+        <li>配信機材レンタル無料（リングライト・マイク・スマホスタンド）</li>
+        <li>プロカメラマンによる宣材写真撮影 1回無料</li>
+        <li>ATOM SHINJUKU等の提携スタジオ使い放題</li>
+        <li>確定申告・税理士相談 初回無料</li>
+      </ul>
+    </div>
+    <div class="campaign-card">
+      <div class="campaign-card-label">DEBUT CAMPAIGN</div>
+      <div class="campaign-card-period">適用期間：応募から30日間</div>
+      <div class="campaign-card-bonus">5<small>大特典</small></div>
+      <div class="campaign-card-note">通常 ¥80,000 相当 → 完全無料</div>
+      <a href="#contact" class="btn btn-primary btn-arrow">LINEで特典を受け取る</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Flow ========== -->
+<section class="flow" id="flow">
+  <div class="section-inner">
+    <span class="section-eyebrow">How to Join</span>
+    <h2 class="section-title">最短<span class="accent">3分</span>で応募完了</h2>
+    <p class="section-lead">LINEから気軽に。難しい書類も初期費用も一切ありません。</p>
+    <div class="flow-grid">
+      <div class="flow-step">
+        <div class="flow-step-num">01</div>
+        <h3>LINEで応募</h3>
+        <p>下のボタンから公式LINEへ。簡単な質問にお答えいただくだけ。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">02</div>
+        <h3>担当から連絡</h3>
+        <p>24時間以内に専任担当者からご返信。気になる点は何でもご相談ください。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">03</div>
+        <h3>オンライン面談</h3>
+        <p>あなたの目標・ライフスタイルに合った配信プランをご提案します。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">04</div>
+        <h3>契約・デビュー</h3>
+        <p>契約完了後、初配信のセッティングまで全力でサポートします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <span class="section-eyebrow">FAQ</span>
+    <h2 class="section-title">よくある<span class="accent">ご質問</span></h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>未経験ですが大丈夫ですか？</summary>
+        <div class="faq-body">もちろんです。Live-Laboの所属ライバーの多くは未経験スタート。初配信前から専属マネージャーが徹底サポートし、平均1〜3ヶ月でS帯ランクへ到達した実績があります。</div>
+      </details>
+      <details class="faq-item">
+        <summary>契約料・初期費用はかかりますか？</summary>
+        <div class="faq-body">一切かかりません。登録・契約・サポート、すべて無料です。配信に必要な機材レンタルも、キャンペーン適用で無料でご用意しています。</div>
+      </details>
+      <details class="faq-item">
+        <summary>年齢制限はありますか？</summary>
+        <div class="faq-body">18歳以上の方であればご応募いただけます。未成年の方は保護者の同意が必要となります。</div>
+      </details>
+      <details class="faq-item">
+        <summary>地方在住でも所属できますか？</summary>
+        <div class="faq-body">はい、全国どこからでもOKです。打ち合わせ・面談はオンラインで完結し、機材も郵送でお届けします。住所提供サービスも全国対応です。</div>
+      </details>
+      <details class="faq-item">
+        <summary>顔出しは必須ですか？</summary>
+        <div class="faq-body">必須ではありません。声配信・Vライバーなど、顔を出さないスタイルでも活躍できる戦略をご提案します。</div>
+      </details>
+      <details class="faq-item">
+        <summary>会社員・主婦・学生でも両立できますか？</summary>
+        <div class="faq-body">可能です。配信ノルマは強制せず、あなたのライフスタイルに合わせた時間設計をサポートします。副業禁止のお仕事の方はご応募前にご確認ください。</div>
+      </details>
+      <details class="faq-item">
+        <summary>他事務所と並行して所属できますか？</summary>
+        <div class="faq-body">原則、他事務所との重複契約はお断りしています。他事務所をご解約後にご連絡ください。両立をご希望の場合はLINEにてご相談ください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Final CTA ========== -->
+<section class="cta-final" id="contact">
+  <div class="section-inner">
+    <h2>"配信したい"を、<br>今日、はじめてみませんか。</h2>
+    <p>LINEから3分。質問だけでも大歓迎です。</p>
+    <div class="cta-final-buttons">
+      <a href="#" class="btn btn-primary btn-large btn-arrow">LINEで無料相談する</a>
+      <a href="https://live-labo.jp/contact/" class="btn btn-ghost btn-large btn-arrow">フォームで問い合わせ</a>
+    </div>
+    <p class="cta-final-note">© 株式会社Live-Labo｜東京都渋谷区恵比寿南1-1-1 Humax Ebisu 8F</p>
+  </div>
+</section>
+
+
+
+<script>
+  // Fade-in on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+</script>
