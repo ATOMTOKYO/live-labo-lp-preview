@@ -17,17 +17,20 @@
     --gray-700:#4a4a52;
     --gray-500:#8a8a8e;
     --gray-300:#d6d6d8;
+    --gray-200:#e8e8ea;
     --gray-100:#f3f3f4;
+    --gray-50:#f9f9fa;
     --paper:#ffffff;
-    --accent-purple:#7c5cff;
     --accent-yellow:#f7d046;
+    --accent-purple:#8b6df0;
     --accent-pink:#ff8ab0;
     --accent-cyan:#7adbe5;
     --accent-orange:#ff7a4d;
-    --accent-green:#3ec585;
     --line:#06c755;
     --ease:cubic-bezier(.22,.61,.36,1);
     --ease-out:cubic-bezier(.16,1,.3,1);
+    --container:1240px;
+    --gutter:80px;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -37,31 +40,38 @@
     line-height:1.7;font-feature-settings:"palt";
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+    padding-bottom:0;
   }
   a{color:inherit;text-decoration:none}
   img{max-width:100%;height:auto;display:block}
-  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
   ul,ol{list-style:none}
 
-  /* ====== Edge vertical marquee ====== */
+  .container{max-width:var(--container);margin:0 auto;padding:0 var(--gutter);position:relative}
+
+  /* ============ Edge vertical marquee ============ */
   .bar{
-    position:fixed;top:0;bottom:0;width:24px;z-index:10;
+    position:fixed;top:0;bottom:0;width:28px;z-index:10;
     pointer-events:none;
-    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    display:flex;align-items:stretch;
     overflow:hidden;
+    background:var(--paper);
   }
   .bar-l{left:0;border-right:1px solid var(--gray-100)}
   .bar-r{right:0;border-left:1px solid var(--gray-100)}
   .bar-track{
     display:flex;flex-direction:column;
-    font-family:Inter,sans-serif;font-weight:700;font-size:11px;letter-spacing:.4em;
-    color:var(--gray-500);
-    animation:bar-scroll 28s linear infinite;
-    white-space:nowrap;
+    width:100%;
+    animation:bar-scroll 26s linear infinite;
   }
   .bar-track span{
     writing-mode:vertical-rl;
-    padding:24px 0;
+    text-orientation:mixed;
+    padding:30px 0;
+    font-family:Inter,sans-serif;font-weight:700;
+    font-size:10px;letter-spacing:.42em;color:var(--gray-500);
+    white-space:nowrap;
+    flex-shrink:0;
   }
   .bar-l .bar-track{animation-direction:reverse}
   @keyframes bar-scroll{
@@ -69,25 +79,29 @@
     to{transform:translateY(-50%)}
   }
 
-  /* ====== Floating logo (top-left) ====== */
+  /* ============ Floating brand (top-left) ============ */
   .brand{
-    position:fixed;top:32px;left:56px;z-index:20;
-    font-family:Inter,sans-serif;font-weight:900;letter-spacing:.04em;
-    color:var(--black);font-size:0;line-height:1;
+    position:fixed;top:36px;left:64px;z-index:20;
+    color:var(--black);text-decoration:none;line-height:1;
   }
   .brand-lead{
-    font-size:9px;letter-spacing:.32em;display:block;margin-bottom:6px;color:var(--ink);font-weight:500;
+    display:block;font-family:Inter,sans-serif;font-weight:500;
+    font-size:9px;letter-spacing:.36em;margin-bottom:8px;color:var(--ink);
   }
   .brand-mark{
-    font-size:28px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:2px;
+    display:flex;align-items:baseline;gap:3px;
+    font-family:Inter,sans-serif;font-weight:900;
+    font-size:24px;letter-spacing:-.005em;color:var(--black);
   }
-  .brand-mark sup{font-size:9px;font-weight:900;letter-spacing:.04em;color:var(--ink);transform:translateY(-10px)}
-  .brand img{height:34px;width:auto}
+  .brand-mark sup{
+    font-size:9px;font-weight:900;letter-spacing:.06em;
+    color:var(--ink);transform:translateY(-9px);
+  }
 
-  /* ====== Floating hamburger (top-right) ====== */
+  /* ============ Floating hamburger (top-right) ============ */
   .menu-btn{
-    position:fixed;top:24px;right:48px;z-index:30;
-    width:72px;height:72px;border-radius:50%;
+    position:fixed;top:28px;right:56px;z-index:30;
+    width:64px;height:64px;border-radius:50%;
     background:var(--black);color:#fff;
     display:flex;align-items:center;justify-content:center;
     box-shadow:0 8px 24px rgba(0,0,0,.18);
@@ -95,380 +109,395 @@
   }
   .menu-btn:hover{transform:scale(1.06)}
   .menu-btn-lines{display:flex;flex-direction:column;gap:5px}
-  .menu-btn-lines span{display:block;width:22px;height:1.5px;background:#fff;border-radius:1px}
+  .menu-btn-lines span{display:block;width:20px;height:1.5px;background:#fff;border-radius:1px}
 
-  /* ====== Floating CTA (bottom-right) ====== */
+  /* ============ Floating CTA (bottom-right) ============ */
   .float-contact{
     position:fixed;bottom:32px;right:32px;z-index:25;
-    display:inline-flex;align-items:center;gap:24px;
+    display:inline-flex;align-items:center;gap:20px;
     background:var(--black);color:#fff;
-    padding:22px 32px;border-radius:6px;
-    font-weight:700;font-size:14px;letter-spacing:.04em;
-    box-shadow:0 16px 40px rgba(0,0,0,.24);
+    padding:18px 26px;border-radius:4px;
+    font-weight:700;font-size:13px;letter-spacing:.04em;
+    box-shadow:0 16px 40px rgba(0,0,0,.22);
     transition:transform .2s var(--ease);
   }
   .float-contact:hover{transform:translateY(-3px)}
   .float-contact-arrow{
-    width:32px;height:32px;border-radius:50%;
+    width:28px;height:28px;border-radius:50%;
     background:#fff;color:var(--black);
     display:flex;align-items:center;justify-content:center;
-    font-size:18px;
+    font-size:14px;font-family:Inter,sans-serif;font-weight:700;
   }
 
-  /* ====== Section base ====== */
-  section{position:relative;padding:0;overflow:hidden}
-  .container{
-    max-width:1280px;margin:0 auto;padding:0 80px;
-    position:relative;
+  /* ============ Section base ============ */
+  section{position:relative}
+  .section-tag{
+    display:inline-block;
+    font-family:Inter,sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.4em;color:var(--ink);
+    padding-left:42px;position:relative;
+  }
+  .section-tag::before{
+    content:"";position:absolute;left:0;top:8px;
+    width:28px;height:1px;background:var(--ink);
+  }
+  .section-title{
+    margin-top:24px;
+    font-size:clamp(28px,3.6vw,46px);
+    font-weight:900;letter-spacing:.04em;line-height:1.5;
+    color:var(--black);
+  }
+  .section-title em{
+    font-style:normal;
+    background:linear-gradient(180deg,transparent 62%,var(--accent-yellow) 62%);
+    padding:0 4px;
   }
 
-  /* ====== Hero ====== */
+  /* ============ Hero ============ */
   .hero{
-    min-height:100vh;padding:160px 0 80px;
-    display:flex;align-items:center;
-    background:#fff;
+    padding:180px 0 120px;
+    background:var(--paper);
+    position:relative;
+    overflow:hidden;
   }
-  .hero-inner{
-    display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center;
-    width:100%;
+  .hero-grid{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+    gap:60px;align-items:center;
   }
-  .hero-text{position:relative}
   .hero-eyebrow{
     display:inline-block;
     font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:.4em;
     color:var(--gray-500);margin-bottom:24px;
   }
+  .hero-sub{
+    font-size:14px;font-weight:500;letter-spacing:.18em;color:var(--ink);
+    margin-bottom:18px;display:inline-flex;align-items:center;gap:14px;
+  }
+  .hero-sub::before,.hero-sub::after{
+    content:"";width:22px;height:1px;background:var(--gray-500);
+  }
   .hero-title{
-    font-size:clamp(40px,5.6vw,84px);
-    font-weight:900;letter-spacing:.04em;line-height:1.18;
+    font-size:clamp(40px,5.4vw,80px);
+    font-weight:900;letter-spacing:.04em;line-height:1.15;
     color:var(--black);
   }
-  .hero-title-mini{
-    font-size:14px;font-weight:500;letter-spacing:.18em;color:var(--ink);
-    margin-bottom:14px;
-  }
-  .hero-title-mini::before{content:"" ";color:var(--gray-500)}
-  .hero-title-mini::after{content:" "";color:var(--gray-500)}
   .hero-desc{
-    margin-top:36px;font-size:14px;color:var(--ink);line-height:2.1;letter-spacing:.04em;
-    max-width:420px;
+    margin-top:36px;font-size:15px;color:var(--ink);
+    line-height:2.1;letter-spacing:.04em;max-width:440px;
   }
-  .hero-meta{
-    margin-top:48px;display:flex;align-items:center;gap:18px;
+  .hero-since{
+    margin-top:48px;display:inline-flex;align-items:center;gap:18px;
+    font-family:Inter,sans-serif;font-size:11px;font-weight:500;
+    letter-spacing:.3em;color:var(--gray-700);
   }
-  .hero-meta-line{
-    width:60px;height:1px;background:var(--ink);
-  }
-  .hero-meta-text{
-    font-family:Inter,sans-serif;font-size:11px;font-weight:500;letter-spacing:.3em;color:var(--gray-700);
+  .hero-since::before{
+    content:"";width:48px;height:1px;background:var(--ink);
   }
 
-  /* Hero collage */
-  .collage{
-    position:relative;height:660px;
+  /* Hero collage — CSS Grid based for stability */
+  .hero-collage{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    gap:14px;
+    aspect-ratio:1/1.05;
+    max-height:640px;
   }
-  .ph{
-    position:absolute;overflow:hidden;
-    background:var(--gray-100);
+  .hero-collage .ph{
+    overflow:hidden;background:var(--gray-100);position:relative;
+    opacity:0;transform:translateY(20px);
+    transition:opacity 1s var(--ease-out),transform 1s var(--ease-out);
   }
-  .ph img{width:100%;height:100%;object-fit:cover;display:block}
-  .ph-1{top:0;left:0;width:50%;height:48%}
-  .ph-2{top:6%;right:0;width:42%;height:54%}
-  .ph-3{bottom:0;left:8%;width:42%;height:46%}
-  .ph-4{bottom:8%;right:8%;width:38%;height:38%}
+  .hero-collage.in .ph{opacity:1;transform:none}
+  .hero-collage .ph:nth-child(1){transition-delay:.1s;grid-column:1;grid-row:1 / span 2;margin-top:24px}
+  .hero-collage .ph:nth-child(2){transition-delay:.25s;grid-column:2;grid-row:1;margin-bottom:14px}
+  .hero-collage .ph:nth-child(3){transition-delay:.4s;grid-column:2;grid-row:2;margin-top:14px}
+  .hero-collage .ph img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .8s var(--ease-out);
+  }
+  .hero-collage .ph:hover img{transform:scale(1.05)}
 
-  /* Decorative shapes */
-  .deco{position:absolute;z-index:5;pointer-events:none}
-  .deco-circle{
-    width:64px;height:64px;border-radius:50%;
-    background:var(--accent-yellow);
-  }
+  /* Hero decorative shapes */
+  .deco{position:absolute;z-index:3;pointer-events:none}
+  .deco-circle{width:48px;height:48px;border-radius:50%;background:var(--accent-yellow)}
   .deco-triangle{
     width:0;height:0;
-    border-left:32px solid transparent;
-    border-right:32px solid transparent;
-    border-bottom:54px solid var(--accent-purple);
+    border-left:24px solid transparent;border-right:24px solid transparent;
+    border-bottom:42px solid var(--accent-purple);
   }
-  .deco-rect{
-    width:48px;height:64px;background:var(--accent-pink);
+  .deco-square{width:42px;height:42px;background:var(--accent-pink);transform:rotate(8deg)}
+  .deco-dot{
+    width:64px;height:64px;
+    background-image:radial-gradient(var(--gray-300) 1.6px,transparent 2px);
+    background-size:8px 8px;opacity:.7;
   }
-  .deco-square{
-    width:56px;height:56px;background:var(--accent-cyan);
+  .deco-line{width:80px;height:2px;background:var(--accent-cyan)}
+
+  .hero-collage .deco-1{top:-18px;right:46%;animation:float 5s ease-in-out infinite}
+  .hero-collage .deco-2{bottom:-12px;left:42%;animation:float 6s ease-in-out infinite reverse}
+  .hero-collage .deco-3{top:46%;right:-18px;animation:float 4.5s ease-in-out infinite}
+  .hero-collage .deco-4{top:8%;left:-24px;opacity:.5}
+
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0)}
+    50%{transform:translateY(-10px) rotate(2deg)}
   }
-  .deco-halftone{
-    width:80px;height:80px;
-    background-image:radial-gradient(var(--gray-500) 1.5px,transparent 2px);
-    background-size:8px 8px;
-    opacity:.45;
-  }
-  /* Hero deco positioning */
-  .hero .deco-1{top:-10px;right:38%;animation:float-y 4s ease-in-out infinite}
-  .hero .deco-2{top:42%;left:46%;animation:float-y 5s ease-in-out infinite reverse}
-  .hero .deco-3{bottom:8%;left:2%;animation:float-y 6s ease-in-out infinite}
-  .hero .deco-4{top:8%;right:4%;animation:float-y 4.5s ease-in-out infinite reverse}
-  .hero .deco-5{bottom:18%;right:42%}
-  @keyframes float-y{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-12px)}
-  }
-  .play-overlay{
-    position:absolute;top:38%;left:38%;z-index:6;
-    width:80px;height:80px;border-radius:50%;
-    background:var(--paper);
+
+  .hero-play{
+    position:absolute;top:46%;left:38%;z-index:5;
+    width:72px;height:72px;border-radius:50%;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(8px);
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 32px rgba(0,0,0,.2);
-    cursor:pointer;
-    transition:transform .25s var(--ease);
+    box-shadow:0 8px 28px rgba(0,0,0,.2);
+    cursor:pointer;transition:transform .25s var(--ease);
   }
-  .play-overlay:hover{transform:scale(1.1)}
-  .play-overlay::before{
-    content:"";display:block;
-    width:0;height:0;
-    border-left:18px solid var(--black);
-    border-top:12px solid transparent;
-    border-bottom:12px solid transparent;
-    margin-left:4px;
+  .hero-play:hover{transform:translate(-4px,-4px) scale(1.06)}
+  .hero-play::before{
+    content:"";width:0;height:0;margin-left:5px;
+    border-left:16px solid var(--black);
+    border-top:11px solid transparent;
+    border-bottom:11px solid transparent;
   }
 
-  /* Auto-rotate photo opacity sequence */
-  .collage .ph{
-    opacity:0;
-    transition:opacity 1.6s var(--ease-out);
+  /* ============ Section divider (small) ============ */
+  .divider-strip{
+    padding:64px var(--gutter);text-align:center;background:var(--paper);
   }
-  .collage.ready .ph{opacity:1}
-
-  /* ====== Page break section (vertical text divider) ====== */
-  .divider{
-    padding:120px 80px 0;text-align:center;
+  .divider-strip-text{
+    display:inline-flex;align-items:center;gap:20px;
+    font-family:Inter,sans-serif;font-size:11px;letter-spacing:.36em;
+    color:var(--gray-500);font-weight:700;
   }
-  .divider-mark{
-    display:inline-flex;align-items:center;gap:18px;
-    font-family:Inter,sans-serif;font-size:11px;letter-spacing:.32em;color:var(--gray-500);
-  }
-  .divider-mark::before,.divider-mark::after{
-    content:"";display:block;width:80px;height:1px;background:var(--gray-300);
+  .divider-strip-text::before,.divider-strip-text::after{
+    content:"";width:80px;height:1px;background:var(--gray-300);
   }
 
-  /* ====== Mission section ====== */
-  .mission{
-    padding:160px 0;background:var(--paper);
-  }
-  .mission-inner{
-    display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;
-  }
-  .mission-tag{
-    font-family:Inter,sans-serif;font-size:12px;font-weight:700;letter-spacing:.4em;color:var(--ink);
-    padding-left:42px;position:relative;
-  }
-  .mission-tag::before{
-    content:"";position:absolute;left:0;top:8px;
-    width:28px;height:1px;background:var(--ink);
-  }
-  .mission-title{
-    margin-top:32px;font-size:clamp(28px,3.2vw,42px);
-    font-weight:900;letter-spacing:.04em;line-height:1.6;
-    color:var(--black);
-  }
-  .mission-title-em{
-    background:linear-gradient(180deg,transparent 60%,var(--accent-yellow) 60%);
+  /* ============ Mission ============ */
+  .mission{padding:120px 0 140px;background:var(--paper)}
+  .mission-grid{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);
+    gap:96px;align-items:start;
   }
   .mission-body{
     font-size:15px;line-height:2.2;color:var(--ink);letter-spacing:.04em;
-    max-width:540px;
+    max-width:560px;
   }
   .mission-body p+p{margin-top:24px}
 
-  /* ====== Big-letter background section ====== */
-  .bg-letter-section{
-    padding:200px 0;background:var(--paper);position:relative;overflow:hidden;
+  /* ============ Big letter section ============ */
+  .story-section{
+    padding:140px 0;background:var(--paper);position:relative;overflow:hidden;
   }
   .bg-letter{
-    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    font-family:Inter,sans-serif;font-weight:900;
-    font-size:clamp(180px,32vw,520px);letter-spacing:-.06em;
-    color:var(--gray-100);
-    line-height:.85;
-    z-index:0;user-select:none;
-    pointer-events:none;
+    position:absolute;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    font-family:Inter,sans-serif;font-weight:900;letter-spacing:-.04em;
+    color:var(--gray-100);line-height:.85;
+    z-index:0;user-select:none;pointer-events:none;
     white-space:nowrap;
+    font-size:clamp(140px,24vw,360px);
   }
-  .bg-letter-section .container{position:relative;z-index:1}
+  .story-section > .container{position:relative;z-index:1}
+  .story-grid{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);
+    gap:96px;align-items:start;
+  }
 
-  /* ====== Services (number list) ====== */
-  .services-header{
-    text-align:left;margin-bottom:80px;
+  /* ============ Services ============ */
+  .services{padding:140px 0 60px;background:var(--paper);position:relative;overflow:hidden}
+  .services-head{margin-bottom:80px;max-width:680px}
+  .services-head .section-title{margin-top:24px}
+  .services-lead{
+    margin-top:28px;font-size:15px;color:var(--gray-700);
+    line-height:2;letter-spacing:.04em;
   }
-  .services-header h2{
-    font-size:clamp(28px,3.4vw,46px);
-    font-weight:900;letter-spacing:.04em;color:var(--black);line-height:1.4;
+  .services-list{
+    border-top:1px solid var(--gray-300);
   }
-  .services-header .lead{
-    margin-top:24px;font-size:15px;color:var(--gray-700);max-width:480px;line-height:2;
+  .service-item{
+    display:grid;
+    grid-template-columns:100px minmax(0,1.1fr) minmax(0,1.3fr);
+    gap:48px;align-items:start;
+    padding:40px 0;border-bottom:1px solid var(--gray-300);
+    transition:background .25s var(--ease);
   }
-  .services-grid{display:grid;gap:0}
-  .service-row{
-    display:grid;grid-template-columns:120px 1fr 1fr;gap:48px;
-    padding:48px 0;border-top:1px solid var(--gray-300);
-    align-items:start;
-  }
-  .service-row:last-child{border-bottom:1px solid var(--gray-300)}
+  .service-item:hover{background:#fcfcfc}
   .service-num{
-    font-family:Inter,sans-serif;font-weight:900;font-size:48px;line-height:1;
-    color:var(--ink);letter-spacing:-.02em;
+    font-family:Inter,sans-serif;font-weight:900;
+    font-size:42px;line-height:1;color:var(--ink);letter-spacing:-.02em;
+    display:flex;align-items:baseline;gap:4px;
   }
-  .service-num sup{font-size:14px;font-weight:700;color:var(--gray-500);vertical-align:super;letter-spacing:.1em}
-  .service-title{font-size:22px;font-weight:900;color:var(--black);line-height:1.5;letter-spacing:.02em}
-  .service-title-en{
-    display:block;font-family:Inter,sans-serif;font-size:11px;font-weight:500;
-    color:var(--gray-500);letter-spacing:.3em;margin-bottom:8px;
+  .service-num sup{
+    font-size:11px;font-weight:500;color:var(--gray-500);
+    letter-spacing:.06em;transform:translateY(0);
   }
-  .service-desc{font-size:14px;color:var(--gray-700);line-height:2;letter-spacing:.02em}
+  .service-name{}
+  .service-name-en{
+    display:block;font-family:Inter,sans-serif;font-size:10px;font-weight:600;
+    color:var(--gray-500);letter-spacing:.32em;margin-bottom:10px;
+  }
+  .service-name-jp{
+    font-size:20px;font-weight:900;color:var(--black);
+    line-height:1.5;letter-spacing:.02em;
+  }
+  .service-desc{
+    font-size:14px;color:var(--gray-700);line-height:2;letter-spacing:.02em;
+  }
 
-  /* ====== Photo banner section ====== */
-  .photo-banner{
-    margin-top:120px;height:520px;
-    display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
-    padding:0 80px;
+  /* ============ Photo strip ============ */
+  .photo-strip{
+    margin-top:96px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+    padding:0 var(--gutter);
   }
-  .photo-banner-cell{
-    overflow:hidden;background:var(--gray-100);position:relative;
+  .photo-strip-cell{
+    overflow:hidden;background:var(--gray-100);
+    aspect-ratio:1/1;
   }
-  .photo-banner-cell img{
+  .photo-strip-cell img{
     width:100%;height:100%;object-fit:cover;
     transition:transform 1.2s var(--ease-out);
   }
-  .photo-banner-cell:hover img{transform:scale(1.05)}
+  .photo-strip-cell:hover img{transform:scale(1.05)}
 
-  /* ====== Livers — frame card grid ====== */
-  .livers{padding:200px 0;background:var(--paper)}
-  .livers-header{
-    display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:end;
-    margin-bottom:64px;
+  /* ============ Livers ============ */
+  .livers{padding:160px 0;background:var(--paper)}
+  .livers-head{
+    display:grid;grid-template-columns:1fr auto;align-items:end;
+    margin-bottom:64px;gap:32px;
   }
-  .livers-header h2{
-    font-size:clamp(28px,3.4vw,46px);font-weight:900;color:var(--black);letter-spacing:.04em;
-  }
-  .livers-tag{
-    font-family:Inter,sans-serif;font-size:11px;letter-spacing:.4em;color:var(--gray-500);
+  .livers-head-text .section-title{margin-top:18px}
+  .livers-head-meta{
+    font-family:Inter,sans-serif;font-size:11px;letter-spacing:.36em;color:var(--gray-500);
+    padding-bottom:8px;
   }
   .livers-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:32px 24px;
   }
-  .liver-card{
-    position:relative;
-  }
+  .liver-card{display:flex;flex-direction:column}
   .liver-photo{
-    aspect-ratio:3/4;overflow:hidden;position:relative;background:var(--gray-100);
+    aspect-ratio:3/4;overflow:hidden;position:relative;
+    background:var(--gray-100);
   }
   .liver-photo img{
     width:100%;height:100%;object-fit:cover;
     transition:transform 1.1s var(--ease-out);
   }
-  .liver-photo:hover img{transform:scale(1.06)}
+  .liver-card:hover .liver-photo img{transform:scale(1.06)}
   .liver-frame{
-    position:absolute;inset:14px;border:1.5px solid #fff;pointer-events:none;
-    opacity:.7;
+    position:absolute;inset:12px;border:1.5px solid rgba(255,255,255,.7);
+    pointer-events:none;opacity:0;transition:opacity .25s var(--ease);
   }
-  .liver-name-row{
-    margin-top:20px;display:flex;justify-content:space-between;align-items:baseline;
+  .liver-card:hover .liver-frame{opacity:1}
+  .liver-meta{
+    margin-top:18px;display:flex;justify-content:space-between;align-items:baseline;
   }
   .liver-name{font-weight:900;font-size:15px;color:var(--black);letter-spacing:.04em}
-  .liver-num{font-family:Inter,sans-serif;font-size:11px;color:var(--gray-500);font-weight:500;letter-spacing:.3em}
+  .liver-num{
+    font-family:Inter,sans-serif;font-size:10px;color:var(--gray-500);
+    font-weight:500;letter-spacing:.3em;
+  }
   .liver-platform{font-size:11px;color:var(--gray-700);margin-top:4px;letter-spacing:.1em}
 
-  /* ====== Quote (big text section) ====== */
+  /* ============ Quote section ============ */
   .quote{
-    padding:200px 0;background:#fafafa;text-align:center;position:relative;overflow:hidden;
+    padding:160px 0;background:var(--gray-50);text-align:center;
+    position:relative;overflow:hidden;
   }
   .quote-mark{
-    font-family:Georgia,serif;font-size:160px;line-height:1;color:var(--gray-300);
-    margin-bottom:-40px;
+    font-family:Georgia,serif;font-size:120px;line-height:1;
+    color:var(--gray-300);margin-bottom:-32px;font-weight:400;
   }
   .quote-body{
-    font-size:clamp(24px,2.8vw,38px);
+    font-size:clamp(22px,2.6vw,34px);
     font-weight:900;color:var(--black);
     line-height:2;letter-spacing:.06em;
   }
-  .quote-body br+br{display:none}
   .quote-attr{
-    margin-top:48px;font-size:13px;color:var(--gray-500);letter-spacing:.2em;
+    margin-top:48px;font-size:11px;color:var(--gray-500);letter-spacing:.32em;
     font-family:Inter,sans-serif;font-weight:500;
   }
-  .quote-attr::before{content:"— ";margin-right:8px}
 
-  /* ====== Platforms strip ====== */
-  .platforms-strip{
-    padding:140px 0;background:var(--paper);
-  }
-  .platforms-strip-head{
-    text-align:center;margin-bottom:80px;
-  }
-  .platforms-strip-head .tag{
-    font-family:Inter,sans-serif;font-size:11px;letter-spacing:.4em;color:var(--gray-500);
-  }
-  .platforms-strip-head h2{
-    margin-top:18px;font-size:clamp(28px,3.2vw,42px);font-weight:900;letter-spacing:.04em;
-  }
+  /* ============ Platforms ============ */
+  .platforms{padding:140px 0;background:var(--paper)}
+  .platforms-head{text-align:center;margin-bottom:72px}
+  .platforms-head .section-tag{padding-left:0}
+  .platforms-head .section-tag::before{display:none}
+  .platforms-head .section-title{margin-top:18px}
   .platforms-row{
-    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
-    gap:32px 56px;max-width:1100px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(5,1fr);
+    gap:36px 28px;max-width:920px;margin:0 auto;
   }
   .platform-cell{
-    display:flex;flex-direction:column;align-items:center;gap:14px;
+    display:flex;flex-direction:column;align-items:center;gap:12px;
     transition:transform .2s var(--ease);
   }
   .platform-cell:hover{transform:translateY(-4px)}
   .platform-cell-art{
-    width:96px;height:96px;border-radius:22px;overflow:hidden;
+    width:84px;height:84px;border-radius:18px;overflow:hidden;
     display:flex;align-items:center;justify-content:center;
-    font-family:Inter,sans-serif;font-weight:900;font-size:36px;
-    box-shadow:0 12px 32px rgba(0,0,0,.12);
+    font-family:Inter,sans-serif;font-weight:900;font-size:30px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
   }
   .platform-cell-art img{width:100%;height:100%;object-fit:cover}
-  .platform-cell-name{font-size:12px;font-weight:700;color:var(--gray-700);letter-spacing:.1em}
-
-  /* ====== Numbers strip ====== */
-  .nums{
-    padding:160px 0;background:var(--black);color:#fff;
+  .platform-cell-name{
+    font-size:11px;font-weight:700;color:var(--gray-700);letter-spacing:.06em;
   }
+
+  /* ============ Numbers ============ */
+  .nums{padding:140px 0;background:var(--black);color:#fff}
+  .nums-head{margin-bottom:64px}
+  .nums-head .section-tag{color:rgba(255,255,255,.7)}
+  .nums-head .section-tag::before{background:rgba(255,255,255,.7)}
+  .nums-head .section-title{color:#fff}
+  .nums-head .section-title em{background:linear-gradient(180deg,transparent 62%,var(--accent-yellow) 62%);color:var(--black)}
   .nums-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:48px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
   }
   .num-cell{
     text-align:left;border-left:1px solid rgba(255,255,255,.18);
-    padding-left:32px;
+    padding:0 24px;
   }
+  .num-cell:first-child{border-left:none;padding-left:0}
   .num-value{
     font-family:Inter,sans-serif;font-weight:900;
-    font-size:clamp(48px,5vw,80px);line-height:1;letter-spacing:-.03em;
-    color:#fff;
+    font-size:clamp(48px,5vw,76px);line-height:1;letter-spacing:-.03em;color:#fff;
   }
-  .num-value small{font-size:.5em;letter-spacing:0;color:rgba(255,255,255,.7);margin-left:6px;font-weight:500}
-  .num-label{margin-top:14px;font-size:12px;letter-spacing:.2em;color:rgba(255,255,255,.55);font-family:Inter,sans-serif;font-weight:500}
-  .num-desc{margin-top:6px;font-size:13px;color:#fff;font-weight:700}
+  .num-value small{
+    font-size:.46em;letter-spacing:0;color:rgba(255,255,255,.7);
+    margin-left:6px;font-weight:500;
+  }
+  .num-label{
+    margin-top:16px;font-size:11px;letter-spacing:.3em;
+    color:rgba(255,255,255,.55);font-family:Inter,sans-serif;font-weight:500;
+  }
+  .num-desc{margin-top:6px;font-size:13px;color:#fff;font-weight:700;letter-spacing:.04em}
 
-  /* ====== Recruit CTA banner ====== */
-  .recruit-banner{
-    padding:240px 80px;background:var(--paper);position:relative;overflow:hidden;
-  }
-  .recruit-inner{
-    max-width:1280px;margin:0 auto;text-align:center;position:relative;z-index:2;
+  /* ============ Recruit banner ============ */
+  .recruit{
+    padding:200px 0;background:var(--paper);
+    position:relative;overflow:hidden;text-align:center;
   }
   .recruit-tag{
     font-family:Inter,sans-serif;font-size:11px;letter-spacing:.4em;color:var(--gray-500);
+    font-weight:700;
   }
   .recruit-title{
     margin-top:24px;
-    font-size:clamp(36px,4.8vw,68px);font-weight:900;color:var(--black);
+    font-size:clamp(34px,4.4vw,62px);
+    font-weight:900;color:var(--black);
     line-height:1.5;letter-spacing:.04em;
   }
   .recruit-actions{
-    margin-top:64px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;
+    margin-top:56px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
   }
   .btn-l{
     display:inline-flex;align-items:center;gap:18px;
-    padding:22px 42px;border-radius:6px;
-    font-weight:700;font-size:14px;letter-spacing:.06em;
+    padding:20px 36px;border-radius:4px;
+    font-weight:700;font-size:13px;letter-spacing:.06em;
     transition:transform .2s var(--ease);
   }
   .btn-black{background:var(--black);color:#fff}
@@ -478,35 +507,38 @@
   .btn-l-arrow{
     width:24px;height:24px;border-radius:50%;
     background:#fff;color:var(--black);
-    display:inline-flex;align-items:center;justify-content:center;font-size:13px;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:13px;font-family:Inter,sans-serif;font-weight:700;
   }
   .btn-line .btn-l-arrow{color:var(--line)}
   .btn-outline .btn-l-arrow{background:var(--black);color:#fff}
-  /* Decorative shapes for recruit */
-  .recruit-banner .deco-1{top:18%;left:8%}
-  .recruit-banner .deco-2{bottom:18%;right:10%}
-  .recruit-banner .deco-3{top:24%;right:18%}
-  .recruit-banner .deco-4{bottom:28%;left:14%}
 
-  /* ====== Footer ====== */
-  .site-footer{
-    background:var(--black);color:#fff;padding:120px 80px 60px;
-  }
+  /* Decorations for recruit */
+  .recruit .deco-r1{top:24%;left:14%;animation:float 5s ease-in-out infinite}
+  .recruit .deco-r2{bottom:24%;right:14%;animation:float 6s ease-in-out infinite reverse}
+  .recruit .deco-r3{top:30%;right:22%;opacity:.7}
+  .recruit .deco-r4{bottom:30%;left:22%}
+
+  /* ============ Footer ============ */
+  .site-footer{background:var(--black);color:#fff;padding:120px 0 56px}
   .footer-grid{
-    max-width:1280px;margin:0 auto;
     display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;
   }
-  .footer-brand{
-    font-family:Inter,sans-serif;font-weight:900;font-size:28px;letter-spacing:-.01em;
-    color:#fff;display:flex;align-items:baseline;gap:4px;
+  .footer-brand-row{
+    font-family:Inter,sans-serif;font-weight:900;font-size:26px;
+    letter-spacing:-.005em;color:#fff;
+    display:flex;align-items:baseline;gap:3px;
   }
-  .footer-brand sup{font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.7);transform:translateY(-12px)}
+  .footer-brand-row sup{
+    font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.7);
+    transform:translateY(-12px);
+  }
   .footer-tagline{
     margin-top:18px;font-size:13px;color:rgba(255,255,255,.6);line-height:2;
   }
   .footer-col h4{
     font-size:11px;letter-spacing:.32em;color:rgba(255,255,255,.5);
-    margin-bottom:24px;font-weight:500;
+    margin-bottom:22px;font-weight:500;
   }
   .footer-col ul li{margin-bottom:14px}
   .footer-col a{
@@ -515,59 +547,87 @@
   }
   .footer-col a:hover{opacity:.7}
   .footer-bottom{
-    max-width:1280px;margin:80px auto 0;padding-top:32px;
+    margin-top:80px;padding-top:32px;
     border-top:1px solid rgba(255,255,255,.1);
     display:flex;justify-content:space-between;align-items:center;
     color:rgba(255,255,255,.4);font-size:12px;letter-spacing:.1em;
   }
 
-  /* ====== Responsive ====== */
-  @media (max-width:960px){
-    .bar{display:none}
-    .brand{top:20px;left:20px}
-    .brand-mark{font-size:18px}
-    .brand img{height:24px}
-    .menu-btn{top:16px;right:16px;width:56px;height:56px}
-    .float-contact{bottom:16px;right:16px;left:16px;padding:18px 24px;font-size:13px;justify-content:space-between}
-    .container,.recruit-banner,.site-footer{padding-left:24px;padding-right:24px}
-    .hero{padding:120px 0 60px;min-height:auto}
-    .hero-inner{grid-template-columns:1fr;gap:40px}
-    .hero-title{font-size:44px}
-    .collage{height:440px}
-    .mission{padding:80px 0}
-    .mission-inner{grid-template-columns:1fr;gap:32px}
-    .bg-letter-section{padding:100px 0}
-    .service-row{grid-template-columns:60px 1fr;gap:24px;padding:32px 0}
-    .service-num{font-size:32px}
-    .service-row > .service-desc{grid-column:1/-1;margin-top:8px}
-    .photo-banner{height:auto;grid-template-columns:1fr;padding:0 24px}
-    .photo-banner-cell{height:240px}
-    .livers{padding:100px 0}
-    .livers-header{grid-template-columns:1fr;gap:16px}
-    .livers-grid{grid-template-columns:repeat(2,1fr);gap:16px}
-    .quote{padding:100px 0}
-    .quote-mark{font-size:80px}
-    .platforms-strip{padding:80px 0}
-    .platforms-row{gap:28px 28px}
-    .platform-cell-art{width:72px;height:72px;border-radius:18px}
-    .nums{padding:80px 0}
-    .nums-grid{grid-template-columns:repeat(2,1fr);gap:32px 24px}
-    .num-cell{padding-left:18px}
-    .recruit-banner{padding:120px 24px}
-    .recruit-actions{flex-direction:column;align-items:stretch}
-    .btn-l{justify-content:center}
-    .site-footer{padding:80px 24px 40px}
-    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-    .footer-bottom{flex-direction:column;gap:12px;text-align:center;font-size:11px}
-    body{padding-bottom:96px}
-  }
-
-  /* Reveal animation */
+  /* ============ Reveal ============ */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
   .reveal.in{opacity:1;transform:none}
+
+  /* ============ Responsive ============ */
+  @media (max-width:1100px){
+    :root{--gutter:48px}
+    .menu-btn{right:48px}
+    .brand{left:48px}
+    .hero-collage{aspect-ratio:1/1}
+  }
+  @media (max-width:760px){
+    :root{--gutter:20px}
+    .bar{display:none}
+    .brand{top:18px;left:20px}
+    .brand-mark{font-size:18px}
+    .brand-lead{font-size:8px}
+    .menu-btn{top:14px;right:16px;width:52px;height:52px}
+    .float-contact{
+      bottom:0;right:0;left:0;border-radius:0;
+      padding:16px 20px;font-size:12px;justify-content:space-between;
+    }
+    body{padding-bottom:64px}
+
+    .hero{padding:120px 0 80px}
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .hero-title{font-size:38px}
+    .hero-collage{aspect-ratio:1/1.1;max-height:520px;gap:10px}
+
+    .mission{padding:80px 0}
+    .mission-grid{grid-template-columns:1fr;gap:32px}
+
+    .story-section{padding:80px 0}
+    .story-grid{grid-template-columns:1fr;gap:32px}
+
+    .services{padding:80px 0 40px}
+    .services-head{margin-bottom:40px}
+    .service-item{
+      grid-template-columns:60px 1fr;gap:16px;padding:28px 0;
+    }
+    .service-num{font-size:28px}
+    .service-desc{grid-column:1/-1;margin-top:8px}
+
+    .photo-strip{
+      grid-template-columns:1fr;gap:4px;margin-top:56px;padding:0 20px;
+    }
+    .photo-strip-cell{aspect-ratio:16/10}
+
+    .livers{padding:80px 0}
+    .livers-head{grid-template-columns:1fr;align-items:start}
+    .livers-grid{grid-template-columns:repeat(2,1fr);gap:24px 16px}
+
+    .quote{padding:80px 0}
+    .quote-mark{font-size:72px;margin-bottom:-20px}
+
+    .platforms{padding:80px 0}
+    .platforms-row{grid-template-columns:repeat(4,1fr);gap:24px 16px}
+    .platform-cell-art{width:64px;height:64px;border-radius:16px}
+    .platform-cell-name{font-size:10px}
+
+    .nums{padding:80px 0}
+    .nums-grid{grid-template-columns:repeat(2,1fr);gap:32px 0}
+    .num-cell{padding:0 16px}
+    .num-cell:nth-child(3){border-left:none;padding-left:0}
+
+    .recruit{padding:100px 0}
+
+    .site-footer{padding:80px 0 32px}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .footer-bottom{margin-top:56px;flex-direction:column;gap:12px;text-align:center;font-size:11px}
+  }
+
   @media (prefers-reduced-motion:reduce){
     .reveal{opacity:1;transform:none;transition:none}
-    .bar-track,.deco-1,.deco-2,.deco-3,.deco-4{animation:none}
+    .bar-track,.deco{animation:none}
   }
 </style>
 </head>
@@ -576,267 +636,245 @@
 <!-- ===== Edge marquees ===== -->
 <aside class="bar bar-l" aria-hidden="true">
   <div class="bar-track">
-    <span>LIVER MANAGEMENT — LIVE-LABO INC.</span>
-    <span>LIVER MANAGEMENT — LIVE-LABO INC.</span>
-    <span>LIVER MANAGEMENT — LIVE-LABO INC.</span>
-    <span>LIVER MANAGEMENT — LIVE-LABO INC.</span>
+    <span>LIVER MANAGEMENT — LIVE-LABO INC. SINCE 2016</span>
+    <span>LIVER MANAGEMENT — LIVE-LABO INC. SINCE 2016</span>
+    <span>LIVER MANAGEMENT — LIVE-LABO INC. SINCE 2016</span>
+    <span>LIVER MANAGEMENT — LIVE-LABO INC. SINCE 2016</span>
   </div>
 </aside>
 <aside class="bar bar-r" aria-hidden="true">
   <div class="bar-track">
-    <span>LIVE-LABO — SINCE 2016 / TOKYO EBISU</span>
-    <span>LIVE-LABO — SINCE 2016 / TOKYO EBISU</span>
-    <span>LIVE-LABO — SINCE 2016 / TOKYO EBISU</span>
-    <span>LIVE-LABO — SINCE 2016 / TOKYO EBISU</span>
+    <span>POCOCHA — TIKTOK LIVE — 17LIVE — IRIAM — REALITY</span>
+    <span>POCOCHA — TIKTOK LIVE — 17LIVE — IRIAM — REALITY</span>
+    <span>POCOCHA — TIKTOK LIVE — 17LIVE — IRIAM — REALITY</span>
+    <span>POCOCHA — TIKTOK LIVE — 17LIVE — IRIAM — REALITY</span>
   </div>
 </aside>
 
-<!-- ===== Floating brand ===== -->
 <a href="https://live-labo.jp/" class="brand">
   <span class="brand-lead">LIVER MANAGEMENT</span>
   <span class="brand-mark">LIVE-LABO<sup>INC</sup></span>
 </a>
 
-<!-- ===== Floating menu ===== -->
 <button class="menu-btn" aria-label="メニュー">
   <span class="menu-btn-lines"><span></span><span></span></span>
 </button>
 
-<!-- ===== Floating CTA ===== -->
-<a href="#contact" class="float-contact">
+<a href="#recruit" class="float-contact">
   ライバー新規登録についてはこちら
   <span class="float-contact-arrow">→</span>
 </a>
 
-<!-- ====================================================== -->
-<!-- ===== Hero ===== -->
+<!-- ============ Hero ============ -->
 <section class="hero">
   <div class="container">
-    <div class="hero-inner">
-      <div class="hero-text reveal">
+    <div class="hero-grid">
+      <div class="reveal">
         <span class="hero-eyebrow">LIVER MANAGEMENT PRODUCTION</span>
-        <p class="hero-title-mini">"好き"を"仕事"に</p>
+        <span class="hero-sub">"好き"を"仕事"に</span>
         <h1 class="hero-title">ライブ配信で、<br>人生を選ぶ。</h1>
         <p class="hero-desc">
-          株式会社Live-Laboは、ライブ配信アプリで活動する<br>
-          「ライバー」を、契約・教育・収益化まで<br>
-          トータルでサポートするライバーマネジメント事務所です。
+          株式会社Live-Laboは、ライブ配信アプリで活動する「ライバー」を、契約・教育・収益化までトータルでサポートするライバーマネジメント事務所です。
         </p>
-        <div class="hero-meta">
-          <span class="hero-meta-line"></span>
-          <span class="hero-meta-text">SINCE 2016 / TOKYO EBISU</span>
-        </div>
+        <span class="hero-since">SINCE 2016 / TOKYO EBISU</span>
       </div>
-      <div class="collage" id="collage">
-        <div class="ph ph-1"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt=""></div>
-        <div class="ph ph-2"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt=""></div>
-        <div class="ph ph-3"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt=""></div>
-        <div class="ph ph-4"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt=""></div>
+      <div class="hero-collage" id="collage">
+        <div class="ph"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt=""></div>
+        <div class="ph"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt=""></div>
+        <div class="ph"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt=""></div>
         <span class="deco deco-circle deco-1" aria-hidden="true"></span>
         <span class="deco deco-triangle deco-2" aria-hidden="true"></span>
-        <span class="deco deco-rect deco-3" aria-hidden="true"></span>
-        <span class="deco deco-square deco-4" aria-hidden="true"></span>
-        <span class="deco deco-halftone deco-5" aria-hidden="true"></span>
-        <button class="play-overlay" aria-label="再生"></button>
+        <span class="deco deco-square deco-3" aria-hidden="true"></span>
+        <span class="deco deco-dot deco-4" aria-hidden="true"></span>
+        <button class="hero-play" aria-label="再生"></button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Divider ===== -->
-<div class="divider">
-  <span class="divider-mark">ABOUT US</span>
+<!-- ============ Divider ============ -->
+<div class="divider-strip">
+  <span class="divider-strip-text">ABOUT US</span>
 </div>
 
-<!-- ===== Mission ===== -->
+<!-- ============ Mission ============ -->
 <section class="mission">
   <div class="container">
-    <div class="mission-inner">
+    <div class="mission-grid">
       <div class="reveal">
-        <span class="mission-tag">MISSION 01</span>
-        <h2 class="mission-title">
-          <span class="mission-title-em">人生の選択肢</span>を、<br>
-          配信で増やす。
-        </h2>
+        <span class="section-tag">MISSION 01</span>
+        <h2 class="section-title"><em>人生の選択肢</em>を、<br>配信で増やす。</h2>
       </div>
       <div class="mission-body reveal">
-        <p>
-          スマホ1台で、誰もが「表現」と「収入」を手にできる時代になりました。
-          私たちLive-Laboは、その入口を整え、続けるための環境をすべて用意します。
-        </p>
-        <p>
-          所属ライバー一人ひとりに専属マネージャーが付き、配信戦略・機材・税務・住所提供まで一括サポート。
-          Pococha 歴代1位ライバーを多数輩出してきた現場のノウハウを、未経験の方にもそのまま渡します。
-        </p>
+        <p>スマホ1台で、誰もが「表現」と「収入」を手にできる時代になりました。私たちLive-Laboは、その入口を整え、続けるための環境をすべて用意します。</p>
+        <p>所属ライバー一人ひとりに専属マネージャーが付き、配信戦略・機材・税務・住所提供まで一括サポート。Pococha 歴代1位ライバーを多数輩出してきた現場のノウハウを、未経験の方にもそのまま渡します。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Big letter section: STORY ===== -->
-<section class="bg-letter-section">
+<!-- ============ Story (big BG letter) ============ -->
+<section class="story-section">
   <div class="bg-letter">STORY</div>
   <div class="container">
-    <div class="mission-inner reveal">
-      <div>
-        <span class="mission-tag">MISSION 02</span>
-        <h2 class="mission-title">
-          配信を、<br>
-          <span class="mission-title-em">"続く仕事"</span>に。
-        </h2>
+    <div class="story-grid">
+      <div class="reveal">
+        <span class="section-tag">MISSION 02</span>
+        <h2 class="section-title">配信を、<br><em>"続く仕事"</em>に。</h2>
       </div>
-      <div class="mission-body">
-        <p>
-          「配信は数字が落ちたら終わり」── そんな業界の常識を私たちは変えてきました。
-          メジャーレーベルとの楽曲制作、メディア出演、オリジナルグッズ展開、タレント転身。
-          配信は"通過点"であり、その先のキャリアを描けます。
-        </p>
-        <p>
-          Live-Laboは、ライバーが「配信を辞めても食べていける状態」をゴールに置く事務所です。
-        </p>
+      <div class="mission-body reveal">
+        <p>「配信は数字が落ちたら終わり」── そんな業界の常識を、私たちは変えてきました。メジャーレーベルとの楽曲制作、メディア出演、オリジナルグッズ展開、タレント転身。配信は"通過点"であり、その先のキャリアを描けます。</p>
+        <p>Live-Laboは、ライバーが「配信を辞めても食べていける状態」をゴールに置く事務所です。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Services ===== -->
-<section class="bg-letter-section">
+<!-- ============ Services ============ -->
+<section class="services">
   <div class="bg-letter">SERVICE</div>
   <div class="container">
-    <div class="services-header reveal">
-      <span class="mission-tag">SERVICES</span>
-      <h2>ライバーが続けるための、<br>すべてのサポートを。</h2>
-      <p class="lead">配信のことだけじゃない。お金のこと、安心のこと、夢のこと。<br>必要なものすべてを揃えました。</p>
+    <div class="services-head reveal">
+      <span class="section-tag">SERVICES</span>
+      <h2 class="section-title">ライバーが続けるための、<br>すべてのサポートを。</h2>
+      <p class="services-lead">配信のことだけじゃない。お金のこと、安心のこと、夢のこと。必要なものすべてを揃えました。</p>
     </div>
-    <div class="services-grid">
-      <div class="service-row reveal">
+
+    <div class="services-list">
+      <article class="service-item reveal">
         <div class="service-num">01<sup>/06</sup></div>
-        <div>
-          <span class="service-title-en">MANAGEMENT</span>
-          <h3 class="service-title">専属マネージャー制度</h3>
+        <div class="service-name">
+          <span class="service-name-en">MANAGEMENT</span>
+          <h3 class="service-name-jp">専属マネージャー制度</h3>
         </div>
         <p class="service-desc">配信戦略から日々の相談、企画立案まで、ライバー1人ずつに専属担当が付きます。</p>
-      </div>
-      <div class="service-row reveal">
+      </article>
+
+      <article class="service-item reveal">
         <div class="service-num">02<sup>/06</sup></div>
-        <div>
-          <span class="service-title-en">REWARD</span>
-          <h3 class="service-title">還元率100% × 透明性</h3>
+        <div class="service-name">
+          <span class="service-name-en">REWARD</span>
+          <h3 class="service-name-jp">還元率100% × 透明性</h3>
         </div>
         <p class="service-desc">Pocochaは報酬ダイヤを100%還元。明細はすべて開示。不透明な手数料は一切いただきません。</p>
-      </div>
-      <div class="service-row reveal">
+      </article>
+
+      <article class="service-item reveal">
         <div class="service-num">03<sup>/06</sup></div>
-        <div>
-          <span class="service-title-en">ADDRESS</span>
-          <h3 class="service-title">事務所住所の提供</h3>
+        <div class="service-name">
+          <span class="service-name-en">ADDRESS</span>
+          <h3 class="service-name-jp">事務所住所の提供</h3>
         </div>
         <p class="service-desc">ファンレター・プライズの受取に事務所住所を使用可。自宅住所を公開せず安心して活動できます。</p>
-      </div>
-      <div class="service-row reveal">
+      </article>
+
+      <article class="service-item reveal">
         <div class="service-num">04<sup>/06</sup></div>
-        <div>
-          <span class="service-title-en">TAX</span>
-          <h3 class="service-title">税理士・確定申告サポート</h3>
+        <div class="service-name">
+          <span class="service-name-en">TAX</span>
+          <h3 class="service-name-jp">税理士・確定申告サポート</h3>
         </div>
         <p class="service-desc">提携税理士事務所を最大半額以下で利用可能。お金の手続きは丸ごとお任せください。</p>
-      </div>
-      <div class="service-row reveal">
+      </article>
+
+      <article class="service-item reveal">
         <div class="service-num">05<sup>/06</sup></div>
-        <div>
-          <span class="service-title-en">STUDIO</span>
-          <h3 class="service-title">提携スタジオ・配信ラウンジ</h3>
+        <div class="service-name">
+          <span class="service-name-en">STUDIO</span>
+          <h3 class="service-name-jp">提携スタジオ・配信ラウンジ</h3>
         </div>
         <p class="service-desc">ATOM SHINJUKU他、提携配信スタジオを無料で利用可。コラボ配信・オフ会会場としても活用できます。</p>
-      </div>
-      <div class="service-row reveal">
+      </article>
+
+      <article class="service-item reveal">
         <div class="service-num">06<sup>/06</sup></div>
-        <div>
-          <span class="service-title-en">EDUCATION</span>
-          <h3 class="service-title">未経験向け教育プログラム</h3>
+        <div class="service-name">
+          <span class="service-name-en">EDUCATION</span>
+          <h3 class="service-name-jp">未経験向け教育プログラム</h3>
         </div>
         <p class="service-desc">平均3ヶ月でS帯到達。初配信前から、専属マネージャーが配信スタイル作りを伴走します。</p>
-      </div>
+      </article>
     </div>
   </div>
-  <div class="photo-banner reveal">
-    <div class="photo-banner-cell"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt=""></div>
-    <div class="photo-banner-cell"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt=""></div>
-    <div class="photo-banner-cell"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt=""></div>
+
+  <!-- Photo strip after services -->
+  <div class="photo-strip reveal">
+    <div class="photo-strip-cell"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt=""></div>
+    <div class="photo-strip-cell"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt=""></div>
+    <div class="photo-strip-cell"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt=""></div>
   </div>
 </section>
 
-<!-- ===== Livers ===== -->
+<!-- ============ Livers ============ -->
 <section class="livers">
   <div class="container">
-    <div class="livers-header reveal">
-      <h2>活躍中の<br>所属ライバー</h2>
-      <span class="livers-tag">FEATURED LIVERS / 2026</span>
+    <div class="livers-head reveal">
+      <div class="livers-head-text">
+        <span class="section-tag">LIVERS</span>
+        <h2 class="section-title">活躍中の<br>所属ライバー</h2>
+      </div>
+      <span class="livers-head-meta">FEATURED — 2026</span>
     </div>
     <div class="livers-grid">
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="わらし。"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">わらし。</span><span class="liver-num">001</span></div>
+        <div class="liver-meta"><span class="liver-name">わらし。</span><span class="liver-num">001</span></div>
         <div class="liver-platform">Pococha / Top Tier</div>
       </article>
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="あの"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">あの</span><span class="liver-num">002</span></div>
+        <div class="liver-meta"><span class="liver-name">あの</span><span class="liver-num">002</span></div>
         <div class="liver-platform">Pococha / Rising</div>
       </article>
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="ゆいころ"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">ゆいころ</span><span class="liver-num">003</span></div>
+        <div class="liver-meta"><span class="liver-name">ゆいころ</span><span class="liver-num">003</span></div>
         <div class="liver-platform">17LIVE / Top Tier</div>
       </article>
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="遊汰様"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">遊汰様</span><span class="liver-num">004</span></div>
+        <div class="liver-meta"><span class="liver-name">遊汰様</span><span class="liver-num">004</span></div>
         <div class="liver-platform">TikTok LIVE / Top Tier</div>
       </article>
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="なるみ"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">なるみ</span><span class="liver-num">005</span></div>
+        <div class="liver-meta"><span class="liver-name">なるみ</span><span class="liver-num">005</span></div>
         <div class="liver-platform">Pococha / Rising</div>
       </article>
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg" alt="おとうふ"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">おとうふ</span><span class="liver-num">006</span></div>
+        <div class="liver-meta"><span class="liver-name">おとうふ</span><span class="liver-num">006</span></div>
         <div class="liver-platform">17LIVE / Rising</div>
       </article>
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/%E3%81%8A%E5%A4%A9-scaled.jpeg" alt="お天"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">お天</span><span class="liver-num">007</span></div>
+        <div class="liver-meta"><span class="liver-name">お天</span><span class="liver-num">007</span></div>
         <div class="liver-platform">Pococha / Active</div>
       </article>
       <article class="liver-card reveal">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/line_oa_chat_250902_112651.jpg" alt="えなぴまる"><span class="liver-frame"></span></div>
-        <div class="liver-name-row"><span class="liver-name">えなぴまる</span><span class="liver-num">008</span></div>
+        <div class="liver-meta"><span class="liver-name">えなぴまる</span><span class="liver-num">008</span></div>
         <div class="liver-platform">Pococha / Active</div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ===== Quote ===== -->
+<!-- ============ Quote ============ -->
 <section class="quote">
   <div class="container">
     <div class="quote-mark reveal">"</div>
-    <p class="quote-body reveal">
-      数字を伸ばすことより、<br>
-      <span class="mission-title-em">続けられる仕組み</span>を作ること。<br>
-      それが、Live-Laboの仕事です。
-    </p>
-    <p class="quote-attr reveal">Live-Labo Inc. / Founder Message</p>
+    <p class="quote-body reveal">数字を伸ばすことより、<br><em style="font-style:normal;background:linear-gradient(180deg,transparent 62%,var(--accent-yellow) 62%);padding:0 4px">続けられる仕組み</em>を作ること。<br>それが、Live-Laboの仕事です。</p>
+    <p class="quote-attr reveal">— LIVE-LABO INC. / FOUNDER MESSAGE</p>
   </div>
 </section>
 
-<!-- ===== Platforms ===== -->
-<section class="platforms-strip">
+<!-- ============ Platforms ============ -->
+<section class="platforms">
   <div class="container">
-    <div class="platforms-strip-head reveal">
-      <span class="tag">PARTNER PLATFORMS</span>
-      <h2>主要配信アプリ、すべて対応。</h2>
+    <div class="platforms-head reveal">
+      <span class="section-tag">PARTNER PLATFORMS</span>
+      <h2 class="section-title">主要配信アプリ、すべて対応。</h2>
     </div>
     <div class="platforms-row reveal">
       <a class="platform-cell" title="TikTok LIVE">
@@ -871,6 +909,10 @@
         <div class="platform-cell-art" style="background:#fff;color:#1ab7ea">E</div>
         <span class="platform-cell-name">EVERY.LIVE</span>
       </a>
+      <a class="platform-cell" title="Uplive">
+        <div class="platform-cell-art" style="background:linear-gradient(135deg,#a16bff 0%,#ec4899 100%);color:#fff;font-style:italic">up</div>
+        <span class="platform-cell-name">Uplive</span>
+      </a>
       <a class="platform-cell" title="SHOWROOM">
         <div class="platform-cell-art" style="background:linear-gradient(135deg,#ff5577 0%,#ff8855 100%);color:#fff">SR</div>
         <span class="platform-cell-name">SHOWROOM</span>
@@ -879,9 +921,13 @@
   </div>
 </section>
 
-<!-- ===== Numbers ===== -->
+<!-- ============ Numbers ============ -->
 <section class="nums">
   <div class="container">
+    <div class="nums-head reveal">
+      <span class="section-tag">BY THE NUMBERS</span>
+      <h2 class="section-title">"安心"は、<em>数字</em>で示します。</h2>
+    </div>
     <div class="nums-grid">
       <div class="num-cell reveal">
         <div class="num-value">100<small>%</small></div>
@@ -895,30 +941,27 @@
       </div>
       <div class="num-cell reveal">
         <div class="num-value">3<small>ヶ月</small></div>
-        <div class="num-label">TIME TO SUCCESS</div>
-        <div class="num-desc">未経験→S帯到達</div>
+        <div class="num-label">TIME TO RANK</div>
+        <div class="num-desc">未経験→S帯</div>
       </div>
       <div class="num-cell reveal">
         <div class="num-value">0<small>円</small></div>
         <div class="num-label">INITIAL FEE</div>
-        <div class="num-desc">初期費用・契約料</div>
+        <div class="num-desc">初期費用</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Recruit banner ===== -->
-<section class="recruit-banner" id="contact">
-  <span class="deco deco-circle deco-1" aria-hidden="true"></span>
-  <span class="deco deco-triangle deco-2" aria-hidden="true"></span>
-  <span class="deco deco-rect deco-3" aria-hidden="true"></span>
-  <span class="deco deco-square deco-4" aria-hidden="true"></span>
-  <div class="recruit-inner">
+<!-- ============ Recruit ============ -->
+<section class="recruit" id="recruit">
+  <span class="deco deco-circle deco-r1" aria-hidden="true"></span>
+  <span class="deco deco-triangle deco-r2" aria-hidden="true"></span>
+  <span class="deco deco-square deco-r3" aria-hidden="true"></span>
+  <span class="deco deco-dot deco-r4" aria-hidden="true"></span>
+  <div class="container">
     <span class="recruit-tag">RECRUIT 2026</span>
-    <h2 class="recruit-title reveal">
-      "配信したい"を、<br>
-      <span class="mission-title-em">今日、はじめる。</span>
-    </h2>
+    <h2 class="recruit-title reveal">"配信したい"を、<br>今日、はじめる。</h2>
     <div class="recruit-actions reveal">
       <a href="#" class="btn-l btn-line">LINEで無料相談<span class="btn-l-arrow">→</span></a>
       <a href="https://live-labo.jp/contact/" class="btn-l btn-outline">フォームから応募<span class="btn-l-arrow">→</span></a>
@@ -926,73 +969,69 @@
   </div>
 </section>
 
-<!-- ===== Footer ===== -->
+<!-- ============ Footer ============ -->
 <footer class="site-footer">
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand">LIVE-LABO<sup>INC</sup></div>
-      <p class="footer-tagline">
-        株式会社Live-Labo<br>
-        〒150-0022 東京都渋谷区恵比寿南1-1-1 Humax Ebisu 8F
-      </p>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-row">LIVE-LABO<sup>INC</sup></div>
+        <p class="footer-tagline">
+          株式会社Live-Labo<br>
+          〒150-0022 東京都渋谷区恵比寿南1-1-1<br>
+          Humax Ebisu 8F
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>ABOUT</h4>
+        <ul>
+          <li><a href="https://live-labo.jp/about/">会社概要</a></li>
+          <li><a href="https://live-labo.jp/news/">ニュース</a></li>
+          <li><a href="https://live-labo.jp/interview/">インタビュー</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>JOIN</h4>
+        <ul>
+          <li><a href="#recruit">ライバー募集</a></li>
+          <li><a href="https://live-labo.jp/hope/">所属希望の方へ</a></li>
+          <li><a href="https://live-labo.jp/contact/">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>FOLLOW</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">X (Twitter)</a></li>
+          <li><a href="#">YouTube</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>ABOUT</h4>
-      <ul>
-        <li><a href="https://live-labo.jp/about/">会社概要</a></li>
-        <li><a href="https://live-labo.jp/news/">ニュース</a></li>
-        <li><a href="https://live-labo.jp/interview/">インタビュー</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <span>© 2026 Live-Labo Inc.</span>
+      <span>LIVER MANAGEMENT — TOKYO EBISU</span>
     </div>
-    <div class="footer-col">
-      <h4>JOIN</h4>
-      <ul>
-        <li><a href="#contact">ライバー募集</a></li>
-        <li><a href="https://live-labo.jp/hope/">所属希望の方へ</a></li>
-        <li><a href="https://live-labo.jp/contact/">お問い合わせ</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>FOLLOW</h4>
-      <ul>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">X (Twitter)</a></li>
-        <li><a href="#">YouTube</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Live-Labo Inc.</span>
-    <span>LIVER MANAGEMENT — TOKYO EBISU</span>
   </div>
 </footer>
 
 <script>
-  // Reveal on scroll
+  // IntersectionObserver reveal
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
     });
-  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  },{threshold:.1, rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Collage stagger reveal
+  // Collage staggered reveal
   const collage = document.getElementById('collage');
   if(collage){
-    requestAnimationFrame(()=>{
-      const phs = collage.querySelectorAll('.ph');
-      phs.forEach((ph,i)=>{
-        ph.style.transitionDelay = (i*180)+'ms';
+    const cio = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ collage.classList.add('in'); cio.unobserve(collage); }
       });
-      setTimeout(()=>collage.classList.add('ready'), 120);
-    });
+    },{threshold:.2});
+    cio.observe(collage);
   }
-
-  // Collage hover wiggle
-  document.querySelectorAll('.ph').forEach(ph=>{
-    ph.addEventListener('mouseenter',()=>{ph.style.zIndex=10});
-    ph.addEventListener('mouseleave',()=>{ph.style.zIndex=''});
-  });
 </script>
 
 </body>
