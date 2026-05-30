@@ -149,16 +149,21 @@
     padding:0 5px;
   }
 
-  /* ============ Hero ============ */
+  /* ============ Hero (321本家寄せ完全再構築 / 左テキスト・右フルブリード写真ウォール) ============ */
   .hero{
-    padding:200px 0 140px;
-    background:var(--paper);
-    position:relative;
-    overflow:hidden;
+    position:relative;min-height:100vh;
+    background:var(--paper);overflow:hidden;
+    padding:0;
   }
   .hero-grid{
-    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
-    gap:70px;align-items:center;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);
+    gap:0;align-items:stretch;min-height:100vh;
+  }
+  /* 左カラム: テキストブロック (本家準拠の上下センター配置) */
+  .hero-text-col{
+    padding:120px 56px 80px 88px;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;z-index:2;background:var(--paper);
   }
   .hero-eyebrow{
     display:inline-block;
@@ -188,94 +193,81 @@
   }
   .hero-since::before{content:"";width:52px;height:1px;background:var(--ink)}
 
-  /* ===== Hero collage with auto-rotating photos & offset frames ===== */
-  /* 321本家寄せ: 上方向にも全体的に大きく動く配置（よりタテ長） */
-  .hero-collage{
+  /* ===== 右カラム: フルブリード 2x3 写真ウォール (本家準拠) ===== */
+  .photo-wall{
     position:relative;
-    display:grid;
-    grid-template-columns:1.1fr 1fr;
-    grid-template-rows:1fr 1fr;
-    gap:18px;
-    aspect-ratio:1/1.32;
-    max-height:880px;
-    margin-top:-20px; /* hero-grid基準より上に押し出して上方向の動きを拡大 */
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.05fr 1fr 1.1fr;
+    gap:6px;min-height:100vh;background:var(--paper);overflow:hidden;
   }
-  /* "Slot" container holds rotating photos + offset frame */
-  .slot{
-    position:relative;
-    overflow:visible;
-    opacity:0;transform:translateY(24px);
-    transition:opacity 1.1s var(--ease-out),transform 1.1s var(--ease-out);
+  .photo-cell{
+    position:relative;overflow:hidden;background:var(--gray-100);
+    opacity:0;transform:translateY(20px);
+    transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);
   }
-  .hero-collage.in .slot{opacity:1;transform:none}
-  /* 上方向の表示領域を広げる: slot1は上端から、slot2はさらに上方向、slot3も下方向に大きく */
-  .slot:nth-child(1){transition-delay:.15s;grid-column:1;grid-row:1 / span 2;margin-top:0}
-  .slot:nth-child(2){transition-delay:.32s;grid-column:2;grid-row:1;margin-top:-28px;margin-bottom:10px}
-  .slot:nth-child(3){transition-delay:.5s;grid-column:2;grid-row:2;margin-top:10px;margin-bottom:-12px}
+  .photo-wall.in .photo-cell{opacity:1;transform:none}
+  .photo-wall.in .photo-cell:nth-child(1){transition-delay:.05s}
+  .photo-wall.in .photo-cell:nth-child(2){transition-delay:.18s}
+  .photo-wall.in .photo-cell:nth-child(3){transition-delay:.32s}
+  .photo-wall.in .photo-cell:nth-child(4){transition-delay:.44s}
+  .photo-wall.in .photo-cell:nth-child(5){transition-delay:.56s}
+  .photo-wall.in .photo-cell:nth-child(6){transition-delay:.68s}
+  .photo-cell img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;display:block;
+    will-change:transform,opacity;
+  }
+  /* Ken Burns + クロスフェード: 各セルに2枚の写真、ゆっくりズーム+ドリフトしながら切替 */
+  .photo-cell img:nth-child(1){animation:ken-a 14s infinite cubic-bezier(.45,.05,.55,.95)}
+  .photo-cell img:nth-child(2){animation:ken-b 14s infinite cubic-bezier(.45,.05,.55,.95)}
+  /* セル別に時間とディレイをずらして全体がゆっくり波打つように */
+  .photo-cell:nth-child(2) img{animation-duration:15s;animation-delay:-2.5s}
+  .photo-cell:nth-child(3) img{animation-duration:13.5s;animation-delay:-5s}
+  .photo-cell:nth-child(4) img{animation-duration:16s;animation-delay:-3.2s}
+  .photo-cell:nth-child(5) img{animation-duration:14.5s;animation-delay:-6.4s}
+  .photo-cell:nth-child(6) img{animation-duration:15.5s;animation-delay:-4.1s}
 
-  /* Offset frame behind each slot (321の特徴的オフセット矩形) */
-  .slot::before{
-    content:"";position:absolute;inset:0;
-    background:transparent;
-    border:2.5px solid var(--accent-orange);
-    z-index:1;pointer-events:none;
+  @keyframes ken-a{
+    0%        {opacity:1;transform:scale(1.02) translate(0,0)}
+    42%       {opacity:1;transform:scale(1.08) translate(-1.5%,-1.5%)}
+    50%,92%   {opacity:0;transform:scale(1.10) translate(-2.5%,-2.2%)}
+    100%      {opacity:1;transform:scale(1.02) translate(0,0)}
   }
-  .slot:nth-child(1)::before{transform:translate(-20px,20px);border-color:var(--accent-orange)}
-  .slot:nth-child(2)::before{transform:translate(18px,-16px);border-color:var(--accent-cyan)}
-  .slot:nth-child(3)::before{transform:translate(-16px,18px);border-color:var(--accent-purple)}
-
-  /* 321風: 縦スライドする写真トラック方式（クロスフェードではなく縦に流れる） */
-  .slot-photos{
-    position:relative;width:100%;height:100%;
-    overflow:hidden;background:var(--gray-100);
-    z-index:2;
-  }
-  .slot-track{
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;
-    height:400%; /* 4枚分（3枚 + 先頭複製でシームレスループ）*/
-    will-change:transform;
-  }
-  .slot-track img{
-    width:100%;height:25%;
-    object-fit:cover;display:block;flex-shrink:0;
-  }
-  /* 各スロットを別々のタイミングで縦スライド */
-  .slot:nth-child(1) .slot-track{animation:slide-vert 13s infinite cubic-bezier(.65,.05,.35,1)}
-  .slot:nth-child(2) .slot-track{animation:slide-vert 14s infinite cubic-bezier(.65,.05,.35,1);animation-delay:-3s}
-  .slot:nth-child(3) .slot-track{animation:slide-vert 12s infinite cubic-bezier(.65,.05,.35,1);animation-delay:-6s}
-  @keyframes slide-vert{
-    0%,22%   {transform:translateY(0)}
-    33%,55%  {transform:translateY(-25%)}
-    66%,88%  {transform:translateY(-50%)}
-    100%     {transform:translateY(-75%)} /* -75% = 先頭画像の複製位置 → ループ起点に戻る */
+  @keyframes ken-b{
+    0%,42%    {opacity:0;transform:scale(1.10) translate(2%,2%)}
+    50%       {opacity:1;transform:scale(1.08) translate(1.2%,1.5%)}
+    92%       {opacity:1;transform:scale(1.02) translate(0,0)}
+    100%      {opacity:0;transform:scale(1.10) translate(2%,2%)}
   }
 
-  /* Hero decorative shapes (muted 321 palette) */
-  .deco{position:absolute;z-index:3;pointer-events:none}
-  .deco-circle{width:42px;height:42px;border-radius:50%;background:var(--accent-yellow)}
-  .deco-triangle{
+  /* 写真ウォール上に散らす装飾 (本家deco01-deco10系列の再現) */
+  .pw-deco{position:absolute;z-index:5;pointer-events:none}
+  .pw-deco-circle{width:46px;height:46px;border-radius:50%;background:var(--accent-yellow)}
+  .pw-deco-triangle{
     width:0;height:0;
-    border-left:22px solid transparent;border-right:22px solid transparent;
-    border-bottom:38px solid var(--accent-purple);
+    border-left:20px solid transparent;border-right:20px solid transparent;
+    border-bottom:34px solid var(--accent-purple);
   }
-  .deco-square{width:36px;height:36px;background:var(--accent-pink);transform:rotate(10deg)}
-  .deco-dot{
-    width:72px;height:72px;
-    background-image:radial-gradient(var(--gray-300) 1.5px,transparent 1.8px);
-    background-size:8px 8px;opacity:.7;
+  .pw-deco-square{width:32px;height:32px;background:var(--accent-pink);transform:rotate(8deg)}
+  .pw-deco-mint{width:38px;height:38px;background:var(--accent-mint);transform:rotate(-6deg)}
+  .pw-deco-dot{
+    width:74px;height:74px;
+    background-image:radial-gradient(rgba(0,0,0,.35) 1.4px,transparent 1.6px);
+    background-size:7px 7px;opacity:.65;
   }
-  .deco-ring{
-    width:48px;height:48px;border-radius:50%;
-    border:3px solid var(--accent-yellow);background:transparent;
+  .pw-deco-ring{
+    width:50px;height:50px;border-radius:50%;
+    border:3px solid var(--accent-orange);background:transparent;
   }
-  .deco-bar{width:90px;height:8px;background:var(--accent-mint)}
-  .hero-collage .deco-1{top:-22px;right:46%;animation:float 5s ease-in-out infinite;z-index:5}
-  .hero-collage .deco-2{bottom:-14px;left:40%;animation:float 6s ease-in-out infinite reverse;z-index:5}
-  .hero-collage .deco-3{top:48%;right:-22px;animation:float 4.5s ease-in-out infinite;z-index:5}
-  .hero-collage .deco-4{top:4%;left:-32px;opacity:.55;z-index:0}
-  .hero-collage .deco-5{bottom:18%;right:34%;z-index:5;animation:float 5.5s ease-in-out infinite}
-  .hero-collage .deco-6{top:36%;left:38%;z-index:0;opacity:.7}
+  .pw-deco-bar{width:88px;height:6px;background:var(--accent-cyan)}
+  /* 配置 — 本家準拠で写真の境界に重なる形 */
+  .photo-wall .pw-1{top:8%;left:50%;animation:float 6s ease-in-out infinite}
+  .photo-wall .pw-2{top:46%;left:48%;animation:float 5s ease-in-out infinite reverse}
+  .photo-wall .pw-3{top:18%;right:6%;animation:float 7s ease-in-out infinite}
+  .photo-wall .pw-4{top:64%;left:8%;animation:float 5.5s ease-in-out infinite}
+  .photo-wall .pw-5{top:32%;left:2%;opacity:.7}
+  .photo-wall .pw-6{bottom:8%;right:30%;animation:float 4.5s ease-in-out infinite reverse}
+  .photo-wall .pw-7{top:2%;left:8%;animation:float 6.5s ease-in-out infinite}
+  .photo-wall .pw-8{bottom:18%;left:46%;animation:float 5.2s ease-in-out infinite reverse}
 
   @keyframes float{
     0%,100%{transform:translateY(0) rotate(0)}
@@ -673,23 +665,23 @@
     :root{--gutter:48px}
     .brand{left:36px;top:28px}
     .menu-btn{right:36px;top:24px}
-    .hero{padding:140px 0 100px}
-    .hero-grid{gap:40px}
-    .hero-collage{aspect-ratio:1/1}
+    .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+    .hero-text-col{padding:110px 36px 60px 56px}
+    .photo-wall{gap:5px}
     .platforms-row{grid-template-columns:repeat(5,1fr);gap:24px 18px}
     .platform-cell-art{width:72px;height:72px;border-radius:16px;font-size:24px}
   }
 
   /* ============================================================== */
-  /* ============ MOBILE (760px) ============ */
+  /* ============ MOBILE (760px) — 本家321 mobile準拠 ============ */
   /* ============================================================== */
   @media (max-width:760px){
     :root{--gutter:24px}
     .bar{display:none}
-    .brand{top:18px;left:20px}
-    .brand-mark{font-size:18px}
-    .brand-lead{font-size:8px;letter-spacing:.32em;margin-bottom:6px}
-    .menu-btn{top:14px;right:16px;width:48px;height:48px}
+    .brand{top:18px;left:20px;z-index:30}
+    .brand-mark{font-size:18px;color:#fff;mix-blend-mode:difference}
+    .brand-lead{font-size:8px;letter-spacing:.32em;margin-bottom:6px;color:#fff;mix-blend-mode:difference}
+    .menu-btn{top:14px;right:16px;width:48px;height:48px;z-index:30}
     .menu-btn-lines span{width:18px}
     .float-contact{
       bottom:0;right:0;left:0;border-radius:0;
@@ -699,44 +691,45 @@
     .float-contact-arrow{width:24px;height:24px;font-size:12px}
     body{padding-bottom:54px}
 
-    /* HERO: stack vertically — text first, then collage */
-    .hero{padding:108px 0 64px}
-    .hero-grid{grid-template-columns:1fr;gap:48px}
-    .hero-eyebrow{font-size:10px;letter-spacing:.32em;margin-bottom:18px}
-    .hero-sub{font-size:13px;margin-bottom:14px}
-    .hero-sub::before,.hero-sub::after{width:16px}
-    .hero-title{font-size:42px;line-height:1.2;letter-spacing:.02em}
-    .hero-desc{font-size:13px;line-height:2;margin-top:24px;max-width:none}
-    .hero-since{margin-top:32px;font-size:10px}
-    .hero-since::before{width:32px}
+    /* HERO: フルブリード写真ウォール + 左下テキストオーバーレイ (本家準拠) */
+    .hero{padding:0;min-height:100vh;position:relative}
+    .hero-grid{
+      display:block;grid-template-columns:none;gap:0;
+      min-height:100vh;position:relative;
+    }
+    /* 写真ウォールは画面全体を覆う */
+    .photo-wall{
+      position:absolute;inset:0;
+      grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr 1fr;
+      gap:4px;height:100%;min-height:100vh;z-index:1;
+    }
+    /* テキストは写真の上にカード状でオーバーレイ */
+    .hero-text-col{
+      position:absolute;bottom:54px;left:0;right:0;
+      padding:24px 22px 26px;background:rgba(255,255,255,.96);
+      backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+      z-index:10;width:auto;
+      box-shadow:0 -8px 32px rgba(0,0,0,.08);
+    }
+    .hero-eyebrow{font-size:9px;letter-spacing:.3em;margin-bottom:10px}
+    .hero-sub{font-size:11px;margin-bottom:8px;letter-spacing:.16em}
+    .hero-sub::before,.hero-sub::after{width:12px}
+    .hero-title{font-size:32px;line-height:1.25;letter-spacing:.04em}
+    .hero-desc{font-size:11.5px;line-height:1.85;margin-top:14px;max-width:none;letter-spacing:.04em}
+    .hero-since{margin-top:18px;font-size:9px;letter-spacing:.28em}
+    .hero-since::before{width:24px}
 
-    /* Collage on mobile: PC上下押し出しを上書きしてスマホは標準配置 */
-    .hero-collage{
-      aspect-ratio:1/1.18;max-height:540px;gap:10px;margin-top:0;
+    /* 装飾もモバイルでは少し小さく */
+    .pw-deco-circle{width:30px;height:30px}
+    .pw-deco-triangle{
+      border-left:14px solid transparent;border-right:14px solid transparent;
+      border-bottom:22px solid var(--accent-purple);
     }
-    .slot:nth-child(1){margin-top:14px;margin-bottom:0}
-    .slot:nth-child(2){margin-top:0;margin-bottom:8px}
-    .slot:nth-child(3){margin-top:8px;margin-bottom:0}
-    /* Smaller offset on mobile */
-    .slot:nth-child(1)::before{transform:translate(-10px,10px)}
-    .slot:nth-child(2)::before{transform:translate(10px,-8px)}
-    .slot:nth-child(3)::before{transform:translate(-8px,10px)}
-    .slot::before{border-width:1.5px}
-    /* Smaller decos on mobile */
-    .deco-circle{width:34px;height:34px}
-    .deco-triangle{
-      border-left:18px solid transparent;border-right:18px solid transparent;
-      border-bottom:30px solid var(--accent-purple);
-    }
-    .deco-square{width:30px;height:30px}
-    .deco-dot{width:44px;height:44px;background-size:7px 7px}
-    .deco-ring{width:38px;height:38px;border-width:2.5px}
-    .hero-collage .deco-1{top:-16px;right:42%}
-    .hero-collage .deco-2{bottom:-12px;left:38%}
-    .hero-collage .deco-3{top:46%;right:-14px}
-    .hero-collage .deco-4{top:8%;left:-18px}
-    .hero-play{width:56px;height:56px;top:44%;left:34%}
-    .hero-play::before{border-left-width:12px;border-top-width:8px;border-bottom-width:8px}
+    .pw-deco-square{width:22px;height:22px}
+    .pw-deco-mint{width:26px;height:26px}
+    .pw-deco-dot{width:48px;height:48px;background-size:6px 6px}
+    .pw-deco-ring{width:34px;height:34px;border-width:2.5px}
+    .pw-deco-bar{width:58px;height:5px}
 
     .divider-strip{padding:48px var(--gutter)}
     .divider-strip-text{font-size:10px;letter-spacing:.32em;gap:14px}
@@ -904,58 +897,55 @@
   <span class="float-contact-arrow">→</span>
 </a>
 
-<!-- ============ Hero ============ -->
+<!-- ============ Hero (本家321.inc準拠 / 左テキスト 右フルブリード写真ウォール) ============ -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="reveal">
-        <span class="hero-eyebrow">LIVER MANAGEMENT PRODUCTION</span>
-        <span class="hero-sub">"好き"を"仕事"に</span>
-        <h1 class="hero-title">ライブ配信で、<br>人生を選ぶ。</h1>
-        <p class="hero-desc">
-          株式会社Live-Laboは、ライブ配信アプリで活動する「ライバー」を、契約・教育・収益化までトータルでサポートするライバーマネジメント事務所です。
-        </p>
-        <span class="hero-since">SINCE 2016 / TOKYO EBISU</span>
+  <div class="hero-grid">
+    <div class="hero-text-col reveal">
+      <span class="hero-eyebrow">LIVER MANAGEMENT PRODUCTION</span>
+      <span class="hero-sub">"好き"を"仕事"に</span>
+      <h1 class="hero-title">ライブ配信で、<br>人生を選ぶ。</h1>
+      <p class="hero-desc">
+        株式会社Live-Laboは、ライブ配信アプリで活動する「ライバー」を、契約・教育・収益化までトータルでサポートするライバーマネジメント事務所です。
+      </p>
+      <span class="hero-since">SINCE 2016 / TOKYO EBISU</span>
+    </div>
+
+    <!-- 右: フルブリード 2x3 写真ウォール (Ken Burns + クロスフェード) -->
+    <div class="photo-wall" id="photoWall">
+      <div class="photo-cell">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="">
       </div>
-      <div class="hero-collage" id="collage">
-        <div class="slot">
-          <div class="slot-photos">
-            <div class="slot-track">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/%E3%81%8A%E5%A4%A9-scaled.jpeg" alt="">
-              <!-- 先頭画像をループ用に複製 -->
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="" aria-hidden="true">
-            </div>
-          </div>
-        </div>
-        <div class="slot">
-          <div class="slot-photos">
-            <div class="slot-track">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/line_oa_chat_250902_112651.jpg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="" aria-hidden="true">
-            </div>
-          </div>
-        </div>
-        <div class="slot">
-          <div class="slot-photos">
-            <div class="slot-track">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="">
-              <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="" aria-hidden="true">
-            </div>
-          </div>
-        </div>
-        <span class="deco deco-circle deco-1" aria-hidden="true"></span>
-        <span class="deco deco-triangle deco-2" aria-hidden="true"></span>
-        <span class="deco deco-square deco-3" aria-hidden="true"></span>
-        <span class="deco deco-dot deco-4" aria-hidden="true"></span>
-        <span class="deco deco-ring deco-5" aria-hidden="true"></span>
-        <span class="deco deco-bar deco-6" aria-hidden="true"></span>
+      <div class="photo-cell">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/line_oa_chat_250902_112651.jpg" alt="">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="">
       </div>
+      <div class="photo-cell">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="">
+      </div>
+      <div class="photo-cell">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2024/09/%E3%83%AC%E3%82%A4%E3%83%9F.jpg" alt="">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2023/10/yanchan-scaled.jpeg" alt="">
+      </div>
+      <div class="photo-cell">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg" alt="">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2025/07/%E3%82%86%E3%81%8D%E3%81%A1%E3%82%83%E3%82%93.jpeg" alt="">
+      </div>
+      <div class="photo-cell">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/%E3%81%8A%E5%A4%A9-scaled.jpeg" alt="">
+        <img src="https://live-labo.jp/wp/wp-content/uploads/2023/12/Achan-e1703232526958.jpeg" alt="">
+      </div>
+
+      <!-- 装飾オーバーレイ (本家deco01-deco10再現) -->
+      <span class="pw-deco pw-deco-circle pw-1" aria-hidden="true"></span>
+      <span class="pw-deco pw-deco-square pw-2" aria-hidden="true"></span>
+      <span class="pw-deco pw-deco-triangle pw-3" aria-hidden="true"></span>
+      <span class="pw-deco pw-deco-mint pw-4" aria-hidden="true"></span>
+      <span class="pw-deco pw-deco-dot pw-5" aria-hidden="true"></span>
+      <span class="pw-deco pw-deco-ring pw-6" aria-hidden="true"></span>
+      <span class="pw-deco pw-deco-bar pw-7" aria-hidden="true"></span>
+      <span class="pw-deco pw-deco-triangle pw-8" aria-hidden="true" style="border-bottom-color:var(--accent-orange);transform:rotate(180deg)"></span>
     </div>
   </div>
 </section>
@@ -1326,19 +1316,22 @@
   },{threshold:.1, rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  /* ===== Collage entrance reveal ===== */
-  const collage = document.getElementById('collage');
-  if(collage){
-    const cio = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){ collage.classList.add('in'); cio.unobserve(collage); }
-      });
-    },{threshold:.2});
-    cio.observe(collage);
+  /* ===== Photo Wall entrance reveal ===== */
+  const wall = document.getElementById('photoWall');
+  if(wall){
+    /* ヒーロー直撃時は即時reveal、それ以外はIntersectionObserver */
+    const showWall = ()=>wall.classList.add('in');
+    if(wall.getBoundingClientRect().top < window.innerHeight){
+      requestAnimationFrame(()=>setTimeout(showWall,80));
+    } else {
+      const wio = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ showWall(); wio.unobserve(wall); } });
+      },{threshold:.15});
+      wio.observe(wall);
+    }
   }
 
-  /* 写真の縦スライドアニメは CSS @keyframes slide-vert で完結 */
-  /* JSは不要（リロード即時から CSS animation 開始） */
+  /* Ken Burns + クロスフェードはCSS @keyframes ken-a / ken-b で完結 (リロード即時開始) */
 </script>
 
 </body>
