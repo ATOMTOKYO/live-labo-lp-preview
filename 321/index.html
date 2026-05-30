@@ -221,25 +221,31 @@
   .slot:nth-child(2)::before{transform:translate(18px,-16px);border-color:var(--accent-cyan)}
   .slot:nth-child(3)::before{transform:translate(-16px,18px);border-color:var(--accent-purple)}
 
+  /* 321風: 縦スライドする写真トラック方式（クロスフェードではなく縦に流れる） */
   .slot-photos{
     position:relative;width:100%;height:100%;
     overflow:hidden;background:var(--gray-100);
     z-index:2;
   }
-  .slot-photos img{
-    position:absolute;inset:0;width:100%;height:100%;
-    object-fit:cover;display:block;
-    opacity:0;transform:scale(1.02);
-    transition:opacity 1.4s var(--ease-out);
+  .slot-track{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;
+    height:400%; /* 4枚分（3枚 + 先頭複製でシームレスループ）*/
+    will-change:transform;
   }
-  .slot-photos img.active{
-    opacity:1;
-    animation:ken-burns 8s linear forwards;
+  .slot-track img{
+    width:100%;height:25%;
+    object-fit:cover;display:block;flex-shrink:0;
   }
-  .slot-photos img:first-child{opacity:1}
-  @keyframes ken-burns{
-    from{transform:scale(1.0)}
-    to{transform:scale(1.08)}
+  /* 各スロットを別々のタイミングで縦スライド */
+  .slot:nth-child(1) .slot-track{animation:slide-vert 13s infinite cubic-bezier(.65,.05,.35,1)}
+  .slot:nth-child(2) .slot-track{animation:slide-vert 14s infinite cubic-bezier(.65,.05,.35,1);animation-delay:-3s}
+  .slot:nth-child(3) .slot-track{animation:slide-vert 12s infinite cubic-bezier(.65,.05,.35,1);animation-delay:-6s}
+  @keyframes slide-vert{
+    0%,22%   {transform:translateY(0)}
+    33%,55%  {transform:translateY(-25%)}
+    66%,88%  {transform:translateY(-50%)}
+    100%     {transform:translateY(-75%)} /* -75% = 先頭画像の複製位置 → ループ起点に戻る */
   }
 
   /* Optional decorative "play" mark in corner of first slot (321 style) */
@@ -817,25 +823,35 @@
       </div>
       <div class="hero-collage" id="collage">
         <div class="slot">
-          <div class="slot-photos" data-slot="0">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="" class="active">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg" alt="">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/%E3%81%8A%E5%A4%A9-scaled.jpeg" alt="">
+          <div class="slot-photos">
+            <div class="slot-track">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/%E3%81%8A%E5%A4%A9-scaled.jpeg" alt="">
+              <!-- 先頭画像をループ用に複製 -->
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="" aria-hidden="true">
+            </div>
           </div>
           <span class="slot-mark" aria-hidden="true">PLAY</span>
         </div>
         <div class="slot">
-          <div class="slot-photos" data-slot="1">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="" class="active">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/line_oa_chat_250902_112651.jpg" alt="">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="">
+          <div class="slot-photos">
+            <div class="slot-track">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/line_oa_chat_250902_112651.jpg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="" aria-hidden="true">
+            </div>
           </div>
         </div>
         <div class="slot">
-          <div class="slot-photos" data-slot="2">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="" class="active">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="">
-            <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="">
+          <div class="slot-photos">
+            <div class="slot-track">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="">
+              <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="" aria-hidden="true">
+            </div>
           </div>
         </div>
         <span class="deco deco-circle deco-1" aria-hidden="true"></span>
@@ -1189,28 +1205,8 @@
     cio.observe(collage);
   }
 
-  /* ===== Auto-rotating photos (321風の自動連続再生) ===== */
-  document.querySelectorAll('.slot-photos').forEach((wrap, idx)=>{
-    const imgs = Array.from(wrap.querySelectorAll('img'));
-    if (imgs.length < 2) return;
-    let current = 0;
-    // 各スロットの開始時刻をずらすことで写真が同時に切り替わらない
-    const startDelay = 900 + (idx * 1100);
-    const interval = 3800; // 約3.8秒ごとに切替（321並みのテンポ）
-    const rotate = ()=>{
-      const next = (current + 1) % imgs.length;
-      imgs[next].classList.add('active');
-      // 前の写真は少し遅れて非表示にしてクロスフェード
-      setTimeout(()=>{
-        imgs[current].classList.remove('active');
-        current = next;
-      }, 1400);
-    };
-    setTimeout(()=>{
-      rotate();
-      setInterval(rotate, interval);
-    }, startDelay);
-  });
+  /* 写真の縦スライドアニメは CSS @keyframes slide-vert で完結 */
+  /* JSは不要（リロード即時から CSS animation 開始） */
 </script>
 
 </body>
