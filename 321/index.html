@@ -189,14 +189,16 @@
   .hero-since::before{content:"";width:52px;height:1px;background:var(--ink)}
 
   /* ===== Hero collage with auto-rotating photos & offset frames ===== */
+  /* 321本家寄せ: 上方向にも全体的に大きく動く配置（よりタテ長） */
   .hero-collage{
     position:relative;
     display:grid;
     grid-template-columns:1.1fr 1fr;
     grid-template-rows:1fr 1fr;
-    gap:16px;
-    aspect-ratio:1/1.08;
-    max-height:680px;
+    gap:18px;
+    aspect-ratio:1/1.32;
+    max-height:880px;
+    margin-top:-20px; /* hero-grid基準より上に押し出して上方向の動きを拡大 */
   }
   /* "Slot" container holds rotating photos + offset frame */
   .slot{
@@ -206,9 +208,10 @@
     transition:opacity 1.1s var(--ease-out),transform 1.1s var(--ease-out);
   }
   .hero-collage.in .slot{opacity:1;transform:none}
-  .slot:nth-child(1){transition-delay:.15s;grid-column:1;grid-row:1 / span 2;margin-top:28px}
-  .slot:nth-child(2){transition-delay:.32s;grid-column:2;grid-row:1;margin-bottom:14px}
-  .slot:nth-child(3){transition-delay:.5s;grid-column:2;grid-row:2;margin-top:14px}
+  /* 上方向の表示領域を広げる: slot1は上端から、slot2はさらに上方向、slot3も下方向に大きく */
+  .slot:nth-child(1){transition-delay:.15s;grid-column:1;grid-row:1 / span 2;margin-top:0}
+  .slot:nth-child(2){transition-delay:.32s;grid-column:2;grid-row:1;margin-top:-28px;margin-bottom:10px}
+  .slot:nth-child(3){transition-delay:.5s;grid-column:2;grid-row:2;margin-top:10px;margin-bottom:-12px}
 
   /* Offset frame behind each slot (321の特徴的オフセット矩形) */
   .slot::before{
@@ -246,21 +249,6 @@
     33%,55%  {transform:translateY(-25%)}
     66%,88%  {transform:translateY(-50%)}
     100%     {transform:translateY(-75%)} /* -75% = 先頭画像の複製位置 → ループ起点に戻る */
-  }
-
-  /* Optional decorative "play" mark in corner of first slot (321 style) */
-  .slot-mark{
-    position:absolute;top:14px;right:14px;z-index:4;
-    display:inline-flex;align-items:center;gap:8px;
-    padding:7px 12px;
-    background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
-    font-family:Inter,sans-serif;font-size:9px;font-weight:700;
-    letter-spacing:.28em;color:var(--black);
-  }
-  .slot-mark::before{
-    content:"";width:0;height:0;
-    border-left:7px solid var(--black);
-    border-top:5px solid transparent;border-bottom:5px solid transparent;
   }
 
   /* Hero decorative shapes (muted 321 palette) */
@@ -402,6 +390,90 @@
     transition:transform 1.2s var(--ease-out);
   }
   .photo-strip-cell:hover img{transform:scale(1.05)}
+
+  /* ============ Beyond (始球式・大舞台 / 321 editorial) ============ */
+  .beyond{padding:140px 0 130px;background:var(--paper);position:relative;overflow:hidden}
+  .beyond-head{max-width:760px;margin-bottom:72px}
+  .beyond-head .section-title{margin-top:22px}
+  .beyond-lead{
+    margin-top:28px;font-size:14px;color:var(--ink);
+    line-height:2.2;letter-spacing:.06em;max-width:600px;
+  }
+  .beyond-grid{
+    display:grid;grid-template-columns:1.15fr 1fr;
+    gap:88px;align-items:start;
+  }
+  /* Featured (始球式) — オフセット枠 + 写真 + キャプション */
+  .beyond-feature{
+    position:relative;margin:0;
+  }
+  .beyond-feature-frame{
+    content:"";position:absolute;
+    inset:18px -18px -18px 18px;
+    border:2.5px solid var(--accent-orange);
+    z-index:1;pointer-events:none;
+  }
+  .beyond-feature-photo{
+    position:relative;z-index:2;overflow:hidden;
+    background:var(--gray-100);aspect-ratio:4/3;
+  }
+  .beyond-feature-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform 1.2s var(--ease-out);
+  }
+  .beyond-feature:hover .beyond-feature-photo img{transform:scale(1.04)}
+  .beyond-feature-tag{
+    position:absolute;left:0;bottom:0;z-index:3;
+    padding:9px 16px;background:var(--black);color:#fff;
+    font-family:Inter,sans-serif;font-size:10px;font-weight:700;
+    letter-spacing:.28em;
+  }
+  .beyond-feature-cap{
+    margin-top:34px;padding-left:18px;
+    border-left:2px solid var(--ink);
+  }
+  .beyond-feature-num{
+    display:block;font-family:Inter,sans-serif;
+    font-size:11px;font-weight:700;letter-spacing:.32em;
+    color:var(--gray-500);margin-bottom:14px;
+  }
+  .beyond-feature-num sup{font-size:.7em;margin-left:2px;color:var(--gray-300);font-weight:500}
+  .beyond-feature-cap h3{
+    font-size:24px;font-weight:900;letter-spacing:.04em;
+    line-height:1.5;color:var(--black);margin-bottom:14px;
+  }
+  .beyond-feature-cap p{
+    font-size:13px;line-height:2;letter-spacing:.04em;color:var(--ink);
+  }
+  /* List (02-06) */
+  .beyond-list{
+    list-style:none;margin:0;padding:0;
+    border-top:1px solid var(--gray-300);
+  }
+  .beyond-list li{
+    display:grid;grid-template-columns:auto auto 1fr;
+    gap:24px;align-items:center;
+    padding:28px 4px;border-bottom:1px solid var(--gray-300);
+    transition:background .35s var(--ease-out),padding-left .35s var(--ease-out);
+  }
+  .beyond-list li:hover{padding-left:14px;background:rgba(0,0,0,.02)}
+  .bli-num{
+    font-family:Inter,sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.28em;color:var(--gray-500);min-width:22px;
+  }
+  .bli-tag{
+    font-family:Inter,sans-serif;font-size:10px;font-weight:700;
+    letter-spacing:.24em;color:var(--accent-orange-deep,var(--accent-orange));
+    padding:5px 11px;border:1px solid currentColor;
+  }
+  .bli-name{
+    font-size:15px;font-weight:700;letter-spacing:.05em;color:var(--black);
+    line-height:1.5;
+  }
+  .beyond-note{
+    margin-top:50px;font-size:11px;letter-spacing:.18em;
+    color:var(--gray-500);text-align:right;
+  }
 
   /* ============ Livers ============ */
   .livers{padding:160px 0;background:var(--paper)}
@@ -706,6 +778,29 @@
     .photo-strip-cell::before{border-width:1.5px}
     .photo-strip-photo{aspect-ratio:16/10}
 
+    /* Beyond (始球式) mobile */
+    .beyond{padding:80px 0 76px}
+    .beyond-head{margin-bottom:40px}
+    .beyond-lead{font-size:12.5px;line-height:1.95;letter-spacing:.04em;margin-top:20px}
+    .beyond-grid{grid-template-columns:1fr;gap:48px}
+    .beyond-feature-frame{inset:12px -12px -12px 12px;border-width:1.5px}
+    .beyond-feature-photo{aspect-ratio:4/3}
+    .beyond-feature-tag{padding:7px 12px;font-size:9px;letter-spacing:.24em}
+    .beyond-feature-cap{margin-top:22px;padding-left:14px}
+    .beyond-feature-num{font-size:10px;letter-spacing:.28em;margin-bottom:10px}
+    .beyond-feature-cap h3{font-size:18px;line-height:1.5;margin-bottom:10px}
+    .beyond-feature-cap p{font-size:12.5px;line-height:1.95}
+    .beyond-list li{
+      grid-template-columns:auto auto;
+      grid-template-areas:"num tag" "name name";
+      row-gap:8px;column-gap:12px;
+      padding:20px 0;
+    }
+    .bli-num{grid-area:num;font-size:10px}
+    .bli-tag{grid-area:tag;font-size:9px;padding:4px 8px;letter-spacing:.2em}
+    .bli-name{grid-area:name;font-size:13.5px;letter-spacing:.04em;line-height:1.55}
+    .beyond-note{margin-top:32px;font-size:10px;text-align:left;letter-spacing:.14em}
+
     .livers{padding:80px 0}
     .livers-head{
       grid-template-columns:1fr;align-items:start;gap:8px;margin-bottom:36px;
@@ -832,7 +927,6 @@
               <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="" aria-hidden="true">
             </div>
           </div>
-          <span class="slot-mark" aria-hidden="true">PLAY</span>
         </div>
         <div class="slot">
           <div class="slot-photos">
@@ -974,6 +1068,43 @@
     <div class="photo-strip-cell"><div class="photo-strip-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt=""></div></div>
     <div class="photo-strip-cell"><div class="photo-strip-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt=""></div></div>
     <div class="photo-strip-cell"><div class="photo-strip-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt=""></div></div>
+  </div>
+</section>
+
+<!-- ============ Beyond / 始球式・大舞台 (321 editorial style) ============ -->
+<section class="beyond">
+  <div class="bg-letter">STAGE</div>
+  <div class="container">
+    <div class="beyond-head reveal">
+      <span class="section-tag">BEYOND THE LIVE</span>
+      <h2 class="section-title">配信の先で、<br><em>"本物の大舞台"</em>へ。</h2>
+      <p class="beyond-lead">プロ野球始球式 / メジャーレーベル楽曲 / TV番組・CM / 雑誌掲載 / 写真集 / 大型イベント — 配信で築いた名前を、もう一段先のステージへ。</p>
+    </div>
+
+    <div class="beyond-grid reveal">
+      <figure class="beyond-feature">
+        <span class="beyond-feature-frame" aria-hidden="true"></span>
+        <div class="beyond-feature-photo">
+          <img src="../assets/shikyushiki.png" alt="プロ野球始球式 出演中の所属ライバー">
+          <span class="beyond-feature-tag">SPORTS / 始球式</span>
+        </div>
+        <figcaption class="beyond-feature-cap">
+          <span class="beyond-feature-num">01<sup>/06</sup></span>
+          <h3>プロ野球 始球式 出演</h3>
+          <p>提携球団との連携で、所属ライバーがマウンドへ。観衆数万人の前で投げる一球が、ライバー人生のハイライトになります。</p>
+        </figcaption>
+      </figure>
+
+      <ul class="beyond-list">
+        <li class="reveal"><span class="bli-num">02</span><span class="bli-tag">MUSIC</span><span class="bli-name">メジャーレーベル楽曲リリース</span></li>
+        <li class="reveal"><span class="bli-num">03</span><span class="bli-tag">MEDIA</span><span class="bli-name">TV番組・CM出演</span></li>
+        <li class="reveal"><span class="bli-num">04</span><span class="bli-tag">PRINT</span><span class="bli-name">雑誌掲載・写真集出版</span></li>
+        <li class="reveal"><span class="bli-num">05</span><span class="bli-tag">EVENT</span><span class="bli-name">大型イベント ゲスト出演</span></li>
+        <li class="reveal"><span class="bli-num">06</span><span class="bli-tag">GLOBAL</span><span class="bli-name">海外進出 / 越境配信サポート</span></li>
+      </ul>
+    </div>
+
+    <p class="beyond-note">※適用は所属ランク・実績に応じて変動 / 詳細はマネージャー面談にて</p>
   </div>
 </section>
 
