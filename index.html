@@ -87,103 +87,105 @@
   .nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:100%;height:2px;background:var(--gray-900)}
   .nav-toggle span::before{top:-6px}.nav-toggle span::after{top:6px}
 
-  /* ---------- Hero (ONECARAT mobile-first reconstruction) ---------- */
+  /* ---------- Hero (ONECARAT準拠・1画面fold完結) ---------- */
   .hero{
     position:relative;overflow:hidden;
     background:
       radial-gradient(900px 500px at 100% 0%, var(--cyan-soft) 0%, transparent 55%),
       radial-gradient(700px 400px at 0% 100%, #fff4f6 0%, transparent 60%),
       #fff;
-    padding:64px 0 80px;
+    padding:28px 0 32px;
   }
   .hero-inner{
     max-width:var(--container);margin:0 auto;padding:0 24px;
-    display:flex;flex-direction:column;gap:36px;
+    display:flex;flex-direction:column;gap:14px;
   }
   /* 上部: 見出しブロック */
   .hero-head{text-align:left;max-width:1080px}
   .hero-badge{
     display:inline-flex;align-items:center;gap:8px;
-    padding:7px 14px;border-radius:var(--r-pill);
+    padding:6px 13px;border-radius:var(--r-pill);
     background:#fff;border:1px solid var(--red);color:var(--red);
-    font-size:12px;font-weight:700;letter-spacing:.06em;
+    font-size:11px;font-weight:700;letter-spacing:.06em;
     box-shadow:var(--shadow-sm);
   }
-  .hero-badge::before{content:"●";font-size:8px;animation:pulse 1.6s var(--ease) infinite}
+  .hero-badge::before{content:"●";font-size:7px;animation:pulse 1.6s var(--ease) infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
   .hero-lead{
-    margin-top:16px;
-    font-size:clamp(18px,2.2vw,26px);font-weight:900;color:var(--black);
-    letter-spacing:.02em;line-height:1.45;
+    margin-top:10px;
+    font-size:clamp(14px,1.6vw,20px);font-weight:900;color:var(--black);
+    letter-spacing:.02em;line-height:1.4;
   }
   .hero h1{
-    margin-top:6px;
-    font-size:clamp(22px,2.6vw,32px);
-    line-height:1.45;letter-spacing:.02em;font-weight:900;
+    margin-top:2px;
+    font-size:clamp(18px,2.1vw,28px);
+    line-height:1.35;letter-spacing:.02em;font-weight:900;
     color:var(--black);
   }
   .hero h1 .accent{color:var(--red);position:relative;display:inline-block}
   .hero h1 .accent::after{
-    content:"";position:absolute;left:0;right:0;bottom:-2px;height:6px;
-    background:linear-gradient(90deg,var(--red),#ff6680);border-radius:6px;opacity:.25;
+    content:"";position:absolute;left:0;right:0;bottom:-2px;height:5px;
+    background:linear-gradient(90deg,var(--red),#ff6680);border-radius:5px;opacity:.25;
   }
-  /* ONECARAT風 巨大英字メイン */
+  /* Live-Laboオリジナル 巨大英字メイン: LIVE YOUR LIGHT. */
   .hero-en-mega{
-    margin-top:24px;
+    margin-top:10px;
     font-family:Inter,sans-serif;font-weight:900;
-    font-size:clamp(56px,9vw,120px);letter-spacing:-.01em;
-    color:var(--black);line-height:.95;
+    font-size:clamp(40px,6vw,84px);letter-spacing:-.01em;
+    color:var(--black);line-height:.92;
     text-transform:uppercase;
   }
-  .hero-sub{margin-top:22px;font-size:15px;color:var(--gray-700);max-width:560px;line-height:1.85}
+  .hero-en-mega .glow{
+    background:linear-gradient(135deg,var(--red) 0%,#ff6680 60%,var(--cyan) 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-sub{margin-top:14px;font-size:14px;color:var(--gray-700);max-width:540px;line-height:1.75}
 
   /* 中部: 左スマホ｜右メトリクスパネル */
   .hero-main{
-    display:grid;grid-template-columns:1fr 1.1fr;gap:32px;align-items:center;
+    display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:center;
   }
   /* ONECARAT風 メトリクスパネル: 黒バッジ → サブ説明 → 巨大シアン数字 */
   .hero-metrics-panel{
-    display:flex;flex-direction:column;gap:18px;align-items:flex-start;
+    display:flex;flex-direction:column;gap:10px;align-items:flex-start;
   }
   .metric-card{
     width:100%;
-    display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+    display:flex;flex-direction:column;align-items:flex-start;gap:3px;
   }
   .metric-label{
     display:inline-block;
-    padding:8px 22px;border-radius:var(--r-pill);
+    padding:6px 18px;border-radius:var(--r-pill);
     background:var(--black);color:#fff;
-    font-size:14px;font-weight:900;letter-spacing:.04em;
-    box-shadow:0 6px 16px rgba(0,0,0,.18);
+    font-size:13px;font-weight:900;letter-spacing:.04em;
+    box-shadow:0 4px 12px rgba(0,0,0,.18);
   }
   .metric-sub{
-    margin-top:4px;
-    font-size:14px;font-weight:700;color:var(--gray-700);letter-spacing:.04em;
+    font-size:12px;font-weight:700;color:var(--gray-700);letter-spacing:.04em;
   }
   .metric-value{
-    margin-top:2px;
     font-family:Inter,sans-serif;font-weight:900;
-    color:var(--cyan);font-size:clamp(48px,6.5vw,80px);
+    color:var(--cyan);font-size:clamp(38px,4.6vw,62px);
     line-height:1;letter-spacing:-.03em;
     text-shadow:0 4px 12px rgba(16,181,201,.15);
   }
   .metric-value small{
-    font-size:.4em;color:var(--cyan-deep);font-weight:900;margin-left:4px;letter-spacing:0;
+    font-size:.38em;color:var(--cyan-deep);font-weight:900;margin-left:3px;letter-spacing:0;
   }
 
-  /* 下部: 所属ライバー写真ストリップ */
+  /* 下部: 所属ライバー写真ストリップ (compact) */
   .hero-photo-strip{
-    margin-top:8px;
-    display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
+    margin-top:2px;
+    display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
   }
   .hero-photo-strip a{
-    position:relative;display:block;aspect-ratio:3/4;
+    position:relative;display:block;aspect-ratio:1/1;
     overflow:hidden;border-radius:var(--r-md);
     background:#f0f0f3;
-    box-shadow:0 6px 16px rgba(0,0,0,.08);
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
     transition:transform .25s var(--ease),box-shadow .25s var(--ease);
   }
-  .hero-photo-strip a:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.16)}
+  .hero-photo-strip a:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.16)}
   .hero-photo-strip img{
     width:100%;height:100%;object-fit:cover;
     transition:transform .45s var(--ease);
@@ -214,18 +216,18 @@
   .hero-trust-text strong{color:var(--black);font-weight:900}
 
   /* ============ Hero phone mockup (ONECARAT風 配信画面) ============ */
-  .hero-visual{position:relative;height:auto;display:flex;justify-content:center;align-items:center;min-height:480px}
+  .hero-visual{position:relative;height:auto;display:flex;justify-content:center;align-items:center;min-height:auto}
   .phone-stage{position:relative;width:100%;display:flex;justify-content:center;align-items:center}
   .phone{
     position:relative;
-    width:min(260px,80%);
+    width:min(210px,82%);
     aspect-ratio:9/19.5;
     background:linear-gradient(180deg,#1c1c1e 0%,#0d0d0e 100%);
-    border-radius:42px;
-    padding:10px;
+    border-radius:34px;
+    padding:8px;
     box-shadow:
-      0 30px 80px rgba(0,0,0,.28),
-      0 12px 28px rgba(0,0,0,.18),
+      0 22px 60px rgba(0,0,0,.26),
+      0 10px 22px rgba(0,0,0,.16),
       inset 0 0 0 2px #2a2a2c;
   }
   .phone-notch{
@@ -1010,49 +1012,52 @@
   @media (max-width: 960px){
     .header-nav{display:none}
     .nav-toggle{display:flex}
-    .hero{padding:36px 0 56px}
-    .hero-inner{gap:28px}
+    .hero{padding:16px 0 20px}
+    .hero-inner{gap:10px}
     .hero-head{text-align:left}
-    .hero-lead{font-size:16px;line-height:1.5;margin-top:14px}
-    .hero h1{font-size:18px;line-height:1.5;margin-top:4px}
-    .hero-en-mega{font-size:clamp(42px,13vw,80px);line-height:.95;margin-top:18px}
-    .hero-sub{font-size:14px;line-height:1.75;margin-top:18px}
-    /* 中部: スマホ｜メトリクス を縦ではなく横で死守 */
-    .hero-main{grid-template-columns:0.95fr 1.1fr;gap:14px;align-items:center}
-    .hero-visual{min-height:auto;padding:8px 0}
-    .phone{width:min(170px,100%);padding:6px;border-radius:28px}
-    .phone-notch{width:60px;height:16px;top:10px;border-radius:10px}
-    .phone-screen{border-radius:22px}
-    .live-top{top:30px;left:8px;right:8px}
-    .live-badge{padding:3px 7px 3px 15px;font-size:8px}
-    .live-badge::before{width:5px;height:5px;left:5px}
-    .live-count{padding:3px 6px;font-size:7px}
-    .live-count::before{width:7px;height:7px}
-    .live-side{top:54px;right:6px;gap:4px}
-    .viewer{width:18px;height:18px;border-width:1.5px}
-    .viewer-more{font-size:7px;padding:2px 4px}
-    .hearts-stream{bottom:70px;right:6px;width:40px;height:120px}
-    .heart{font-size:13px}
-    .heart.h2{font-size:11px}
-    .heart.h3{font-size:15px}
-    .heart.h5{font-size:13px}
-    .live-bottom{bottom:8px;left:6px;right:6px;gap:3px}
-    .comment{font-size:7px;padding:3px 7px;border-radius:9px}
-    .gift-bubble{font-size:7px;padding:3px 8px;border-radius:9px}
+    .hero-badge{padding:4px 10px;font-size:10px}
+    .hero-lead{font-size:14px;line-height:1.4;margin-top:8px}
+    .hero h1{font-size:17px;line-height:1.4;margin-top:2px}
+    .hero-en-mega{font-size:clamp(34px,10vw,58px);line-height:.92;margin-top:8px}
+    /* 中部: スマホ｜メトリクス 2カラム死守 */
+    .hero-main{grid-template-columns:0.85fr 1.15fr;gap:10px;align-items:center}
+    .hero-visual{padding:0}
+    .phone{width:min(135px,100%);padding:5px;border-radius:22px}
+    .phone-notch{width:50px;height:13px;top:8px;border-radius:8px}
+    .phone-screen{border-radius:17px}
+    .live-top{top:22px;left:6px;right:6px}
+    .live-badge{padding:2px 6px 2px 12px;font-size:7px}
+    .live-badge::before{width:4px;height:4px;left:4px}
+    .live-count{padding:2px 5px;font-size:6px}
+    .live-count::before{width:6px;height:6px}
+    .live-side{top:42px;right:5px;gap:3px}
+    .viewer{width:14px;height:14px;border-width:1px}
+    .viewer-more{font-size:6px;padding:1px 3px;border-radius:6px}
+    .hearts-stream{bottom:54px;right:5px;width:30px;height:90px}
+    .heart{font-size:11px}
+    .heart.h2{font-size:9px}
+    .heart.h3{font-size:13px}
+    .heart.h5{font-size:11px}
+    .live-bottom{bottom:6px;left:5px;right:5px;gap:2px}
+    .comment{font-size:6px;padding:2px 5px;border-radius:7px;max-width:80%}
+    .gift-bubble{font-size:6px;padding:2px 6px;border-radius:7px}
     /* メトリクスパネル: スマホでも黒バッジ＋シアン巨大数字を維持 */
-    .hero-metrics-panel{gap:14px}
-    .metric-label{padding:5px 14px;font-size:11px;letter-spacing:.03em}
-    .metric-sub{font-size:10px;letter-spacing:.02em}
-    .metric-value{font-size:clamp(38px,11vw,56px)}
-    .metric-value small{font-size:.36em}
-    /* スマホでは外側の浮遊バッジは非表示（混雑回避） */
+    .hero-metrics-panel{gap:6px}
+    .metric-card{gap:2px}
+    .metric-label{padding:4px 11px;font-size:10px;letter-spacing:.03em}
+    .metric-sub{font-size:9px;letter-spacing:.02em}
+    .metric-value{font-size:clamp(28px,8vw,40px)}
+    .metric-value small{font-size:.36em;margin-left:2px}
+    /* スマホでは外側の浮遊バッジは非表示 */
     .badge-floor{display:none}
-    /* 写真ストリップは5枚維持 */
-    .hero-photo-strip{grid-template-columns:repeat(5,1fr);gap:6px;margin-top:4px}
-    .hero-photo-strip a{border-radius:8px;aspect-ratio:3/4}
-    .hero-trust{margin-top:14px;gap:10px}
-    .hero-trust-avatars img{width:28px;height:28px;margin-left:-8px}
-    .hero-trust-text{font-size:12px}
+    /* 写真ストリップ: 1:1で薄く */
+    .hero-photo-strip{grid-template-columns:repeat(5,1fr);gap:4px;margin-top:2px}
+    .hero-photo-strip a{border-radius:6px;aspect-ratio:1/1}
+    /* CTA: モバイルでも横並びでコンパクト */
+    .hero-ctas{flex-direction:row;gap:6px;flex-wrap:nowrap;margin-top:6px}
+    .hero-ctas .btn{flex:1;padding:11px 8px;font-size:12px;letter-spacing:0;width:auto}
+    /* trust barはヒーロー外に隔離（fold圧迫を避ける） */
+    .hero-trust{display:none}
     .opps-grid{grid-template-columns:1fr;gap:14px}
     .opp-feature{grid-column:span 1;grid-template-columns:1fr}
     .opp-feature .opp-img{min-height:200px}
@@ -1116,34 +1121,37 @@
   .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{transition:transform .25s var(--ease),top .25s var(--ease),background .2s var(--ease)}
   /* 超小型端末 (iPhone SE等 ≤375px) 用ヒーロー保護 */
   @media (max-width:480px){
-    .hero{padding:24px 0 44px}
-    .hero-inner{padding:0 16px;gap:22px}
-    .hero-en-mega{font-size:clamp(36px,12vw,56px)}
-    .hero-main{grid-template-columns:0.85fr 1.15fr;gap:10px}
-    .phone{width:min(140px,100%);padding:5px;border-radius:22px}
-    .phone-notch{width:50px;height:13px;top:8px;border-radius:8px}
-    .phone-screen{border-radius:17px}
-    .live-top{top:24px;left:6px;right:6px}
-    .live-badge{font-size:7px;padding:2px 6px 2px 13px}
-    .live-badge::before{width:4px;height:4px;left:4px}
-    .live-count{font-size:6px;padding:2px 5px}
-    .live-count::before{width:6px;height:6px}
-    .live-side{top:42px;right:4px;gap:3px}
-    .viewer{width:14px;height:14px;border-width:1px}
-    .viewer-more{font-size:6px;padding:1px 3px;border-radius:6px}
-    .hearts-stream{bottom:54px;right:4px;width:30px;height:90px}
-    .heart{font-size:10px}
-    .live-bottom{bottom:6px;left:4px;right:4px;gap:2px}
-    .comment{font-size:6px;padding:2px 5px;border-radius:7px;max-width:80%}
-    .gift-bubble{font-size:6px;padding:2px 6px;border-radius:7px}
-    .metric-label{padding:4px 11px;font-size:10px}
-    .metric-sub{font-size:9px}
-    .metric-value{font-size:clamp(34px,12vw,48px)}
-    .hero-metrics-panel{gap:10px}
-    .hero-photo-strip{grid-template-columns:repeat(5,1fr);gap:4px}
-    .hero-photo-strip a{border-radius:6px}
-    .hero-ctas .btn{padding:14px 22px;font-size:14px;width:100%}
-    .hero-ctas{flex-direction:column}
+    .hero{padding:12px 0 16px}
+    .hero-inner{padding:0 14px;gap:8px}
+    .hero-badge{font-size:9px;padding:3px 9px}
+    .hero-lead{font-size:13px;margin-top:6px}
+    .hero h1{font-size:15px}
+    .hero-en-mega{font-size:clamp(28px,9vw,40px);margin-top:6px}
+    .hero-main{grid-template-columns:0.85fr 1.15fr;gap:8px}
+    .phone{width:min(115px,100%);padding:4px;border-radius:18px}
+    .phone-notch{width:42px;height:11px;top:6px;border-radius:7px}
+    .phone-screen{border-radius:14px}
+    .live-top{top:18px;left:5px;right:5px}
+    .live-badge{font-size:6px;padding:2px 5px 2px 11px}
+    .live-badge::before{width:3px;height:3px;left:3px}
+    .live-count{font-size:5px;padding:2px 4px}
+    .live-count::before{width:5px;height:5px}
+    .live-side{top:34px;right:4px;gap:2px}
+    .viewer{width:12px;height:12px;border-width:1px}
+    .viewer-more{font-size:5px;padding:1px 2px;border-radius:5px}
+    .hearts-stream{bottom:42px;right:3px;width:24px;height:70px}
+    .heart{font-size:9px}
+    .live-bottom{bottom:5px;left:3px;right:3px;gap:2px}
+    .comment{font-size:5px;padding:1px 4px;border-radius:6px;max-width:80%}
+    .gift-bubble{font-size:5px;padding:1px 5px;border-radius:6px}
+    .metric-label{padding:3px 9px;font-size:9px}
+    .metric-sub{font-size:8px}
+    .metric-value{font-size:clamp(22px,7vw,30px)}
+    .hero-metrics-panel{gap:5px}
+    .hero-photo-strip{gap:3px}
+    .hero-photo-strip a{border-radius:5px}
+    .hero-ctas{gap:5px;margin-top:4px}
+    .hero-ctas .btn{padding:10px 6px;font-size:11px;letter-spacing:0;flex:1;width:auto}
   }
   @media (max-width:960px){
     .mobile-menu{display:block;max-height:0;overflow:hidden;background:rgba(255,255,255,.98);border-top:1px solid var(--gray-100);transition:max-height .32s var(--ease)}
@@ -1194,12 +1202,12 @@
 <section class="hero" id="top">
   <div class="hero-inner">
 
-    <!-- ① 上部: 見出しブロック (ONECARAT準拠の縦積み) -->
+    <!-- ① 上部: 見出しブロック (Live-Laboオリジナルキャッチ) -->
     <div class="hero-head">
       <span class="hero-badge">2026年 新規ライバー募集 — 残り若干名</span>
       <p class="hero-lead">次世代のインフルエンサーを育成する</p>
-      <h1>日本トップクラスの<br><span class="accent">ライバー事務所</span></h1>
-      <p class="hero-en-mega">MAKE YOUR<br>DREAM<br>COME TRUE</p>
+      <h1>日本トップクラスの<span class="accent">ライバー事務所</span></h1>
+      <p class="hero-en-mega">LIVE YOUR<br><span class="glow">LIGHT</span>.</p>
     </div>
 
     <!-- ② 中部: 左スマホモック ｜ 右メトリクスパネル -->
