@@ -701,7 +701,7 @@
     .float-contact-arrow{width:24px;height:24px;font-size:12px}
     body{padding-bottom:54px}
 
-    /* HERO: フルブリード写真ウォール + 左下テキストオーバーレイ (本家準拠) */
+    /* HERO: 本家321mobile準拠 — 写真グリッドの中に左寄せテキストセルが「埋め込まれる」 */
     .hero{padding:0;min-height:100vh;position:relative}
     .hero-grid{
       display:block;grid-template-columns:none;gap:0;
@@ -713,21 +713,33 @@
       grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr 1fr;
       gap:4px;height:100%;min-height:100vh;z-index:1;
     }
-    /* テキストは写真の上にカード状でオーバーレイ */
+    /* テキストは「グリッドの左中央セル」として組み込む（フルブリードではない・左寄せ約60%幅） */
     .hero-text-col{
-      position:absolute;bottom:54px;left:0;right:0;
-      padding:24px 22px 26px;background:rgba(255,255,255,.96);
-      backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-      z-index:10;width:auto;
-      box-shadow:0 -8px 32px rgba(0,0,0,.08);
+      position:absolute;
+      top:38%;left:0;
+      width:62%;max-width:280px;
+      transform:translateY(-50%);
+      padding:18px 18px 20px;
+      background:rgba(255,255,255,.97);
+      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+      z-index:10;
+      box-shadow:0 12px 32px rgba(0,0,0,.10),0 2px 8px rgba(0,0,0,.05);
+      animation:hero-text-slide-in 1.1s var(--ease-out) both .15s;
     }
-    .hero-eyebrow{font-size:9px;letter-spacing:.3em;margin-bottom:10px}
-    .hero-sub{font-size:11px;margin-bottom:8px;letter-spacing:.16em}
-    .hero-sub::before,.hero-sub::after{width:12px}
-    .hero-title{font-size:32px;line-height:1.25;letter-spacing:.04em}
-    .hero-desc{font-size:11.5px;line-height:1.85;margin-top:14px;max-width:none;letter-spacing:.04em}
-    .hero-since{margin-top:18px;font-size:9px;letter-spacing:.28em}
-    .hero-since::before{width:24px}
+    @keyframes hero-text-slide-in{
+      from{opacity:0;transform:translateY(-50%) translateX(-14px)}
+      to{opacity:1;transform:translateY(-50%) translateX(0)}
+    }
+    .hero-eyebrow{font-size:8.5px;letter-spacing:.28em;margin-bottom:8px}
+    .hero-sub{font-size:10.5px;margin-bottom:7px;letter-spacing:.14em}
+    .hero-sub::before,.hero-sub::after{width:10px}
+    .hero-title{
+      font-size:30px;line-height:1.22;letter-spacing:.03em;
+      font-weight:900;
+    }
+    .hero-desc{font-size:10.5px;line-height:1.78;margin-top:10px;max-width:none;letter-spacing:.03em}
+    .hero-since{margin-top:12px;font-size:8.5px;letter-spacing:.24em}
+    .hero-since::before{width:18px}
 
     /* 装飾もモバイルでは少し小さく */
     .pw-deco-circle{width:30px;height:30px}
