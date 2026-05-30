@@ -26,7 +26,13 @@
     --gray-100:#f4f4f6;
     --cream:#fafafa;
     --line:#06c755;
+    --line-deep:#04a847;
     --gold:#c8a456;
+    /* ONECARAT風アクセント */
+    --cyan:#10b5c9;
+    --cyan-deep:#0d97a8;
+    --cyan-soft:#e6f6f9;
+    --yellow:#f4d63a;
     --shadow-sm:0 1px 2px rgba(14,14,16,.06),0 2px 8px rgba(14,14,16,.04);
     --shadow-md:0 4px 12px rgba(14,14,16,.08),0 12px 32px rgba(14,14,16,.06);
     --shadow-lg:0 8px 24px rgba(14,14,16,.12),0 24px 64px rgba(14,14,16,.08);
@@ -43,6 +49,7 @@
     line-height:1.7;
     font-feature-settings:"palt";
     -webkit-font-smoothing:antialiased;
+    padding-bottom:64px; /* 常時LINEバー分の余白 */
   }
   a{color:inherit;text-decoration:none}
   img{max-width:100%;height:auto;display:block}
@@ -113,7 +120,36 @@
     content:"";position:absolute;left:0;right:0;bottom:-2px;height:6px;
     background:linear-gradient(90deg,var(--red),#ff6680);border-radius:6px;opacity:.25;
   }
+  .hero-lead{
+    font-size:14px;font-weight:700;color:var(--gray-700);
+    letter-spacing:.06em;margin-bottom:8px;
+  }
+  .hero-en{
+    margin-top:18px;
+    font-family:Inter,sans-serif;font-weight:900;
+    font-size:clamp(22px,2.4vw,32px);letter-spacing:.04em;
+    color:var(--black);line-height:1.1;
+  }
   .hero-sub{margin-top:22px;font-size:17px;color:var(--gray-700);max-width:520px}
+  /* ONECARAT風 黒ピル + シアン数字 メトリクス */
+  .hero-metrics{
+    margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;
+  }
+  .hero-metric{
+    display:inline-flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .hero-metric-label{
+    padding:6px 16px;border-radius:var(--r-pill);
+    background:var(--black);color:#fff;
+    font-size:12px;font-weight:700;letter-spacing:.04em;
+  }
+  .hero-metric-value{
+    font-family:Inter,sans-serif;font-weight:900;
+    color:var(--cyan);font-size:36px;line-height:1;letter-spacing:-.02em;
+  }
+  .hero-metric-value small{
+    font-size:.45em;color:var(--cyan);font-weight:700;margin-left:2px;
+  }
   .hero-ctas{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:10px;
@@ -159,18 +195,31 @@
   .hero-tag.t1{top:-12px;right:18%;background:var(--red);transform:rotate(-4deg)}
   .hero-tag.t2{bottom:30%;left:-14px;background:#fff;color:var(--black);transform:rotate(3deg)}
 
-  /* ---------- Stats ---------- */
-  .stats{background:var(--black);color:#fff;padding:52px 24px}
-  .stats-inner{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-  .stat{text-align:center}
-  .stat-num{
-    font-family:Inter,sans-serif;font-weight:900;letter-spacing:-.02em;
-    font-size:clamp(36px,4.5vw,56px);line-height:1;
-    background:linear-gradient(180deg,#fff 0%,#ff8fa3 120%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+  /* ---------- Stats (ONECARAT風 白背景・シアン数字) ---------- */
+  .stats{
+    background:linear-gradient(180deg,#fff 0%,var(--cyan-soft) 100%);
+    color:var(--black);padding:64px 24px;
+    border-top:1px solid var(--gray-100);
+    border-bottom:1px solid var(--gray-100);
   }
-  .stat-num small{font-size:.5em;font-weight:700;margin-left:4px;color:#fff;background:none;-webkit-text-fill-color:#fff}
-  .stat-label{margin-top:8px;font-size:13px;color:rgba(255,255,255,.7);letter-spacing:.04em}
+  .stats-inner{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .stat{text-align:center;position:relative}
+  .stat:not(:first-child)::before{
+    content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;
+    background:var(--gray-300);
+  }
+  .stat-num{
+    font-family:Inter,sans-serif;font-weight:900;letter-spacing:-.03em;
+    font-size:clamp(40px,5vw,64px);line-height:1;
+    color:var(--cyan);
+  }
+  .stat-num small{
+    font-size:.42em;font-weight:700;margin-left:4px;color:var(--cyan-deep);
+  }
+  .stat-label{
+    margin-top:12px;font-size:12px;color:var(--gray-700);letter-spacing:.12em;
+    font-weight:700;
+  }
 
   /* ---------- Section common ---------- */
   section{padding:96px 24px}
@@ -272,6 +321,26 @@
   @media (prefers-reduced-motion: reduce){
     .marquee-track{animation:none}
     .marquee-viewport{overflow-x:auto}
+  }
+
+  /* ---------- Activity Tags (ONECARAT風カテゴリ行) ---------- */
+  .activity-tags{padding:36px 24px;background:#fff;border-bottom:1px solid var(--gray-100)}
+  .activity-tags .section-inner{display:flex;justify-content:center}
+  .atag-list{
+    list-style:none;display:flex;flex-wrap:wrap;justify-content:center;
+    gap:8px 32px;
+  }
+  .atag-list li{
+    font-family:Inter,sans-serif;font-weight:900;font-size:18px;
+    letter-spacing:.18em;color:var(--gray-300);
+    transition:color .25s var(--ease);
+    position:relative;
+  }
+  .atag-list li:hover{color:var(--black)}
+  .atag-list li:not(:last-child)::after{
+    content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:var(--cyan);margin-left:32px;vertical-align:middle;
+    margin-bottom:3px;
   }
 
   /* ---------- Media Strip ---------- */
@@ -656,7 +725,7 @@
   .footer-links{display:flex;gap:24px;flex-wrap:wrap}
   .footer-links a:hover{color:#fff}
 
-  /* ---------- Floating CTA (mobile) ---------- */
+  /* ---------- Floating CTA (mobile / 旧版維持) ---------- */
   .float-cta{
     position:fixed;left:0;right:0;bottom:0;z-index:40;
     background:rgba(255,255,255,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
@@ -664,6 +733,26 @@
     display:none;gap:10px;
   }
   .float-cta .btn{flex:1;padding:16px;font-size:15px}
+
+  /* ---------- Always-on bottom LINE bar (ONECARAT signature) ---------- */
+  .line-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:45;
+    background:var(--line);color:#fff;
+    padding:16px 24px;text-align:center;
+    font-weight:900;font-size:17px;letter-spacing:.04em;
+    box-shadow:0 -8px 24px rgba(6,199,85,.25);
+    transition:background .2s var(--ease),transform .2s var(--ease);
+    display:flex;align-items:center;justify-content:center;gap:14px;
+  }
+  .line-bar:hover{background:var(--line-deep);transform:translateY(-1px)}
+  .line-bar::before{
+    content:"";width:24px;height:24px;flex-shrink:0;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M12 2C6.48 2 2 5.86 2 10.6c0 2.74 1.6 5.17 4.09 6.78-.18.6-.65 2.2-.75 2.54-.12.43.16.43.34.32.14-.09 2.27-1.54 3.19-2.16.9.13 1.83.2 2.78.2c5.52 0 10-3.86 10-8.6S17.52 2 12 2z'/></svg>") no-repeat center/contain;
+  }
+  .line-bar-tap{
+    display:inline-block;padding:4px 10px;border-radius:4px;
+    background:rgba(255,255,255,.2);font-size:11px;font-weight:700;letter-spacing:.1em;
+  }
   .float-cta .btn-secondary{
     background:#fff;color:var(--red);
     border:1.5px solid var(--red);
@@ -715,8 +804,8 @@
     .flow-step:not(:last-child)::after{
       right:50%;top:auto;bottom:-14px;transform:translateX(50%) rotate(90deg);
     }
-    .float-cta{display:flex}
-    body{padding-bottom:80px}
+    .line-bar{padding:14px 20px;font-size:15px}
+    body{padding-bottom:72px}
     .header-cta{display:none}
     .cta-final-buttons{flex-direction:column}
     .cta-final-buttons .btn{width:100%}
@@ -791,11 +880,23 @@
   <div class="hero-inner">
     <div>
       <span class="hero-badge">2026年 新規ライバー募集 — 残り若干名</span>
+      <p class="hero-lead">次世代インフルエンサーを育成する</p>
       <h1>あなたの"好き"を、<br><span class="accent">武器</span>にする。</h1>
+      <p class="hero-en">MAKE LIVING WITH LIVE.</p>
       <p class="hero-sub">
         Pococha 歴代1位ライバー多数在籍。<br>
         Live-Laboは、未経験から3ヶ月でS帯ランクへ。還元率100%・住所提供・確定申告サポートまで、ライバーに必要なすべてを揃えています。
       </p>
+      <div class="hero-metrics">
+        <div class="hero-metric">
+          <span class="hero-metric-label">還元率</span>
+          <span class="hero-metric-value">100<small>%</small></span>
+        </div>
+        <div class="hero-metric">
+          <span class="hero-metric-label">未経験→S帯</span>
+          <span class="hero-metric-value">3<small>ヶ月</small></span>
+        </div>
+      </div>
       <div class="hero-ctas">
         <a href="#contact" class="btn btn-primary btn-arrow">LINEで無料相談</a>
         <a href="#reasons" class="btn btn-ghost btn-arrow">選ばれる理由を見る</a>
@@ -868,6 +969,21 @@
     </div>
   </div>
   <span class="marquee-caption">活躍中の所属ライバー — Pococha・TikTok LIVE・17LIVEで毎日配信中</span>
+</section>
+
+<!-- ========== Activity Tags (ライバーが目指せる7フィールド) ========== -->
+<section class="activity-tags">
+  <div class="section-inner">
+    <ul class="atag-list">
+      <li>IDOL</li>
+      <li>INFLUENCER</li>
+      <li>ACTOR</li>
+      <li>MODEL</li>
+      <li>ARTIST</li>
+      <li>TALENT</li>
+      <li>MEDIA</li>
+    </ul>
+  </div>
 </section>
 
 <!-- ========== Trust Strip ========== -->
@@ -1394,11 +1510,11 @@
   </div>
 </footer>
 
-<!-- ========== Floating CTA (mobile only) ========== -->
-<div class="float-cta">
-  <a href="#contact" class="btn btn-primary">LINEで相談</a>
-  <a href="https://live-labo.jp/contact/" class="btn btn-secondary">フォーム</a>
-</div>
+<!-- ========== Always-on bottom LINE CTA bar (ONECARAT signature) ========== -->
+<a href="#contact" class="line-bar" aria-label="LINEで無料相談">
+  LINEで無料相談する
+  <span class="line-bar-tap">TAP</span>
+</a>
 
 <script>
   // Fade-in on scroll
