@@ -517,49 +517,86 @@
   }
   .liver-platform{font-size:11px;color:var(--gray-700);margin-top:4px;letter-spacing:.1em}
 
-  /* ============ Quote ============ */
+  /* ============ Quote (editorial founder message) ============ */
   .quote{
-    padding:160px 0;background:var(--gray-50);text-align:center;
+    padding:170px 0;background:var(--gray-50);text-align:center;
     position:relative;overflow:hidden;
   }
+  .quote::before,.quote::after{
+    content:"";position:absolute;left:50%;transform:translateX(-50%);
+    width:60px;height:1px;background:var(--gray-300);
+  }
+  .quote::before{top:64px}
+  .quote::after{bottom:64px}
   .quote-mark{
-    font-family:Georgia,serif;font-size:120px;line-height:1;
-    color:var(--gray-300);margin-bottom:-32px;font-weight:400;
+    font-family:Georgia,"Times New Roman",serif;font-size:160px;line-height:1;
+    color:var(--accent-yellow);margin-bottom:-44px;font-weight:400;
+    opacity:.95;
   }
   .quote-body{
     font-size:clamp(22px,2.6vw,34px);
     font-weight:900;color:var(--black);
     line-height:2;letter-spacing:.06em;
+    max-width:880px;margin:0 auto;padding:0 24px;
   }
   .quote-attr{
-    margin-top:48px;font-size:11px;color:var(--gray-500);letter-spacing:.32em;
+    margin-top:56px;font-size:11px;color:var(--gray-500);letter-spacing:.36em;
     font-family:Inter,sans-serif;font-weight:500;
   }
 
-  /* ============ Platforms ============ */
+  /* ============ Platforms (editorial uniform cells) ============ */
   .platforms{padding:140px 0;background:var(--paper)}
-  .platforms-head{text-align:center;margin-bottom:72px}
+  .platforms-head{text-align:center;margin-bottom:80px}
   .platforms-head .section-tag{padding-left:0}
   .platforms-head .section-tag::before{display:none}
   .platforms-head .section-title{margin-top:18px}
   .platforms-row{
     display:grid;grid-template-columns:repeat(5,1fr);
-    gap:36px 28px;max-width:920px;margin:0 auto;
+    gap:44px 28px;max-width:980px;margin:0 auto;padding:0 24px;
   }
   .platform-cell{
-    display:flex;flex-direction:column;align-items:center;gap:12px;
-    transition:transform .2s var(--ease);
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+    transition:transform .25s var(--ease);
   }
-  .platform-cell:hover{transform:translateY(-4px)}
+  .platform-cell:hover{transform:translateY(-5px)}
   .platform-cell-art{
     width:84px;height:84px;border-radius:18px;overflow:hidden;
     display:flex;align-items:center;justify-content:center;
-    font-family:Inter,sans-serif;font-weight:900;font-size:30px;
-    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    font-family:Inter,sans-serif;font-weight:900;font-size:28px;
+    box-shadow:0 12px 28px rgba(14,14,16,.10),inset 0 0 0 1px rgba(14,14,16,.04);
+    position:relative;
+    background:#fff;
+    transition:box-shadow .25s var(--ease);
+  }
+  .platform-cell:hover .platform-cell-art{
+    box-shadow:0 20px 40px rgba(14,14,16,.14),inset 0 0 0 1px rgba(14,14,16,.06);
   }
   .platform-cell-art img{width:100%;height:100%;object-fit:cover}
+  /* テキスト表示用の編集者風ロゴカード (画像ロゴがない場合のフォールバック) */
+  .platform-cell-mark{
+    background:linear-gradient(180deg,#fafafb 0%,#ffffff 100%);
+    color:var(--black);
+    position:relative;
+    border:1px solid rgba(14,14,16,.06);
+  }
+  .platform-cell-mark::before{
+    content:"";position:absolute;left:14px;right:14px;top:14px;height:1px;
+    background:rgba(14,14,16,.08);
+  }
+  .platform-cell-mark::after{
+    content:"";position:absolute;left:14px;right:14px;bottom:14px;height:1px;
+    background:rgba(14,14,16,.08);
+  }
+  .platform-cell-mark span{
+    font-family:Inter,sans-serif;font-weight:900;
+    font-size:10px;letter-spacing:.18em;color:var(--black);
+    text-align:center;line-height:1;
+    padding:0 4px;
+    text-transform:uppercase;
+  }
   .platform-cell-name{
-    font-size:11px;font-weight:700;color:var(--gray-700);letter-spacing:.06em;
+    font-size:11px;font-weight:700;color:var(--gray-700);letter-spacing:.10em;
+    text-transform:uppercase;
   }
 
   /* ============ Numbers ============ */
@@ -591,38 +628,55 @@
   }
   .num-desc{margin-top:6px;font-size:13px;color:#fff;font-weight:700;letter-spacing:.04em}
 
-  /* ============ Recruit ============ */
+  /* ============ Recruit (refined editorial CTA) ============ */
   .recruit{
     padding:200px 0;background:var(--paper);
     position:relative;overflow:hidden;text-align:center;
   }
+  .recruit::before{
+    content:"";position:absolute;left:50%;top:90px;
+    width:1px;height:60px;background:var(--gray-300);
+    transform:translateX(-50%);
+  }
   .recruit-tag{
-    font-family:Inter,sans-serif;font-size:11px;letter-spacing:.4em;color:var(--gray-500);
-    font-weight:700;
+    font-family:Inter,sans-serif;font-size:11px;letter-spacing:.44em;color:var(--gray-500);
+    font-weight:700;text-transform:uppercase;
   }
   .recruit-title{
-    margin-top:24px;
+    margin-top:32px;
     font-size:clamp(34px,4.4vw,62px);
     font-weight:900;color:var(--black);
     line-height:1.5;letter-spacing:.04em;
   }
   .recruit-actions{
-    margin-top:56px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+    margin-top:64px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;
   }
   .btn-l{
     display:inline-flex;align-items:center;gap:18px;
-    padding:20px 36px;border-radius:4px;
-    font-weight:700;font-size:13px;letter-spacing:.06em;
-    transition:transform .2s var(--ease);
+    padding:22px 40px;border-radius:4px;
+    font-weight:700;font-size:13px;letter-spacing:.08em;
+    text-transform:uppercase;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+    position:relative;
   }
-  .btn-line{background:var(--line);color:#fff}
-  .btn-outline{background:transparent;color:var(--black);border:1.5px solid var(--black)}
-  .btn-l:hover{transform:translateY(-2px)}
+  .btn-line{
+    background:var(--line);color:#fff;
+    box-shadow:0 12px 28px rgba(6,199,85,.28);
+  }
+  .btn-line:hover{box-shadow:0 18px 40px rgba(6,199,85,.36)}
+  .btn-outline{
+    background:transparent;color:var(--black);
+    border:1.5px solid var(--black);
+  }
+  .btn-outline:hover{background:var(--black);color:#fff}
+  .btn-outline:hover .btn-l-arrow{background:#fff;color:var(--black)}
+  .btn-l:hover{transform:translateY(-3px)}
   .btn-l-arrow{
-    width:24px;height:24px;border-radius:50%;
+    width:26px;height:26px;border-radius:50%;
     background:#fff;color:var(--black);
     display:inline-flex;align-items:center;justify-content:center;
     font-size:13px;font-family:Inter,sans-serif;font-weight:700;
+    transition:background .25s var(--ease),color .25s var(--ease);
   }
   .btn-line .btn-l-arrow{color:var(--line)}
   .btn-outline .btn-l-arrow{background:var(--black);color:#fff}
@@ -632,10 +686,14 @@
   .recruit .deco-r3{top:30%;right:22%;opacity:.7}
   .recruit .deco-r4{bottom:30%;left:22%}
 
-  /* ============ Footer ============ */
-  .site-footer{background:var(--black);color:#fff;padding:120px 0 56px}
+  /* ============ Footer (refined corporate hierarchy) ============ */
+  .site-footer{background:var(--black);color:#fff;padding:120px 0 48px;position:relative}
+  .site-footer::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:1px;
+    background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);
+  }
   .footer-grid{
-    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:56px;
   }
   .footer-brand-row{
     font-family:Inter,sans-serif;font-weight:900;font-size:26px;
@@ -646,17 +704,21 @@
     font-size:10px;letter-spacing:.06em;color:rgba(255,255,255,.7);
     transform:translateY(-12px);
   }
-  .footer-tagline{margin-top:18px;font-size:13px;color:rgba(255,255,255,.6);line-height:2}
+  .footer-tagline{
+    margin-top:22px;font-size:12.5px;color:rgba(255,255,255,.55);
+    line-height:2.1;letter-spacing:.04em;
+  }
   .footer-col h4{
-    font-size:11px;letter-spacing:.32em;color:rgba(255,255,255,.5);
-    margin-bottom:22px;font-weight:500;
+    font-size:10.5px;letter-spacing:.36em;color:rgba(255,255,255,.45);
+    margin-bottom:26px;font-weight:500;text-transform:uppercase;
+    padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08);
   }
   .footer-col ul li{margin-bottom:14px}
   .footer-col a{
-    font-size:14px;color:#fff;font-weight:500;letter-spacing:.04em;
-    transition:opacity .2s;
+    font-size:13.5px;color:#fff;font-weight:500;letter-spacing:.04em;
+    transition:opacity .2s,padding-left .2s;
   }
-  .footer-col a:hover{opacity:.7}
+  .footer-col a:hover{opacity:.65;padding-left:4px}
   .footer-bottom{
     margin-top:80px;padding-top:32px;
     border-top:1px solid rgba(255,255,255,.1);
@@ -1214,23 +1276,23 @@
         <span class="platform-cell-name">ふわっち</span>
       </a>
       <a class="platform-cell" title="REALITY">
-        <div class="platform-cell-art" style="background:linear-gradient(135deg,#ff7eb6 0%,#7eccff 100%);color:#fff">R</div>
+        <div class="platform-cell-art platform-cell-mark"><span>REALITY</span></div>
         <span class="platform-cell-name">REALITY</span>
       </a>
       <a class="platform-cell" title="ミクチャ">
-        <div class="platform-cell-art" style="background:linear-gradient(135deg,#ff7e5f 0%,#feb47b 100%);color:#fff">ミ</div>
+        <div class="platform-cell-art platform-cell-mark"><span>MIXCH</span></div>
         <span class="platform-cell-name">ミクチャ</span>
       </a>
       <a class="platform-cell" title="EVERY.LIVE">
-        <div class="platform-cell-art" style="background:#fff;color:#1ab7ea">E</div>
+        <div class="platform-cell-art platform-cell-mark"><span>EVERY</span></div>
         <span class="platform-cell-name">EVERY.LIVE</span>
       </a>
       <a class="platform-cell" title="Uplive">
-        <div class="platform-cell-art" style="background:linear-gradient(135deg,#a16bff 0%,#ec4899 100%);color:#fff;font-style:italic">up</div>
+        <div class="platform-cell-art platform-cell-mark"><span>UPLIVE</span></div>
         <span class="platform-cell-name">Uplive</span>
       </a>
       <a class="platform-cell" title="SHOWROOM">
-        <div class="platform-cell-art" style="background:linear-gradient(135deg,#ff5577 0%,#ff8855 100%);color:#fff">SR</div>
+        <div class="platform-cell-art platform-cell-mark"><span>SHOWROOM</span></div>
         <span class="platform-cell-name">SHOWROOM</span>
       </a>
     </div>
