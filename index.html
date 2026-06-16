@@ -47,13 +47,22 @@
     color:var(--gray-900);
     background:#fff;
     line-height:1.7;
+    letter-spacing:.012em;
     font-feature-settings:"palt";
+    line-break:strict;
     -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
     padding-bottom:64px; /* 常時LINEバー分の余白 */
   }
   a{color:inherit;text-decoration:none}
   img{max-width:100%;height:auto;display:block}
   button{font-family:inherit;cursor:pointer;border:none;background:none}
+  /* ---------- 大手感: 日本語組版の精緻化（改行の均等化・禁則・数字の等幅化） ---------- */
+  h1,h2,h3,h4{text-wrap:balance;line-break:strict}
+  p,li,dd,figcaption,blockquote{text-wrap:pretty}
+  .stat-num,.metric-value,.num-value,.hero-metric-value,.cmp-table,
+  .campaign-card-bonus,.liver-rank{font-variant-numeric:tabular-nums}
 
   /* ---------- Header ---------- */
   .site-header{
