@@ -832,29 +832,59 @@
     font-size:11px;color:var(--gray-500);
   }
 
-  /* ---------- Livers ---------- */
+  /* ---------- Livers (photo + name below, expandable) ---------- */
   .livers{background:var(--cream)}
   .livers-grid{
-    margin-top:48px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+    margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:28px 22px;
   }
   .liver-card{
+    display:flex;flex-direction:column;
+    transition:transform .25s var(--ease);
+  }
+  .liver-card.is-extra{display:none}
+  .livers-grid.is-expanded .liver-card.is-extra{
+    display:flex;animation:liver-reveal .55s var(--ease) both;
+  }
+  @keyframes liver-reveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .liver-photo{
     position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:3/4;
-    background:var(--gray-100);box-shadow:var(--shadow-sm);
-    transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+    background:var(--gray-100);
+    box-shadow:0 1px 0 var(--gray-100),0 10px 26px rgba(14,14,16,.06);
   }
-  .liver-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-  .liver-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
-  .liver-card:hover img{transform:scale(1.05)}
-  .liver-meta{
-    position:absolute;inset:auto 0 0 0;padding:14px 14px 12px;
-    background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.85) 100%);
-    color:#fff;
+  .liver-photo::after{
+    content:"";position:absolute;inset:0;border-radius:var(--r-md);
+    box-shadow:inset 0 0 0 1px rgba(14,14,16,.05);pointer-events:none;
   }
-  .liver-rank{
-    display:inline-block;padding:3px 10px;border-radius:var(--r-pill);
-    background:var(--red);font-size:11px;font-weight:700;letter-spacing:.05em;
+  .liver-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
+  .liver-card:hover .liver-photo{box-shadow:0 1px 0 var(--gray-100),0 18px 40px rgba(14,14,16,.12)}
+  .liver-card:hover img{transform:scale(1.06)}
+  .liver-name{
+    margin-top:14px;text-align:center;
+    font-weight:900;font-size:15px;color:var(--black);letter-spacing:.02em;line-height:1.4;
   }
-  .liver-name{margin-top:8px;font-weight:700;font-size:14px}
+  /* さらに表示ボタン */
+  .livers-more{text-align:center;margin-top:46px}
+  .liver-more-btn{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:16px 38px;border-radius:var(--r-pill);
+    background:#fff;border:1.5px solid var(--gray-300);
+    color:var(--gray-900);font-weight:900;font-size:15px;letter-spacing:.04em;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(14,14,16,.05);
+    transition:border-color .2s var(--ease),color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease);
+  }
+  .liver-more-btn:hover{
+    border-color:var(--red);color:var(--red);transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(212,0,42,.12);
+  }
+  .liver-more-btn .lmb-icon{
+    width:22px;height:22px;border-radius:50%;background:var(--red);flex-shrink:0;
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:transform .35s var(--ease);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M4 6l4 4 4-4'/></svg>");
+    background-repeat:no-repeat;background-position:center;background-size:11px 11px;
+  }
+  .livers-grid.is-expanded ~ .livers-more .lmb-icon{transform:rotate(180deg)}
 
   /* ---------- Campaign Box ---------- */
   .campaign{background:linear-gradient(135deg,#0e0e10 0%,#2a0510 100%);color:#fff;padding:0}
@@ -1761,33 +1791,100 @@
     <span class="section-eyebrow">Active Livers</span>
     <h2 class="section-title">活躍中の<span class="accent">所属ライバー</span></h2>
     <p class="section-lead">Pochocha・TikTok LIVE・17LIVEなど、複数プラットフォームでTOPランカーを多数輩出。</p>
-    <div class="livers-grid">
+    <div class="livers-grid" id="liversGrid">
+      <!-- ===== TOP 8（初期表示） ===== -->
       <div class="liver-card">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="わらし。">
-        <div class="liver-meta"><span class="liver-rank">RANK #1</span><div class="liver-name">わらし。</div></div>
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="わらし。" loading="lazy"></div>
+        <div class="liver-name">わらし。</div>
       </div>
       <div class="liver-card">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="あの">
-        <div class="liver-meta"><span class="liver-rank">RANK #2</span><div class="liver-name">あの</div></div>
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="あの" loading="lazy"></div>
+        <div class="liver-name">あの</div>
       </div>
       <div class="liver-card">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="ゆいころ">
-        <div class="liver-meta"><span class="liver-rank">TOP TIER</span><div class="liver-name">ゆいころ</div></div>
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="ゆいころ" loading="lazy"></div>
+        <div class="liver-name">ゆいころ</div>
       </div>
       <div class="liver-card">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="遊汰様">
-        <div class="liver-meta"><span class="liver-rank">TOP TIER</span><div class="liver-name">遊汰様</div></div>
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="遊汰様" loading="lazy"></div>
+        <div class="liver-name">遊汰様</div>
       </div>
       <div class="liver-card">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="なるみ">
-        <div class="liver-meta"><span class="liver-rank">RISING</span><div class="liver-name">なるみ</div></div>
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="なるみ" loading="lazy"></div>
+        <div class="liver-name">なるみ</div>
+      </div>
+      <div class="liver-card">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg" alt="おとうふ" loading="lazy"></div>
+        <div class="liver-name">おとうふ</div>
+      </div>
+      <div class="liver-card">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="きいち" loading="lazy"></div>
+        <div class="liver-name">きいち</div>
+      </div>
+      <div class="liver-card">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/09/%E3%83%AC%E3%82%A4%E3%83%9F.jpg" alt="レイミ" loading="lazy"></div>
+        <div class="liver-name">レイミ</div>
+      </div>
+      <!-- ===== 追加 8（「さらに表示」で展開） ===== -->
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/line_oa_chat_250902_112651.jpg" alt="えなぴまる" loading="lazy"></div>
+        <div class="liver-name">えなぴまる</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/04/%E3%81%8A%E5%A4%A9-scaled.jpeg" alt="お天" loading="lazy"></div>
+        <div class="liver-name">お天</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2023/10/yanchan-scaled.jpeg" alt="やんちゃん" loading="lazy"></div>
+        <div class="liver-name">やんちゃん</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/09/%E3%81%B4%E3%81%B4%E3%82%80-scaled.jpeg" alt="ぴぴむ" loading="lazy"></div>
+        <div class="liver-name">ぴぴむ</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2023/02/%E3%81%97%E3%82%93%E3%81%98%E3%82%85.jpeg" alt="しんじゅ" loading="lazy"></div>
+        <div class="liver-name">しんじゅ</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/07/%E3%82%86%E3%81%8D%E3%81%A1%E3%82%83%E3%82%93.jpeg" alt="ゆきちゃん" loading="lazy"></div>
+        <div class="liver-name">ゆきちゃん</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2023/12/Achan-e1703232526958.jpeg" alt="Aちゃん" loading="lazy"></div>
+        <div class="liver-name">Aちゃん</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg" alt="鬼嫁Luna" loading="lazy"></div>
+        <div class="liver-name">鬼嫁Luna</div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:36px">
-      <a href="https://live-labo.jp/liver/" class="btn btn-ghost btn-arrow">所属ライバー一覧を見る</a>
+    <div class="livers-more">
+      <button class="liver-more-btn" id="liversMoreBtn" type="button" aria-expanded="false" aria-controls="liversGrid">
+        <span class="lmb-text">さらに表示する（＋8名）</span>
+        <span class="lmb-icon" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 </section>
+<script>
+  /* ライバー一覧：さらに表示トグル（このセクション専用・他に影響なし） */
+  (function(){
+    var grid=document.getElementById('liversGrid');
+    var btn=document.getElementById('liversMoreBtn');
+    if(!grid||!btn)return;
+    var txt=btn.querySelector('.lmb-text');
+    btn.addEventListener('click',function(){
+      var expanded=grid.classList.toggle('is-expanded');
+      btn.setAttribute('aria-expanded',expanded?'true':'false');
+      if(txt)txt.textContent=expanded?'閉じる':'さらに表示する（＋8名）';
+      if(!expanded){
+        var sec=document.getElementById('livers');
+        if(sec)sec.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  })();
+</script>
 
 <!-- ========== Platforms (PARTNER wall) ========== -->
 <section class="platforms" id="platforms">
