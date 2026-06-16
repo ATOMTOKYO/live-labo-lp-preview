@@ -1834,10 +1834,14 @@
         <div class="liver-name">パルム</div>
         <span class="liver-rookie-tag">ROOKIE</span>
       </div>
-      <!-- ===== 追加 12（「さらに表示」で展開）— 掲載リスト順 ===== -->
+      <!-- ===== 追加 17（「さらに表示」で展開）— 掲載リスト順 ===== -->
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="なるみ" loading="lazy"></div>
         <div class="liver-name">なるみ</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="assets/livers/karisma-shoma.jpg" alt="カリスマしょーま" loading="lazy"></div>
+        <div class="liver-name">カリスマしょーま</div>
       </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2024/06/MAHO%E2%91%A0.jpg" alt="MAHO" loading="lazy"></div>
@@ -1861,8 +1865,16 @@
         <div class="liver-name">カエすも</div>
       </div>
       <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="assets/livers/kumochan.jpg" alt="雲ちゃん" loading="lazy"></div>
+        <div class="liver-name">雲ちゃん</div>
+      </div>
+      <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%81%8F%E3%82%8B%E3%82%82%E3%82%93.jpg" alt="くるもん" loading="lazy"></div>
         <div class="liver-name">くるもん</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="assets/livers/orenoreo.jpg" alt="おれのれお" loading="lazy"></div>
+        <div class="liver-name">おれのれお</div>
       </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg" alt="鬼嫁Luna" loading="lazy"></div>
@@ -1873,6 +1885,14 @@
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2026/03/%E3%81%AF%E3%81%AB-scaled.jpeg" alt="はに" loading="lazy"></div>
         <div class="liver-name">はに</div>
         <span class="liver-rookie-tag">ROOKIE</span>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="assets/livers/renamero.jpg" alt="れなめろ" loading="lazy"></div>
+        <div class="liver-name">れなめろ</div>
+      </div>
+      <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="assets/livers/hazuta.jpg" alt="はづた" loading="lazy"></div>
+        <div class="liver-name">はづた</div>
       </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="きいち" loading="lazy"></div>
@@ -1889,7 +1909,7 @@
     </div>
     <div class="livers-more">
       <button class="liver-more-btn" id="liversMoreBtn" type="button" aria-expanded="false" aria-controls="liversGrid">
-        <span class="lmb-text">さらに表示する（＋12名）</span>
+        <span class="lmb-text">さらに表示する（＋17名）</span>
         <span class="lmb-icon" aria-hidden="true"></span>
       </button>
     </div>
@@ -1905,7 +1925,7 @@
     btn.addEventListener('click',function(){
       var expanded=grid.classList.toggle('is-expanded');
       btn.setAttribute('aria-expanded',expanded?'true':'false');
-      if(txt)txt.textContent=expanded?'閉じる':'さらに表示する（＋12名）';
+      if(txt)txt.textContent=expanded?'閉じる':'さらに表示する（＋17名）';
       if(!expanded){
         var sec=document.getElementById('livers');
         if(sec)sec.scrollIntoView({behavior:'smooth',block:'start'});
