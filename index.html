@@ -715,23 +715,26 @@
     margin-top:12px;font-size:18px;font-weight:700;color:#fff;letter-spacing:.04em;
   }
   .platforms-lead{margin-top:14px;color:rgba(255,255,255,.65);font-size:15px;line-height:1.8}
+  /* 全アプリアイコンを同一サイズ・正方形のフルブリード公式アイコンで統一 */
   .platform-icons{
-    margin:56px auto 0;max-width:980px;
-    display:grid;grid-template-columns:repeat(5,1fr);gap:28px 22px;
+    margin:56px auto 0;max-width:840px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:34px 30px;
   }
   .picon{
-    display:flex;flex-direction:column;align-items:center;gap:12px;
+    display:flex;flex-direction:column;align-items:center;gap:14px;
     text-decoration:none;color:#fff;position:relative;
     transition:transform .2s var(--ease);
   }
-  .picon:hover{transform:translateY(-4px)}
+  .picon:hover{transform:translateY(-5px)}
   .picon-art{
-    width:100%;aspect-ratio:1/1;border-radius:22px;
-    display:flex;align-items:center;justify-content:center;
-    font-family:Inter,"Noto Sans JP",sans-serif;font-weight:900;
-    font-size:clamp(28px,3.5vw,42px);letter-spacing:-.02em;
-    box-shadow:0 8px 24px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06) inset;
-    overflow:hidden;position:relative;
+    width:100%;aspect-ratio:1/1;border-radius:22%;
+    overflow:hidden;position:relative;background:#fff;
+    box-shadow:0 12px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08) inset;
+    transition:box-shadow .25s var(--ease);
+  }
+  .picon:hover .picon-art{box-shadow:0 18px 44px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.14) inset}
+  .picon-img{
+    width:100%;height:100%;object-fit:cover;display:block;
   }
   .picon-name{font-size:13px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.92)}
   .picon[data-rank]::before{
@@ -741,28 +744,6 @@
     font-size:10px;font-weight:900;letter-spacing:.04em;white-space:nowrap;
     box-shadow:0 3px 10px rgba(255,184,0,.5);
   }
-  /* Individual platform icons (brand-color approximations) */
-  /* 実ロゴ画像を入れたカード共通 */
-  .picon-img{
-    width:100%;height:100%;object-fit:contain;display:block;
-    padding:14%;box-sizing:border-box;
-  }
-  .picon-tiktok-art{background:#010101}
-  .picon-tiktok-art .picon-img{padding:18%;background:#010101}
-  .picon-17live-art{background:#fff}
-  .picon-17live-art .picon-img{padding:0}
-  .picon-iriam-art{background:#fff}
-  .picon-iriam-art .picon-img{padding:0}
-  .picon-pococha-art{background:#fff;color:#000}
-  .picon-pococha-art .picon-img{padding:14%;background:#fff}
-  .picon-fuwacchi-art .picon-img{padding:6%;background:#fff}
-  /* 17LIVE / IRIAM はロゴ自体に背景色あり */
-  .picon-reality-art{background:linear-gradient(135deg,#ff7eb6 0%,#7eccff 100%);color:#fff}
-  .picon-mixch-art{background:linear-gradient(135deg,#ff7e5f 0%,#feb47b 100%);color:#fff}
-  .picon-everylive-art{background:#fff;color:#1ab7ea}
-  .picon-uplive-art{background:linear-gradient(135deg,#a16bff 0%,#ec4899 100%);color:#fff;font-style:italic}
-  .picon-showroom-art{background:linear-gradient(135deg,#ff5577 0%,#ff8855 100%);color:#fff}
-  .picon-fuwacchi-art{background:linear-gradient(135deg,#22c55e 0%,#10b981 100%);color:#fff}
   .platforms-note{
     margin-top:48px;text-align:center;font-size:11px;color:rgba(255,255,255,.4);
   }
@@ -1275,9 +1256,9 @@
     .reasons-grid{grid-template-columns:1fr;gap:14px}
     .reason{padding:28px 22px}
     .livers-grid{grid-template-columns:repeat(2,1fr)}
-    .platform-icons{grid-template-columns:repeat(5,1fr);gap:18px 14px;max-width:520px}
+    .platform-icons{grid-template-columns:repeat(4,1fr);gap:22px 16px;max-width:440px}
     .picon-name{font-size:11px}
-    .picon-art{border-radius:18px}
+    .picon-art{border-radius:22%}
     .picon[data-rank]::before{font-size:9px;padding:4px 8px}
     .os-grid{grid-template-columns:1fr;gap:14px}
     .os-item{padding:20px 18px}
@@ -1542,7 +1523,6 @@
       <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg" alt="" loading="lazy"></a>
     </div>
   </div>
-  <span class="marquee-caption">活躍中の所属ライバー — Pococha・TikTok LIVE・17LIVEで毎日配信中</span>
 </section>
 
 <!-- ========== Activity Tags (ライバーが目指せる7フィールド) ========== -->
@@ -1571,7 +1551,6 @@
       <span class="ml">IRIAM 提携</span>
       <span class="ml">提携税理士事務所</span>
       <span class="ml">提携法律事務所</span>
-      <span class="ml">PR TIMES 配信実績</span>
     </div>
   </div>
 </section>
@@ -1943,44 +1922,36 @@
       <p class="platforms-lead">主要配信アプリすべてに対応。TikTok LIVE・Pococha を中心に、あなたに合ったアプリでデビューできます。</p>
     </div>
     <div class="platform-icons">
-      <a class="picon picon-tiktok" data-rank="推し No.1" title="TikTok LIVE">
-        <div class="picon-art picon-tiktok-art" aria-hidden="true"><img src="assets/logos/tiktok.avif" alt="TikTok LIVE" class="picon-img"></div>
+      <a class="picon" data-rank="推し No.1" title="TikTok LIVE">
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-tiktok.png" alt="TikTok LIVE" class="picon-img" loading="lazy"></div>
         <span class="picon-name">TikTok LIVE</span>
       </a>
-      <a class="picon picon-pococha" data-rank="推し No.2" title="Pococha">
-        <div class="picon-art picon-pococha-art" aria-hidden="true"><img src="assets/logos/pococha.jpg" alt="Pococha" class="picon-img"></div>
+      <a class="picon" data-rank="推し No.2" title="Pococha">
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-pococha.png" alt="Pococha" class="picon-img" loading="lazy"></div>
         <span class="picon-name">Pococha</span>
       </a>
       <a class="picon" title="17LIVE">
-        <div class="picon-art picon-17live-art" aria-hidden="true"><img src="assets/logos/17live.webp" alt="17LIVE" class="picon-img"></div>
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-17live.png" alt="17LIVE" class="picon-img" loading="lazy"></div>
         <span class="picon-name">17LIVE</span>
       </a>
       <a class="picon" title="IRIAM">
-        <div class="picon-art picon-iriam-art" aria-hidden="true"><img src="assets/logos/iriam.webp" alt="IRIAM" class="picon-img"></div>
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-iriam.png" alt="IRIAM" class="picon-img" loading="lazy"></div>
         <span class="picon-name">IRIAM</span>
       </a>
       <a class="picon" title="REALITY">
-        <div class="picon-art picon-reality-art" aria-hidden="true">R</div>
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-reality.png" alt="REALITY" class="picon-img" loading="lazy"></div>
         <span class="picon-name">REALITY</span>
       </a>
       <a class="picon" title="ミクチャ">
-        <div class="picon-art picon-mixch-art" aria-hidden="true">ミ</div>
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-mixch.png" alt="ミクチャ" class="picon-img" loading="lazy"></div>
         <span class="picon-name">ミクチャ</span>
       </a>
-      <a class="picon" title="EVERY.LIVE">
-        <div class="picon-art picon-everylive-art" aria-hidden="true">E</div>
-        <span class="picon-name">EVERY.LIVE</span>
-      </a>
-      <a class="picon" title="Uplive">
-        <div class="picon-art picon-uplive-art" aria-hidden="true">up</div>
-        <span class="picon-name">Uplive</span>
-      </a>
       <a class="picon" title="SHOWROOM">
-        <div class="picon-art picon-showroom-art" aria-hidden="true">SR</div>
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-showroom.png" alt="SHOWROOM" class="picon-img" loading="lazy"></div>
         <span class="picon-name">SHOWROOM</span>
       </a>
       <a class="picon" title="ふわっち">
-        <div class="picon-art picon-fuwacchi-art" aria-hidden="true"><img src="assets/logos/fuwacchi.webp" alt="ふわっち" class="picon-img"></div>
+        <div class="picon-art" aria-hidden="true"><img src="assets/logos/app-fuwacchi.png" alt="ふわっち" class="picon-img" loading="lazy"></div>
         <span class="picon-name">ふわっち</span>
       </a>
     </div>
