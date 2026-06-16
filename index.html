@@ -1821,18 +1821,14 @@
       </div>
       <div class="liver-card">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/07/%E3%82%86%E3%81%8D%E3%81%A1%E3%82%83%E3%82%93.jpeg" alt="ゆきちゃん" loading="lazy"></div>
-        <div class="liver-name">ゆきちゃん</div>
-        <span class="liver-rookie-tag">ROOKIE</span>
-      </div>
+        <div class="liver-name">ゆきちゃん</div>      </div>
       <div class="liver-card">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg" alt="遊汰様" loading="lazy"></div>
         <div class="liver-name">遊汰様</div>
       </div>
       <div class="liver-card">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2026/05/%E3%81%B4%E3%81%AE.jpeg" alt="ぴの" loading="lazy"></div>
-        <div class="liver-name">ぴの</div>
-        <span class="liver-rookie-tag">ROOKIE</span>
-      </div>
+        <div class="liver-name">ぴの</div>      </div>
       <!-- ===== 追加 20（「さらに表示」で展開）= ランキング9〜 → 未ランク（ランダム）→ 非実写は最後 ===== -->
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="きいち" loading="lazy"></div>
@@ -1844,23 +1840,17 @@
       </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2026/03/%E3%83%91%E3%83%AB%E3%83%A0.jpg" alt="パルム" loading="lazy"></div>
-        <div class="liver-name">パルム</div>
-        <span class="liver-rookie-tag">ROOKIE</span>
-      </div>
+        <div class="liver-name">パルム</div>      </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg" alt="おとうふ" loading="lazy"></div>
         <div class="liver-name">おとうふ</div>
       </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg" alt="鬼嫁Luna" loading="lazy"></div>
-        <div class="liver-name">鬼嫁Luna</div>
-        <span class="liver-rookie-tag">ROOKIE</span>
-      </div>
+        <div class="liver-name">鬼嫁Luna</div>      </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2026/03/%E3%81%AF%E3%81%AB-scaled.jpeg" alt="はに" loading="lazy"></div>
-        <div class="liver-name">はに</div>
-        <span class="liver-rookie-tag">ROOKIE</span>
-      </div>
+        <div class="liver-name">はに</div>      </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="assets/livers/orenoreo.jpg" alt="おれのれお" loading="lazy"></div>
         <div class="liver-name">おれのれお</div>
@@ -1883,9 +1873,7 @@
       </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/10/S__98770953.jpg" alt="かりんとう" loading="lazy"></div>
-        <div class="liver-name">かりんとう</div>
-        <span class="liver-rookie-tag">ROOKIE</span>
-      </div>
+        <div class="liver-name">かりんとう</div>      </div>
       <div class="liver-card is-extra">
         <div class="liver-photo"><img src="assets/livers/kumochan.jpg" alt="雲ちゃん" loading="lazy"></div>
         <div class="liver-name">雲ちゃん</div>
@@ -1921,7 +1909,7 @@
     </div>
     <div class="livers-more">
       <button class="liver-more-btn" id="liversMoreBtn" type="button" aria-expanded="false" aria-controls="liversGrid">
-        <span class="lmb-text">さらに表示する（＋20名）</span>
+        <span class="lmb-text">さらに表示する</span>
         <span class="lmb-icon" aria-hidden="true"></span>
       </button>
     </div>
@@ -1937,7 +1925,7 @@
     btn.addEventListener('click',function(){
       var expanded=grid.classList.toggle('is-expanded');
       btn.setAttribute('aria-expanded',expanded?'true':'false');
-      if(txt)txt.textContent=expanded?'閉じる':'さらに表示する（＋20名）';
+      if(txt)txt.textContent=expanded?'閉じる':'さらに表示する';
       if(!expanded){
         var sec=document.getElementById('livers');
         if(sec)sec.scrollIntoView({behavior:'smooth',block:'start'});
