@@ -1308,8 +1308,10 @@
     .flow-step:not(:last-child)::after{
       right:50%;top:auto;bottom:-14px;transform:translateX(50%) rotate(90deg);
     }
-    .line-bar{padding:14px 20px;font-size:15px}
-    body{padding-bottom:72px}
+    .line-bar{padding:9px 16px;font-size:14px;gap:9px;letter-spacing:.02em;box-shadow:0 -3px 14px rgba(6,199,85,.22)}
+    .line-bar::before{width:24px;height:24px;border-radius:7px;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306c755'><path d='M12 2C6.48 2 2 5.86 2 10.6c0 2.74 1.6 5.17 4.09 6.78-.18.6-.65 2.2-.75 2.54-.12.43.16.43.34.32.14-.09 2.27-1.54 3.19-2.16.9.13 1.83.2 2.78.2c5.52 0 10-3.86 10-8.6S17.52 2 12 2z'/></svg>") no-repeat center/15px}
+    .line-bar-tap{padding:3px 8px;font-size:10px}
+    body{padding-bottom:54px}
     .header-cta{display:none}
     .cta-final-buttons{flex-direction:column}
     .cta-final-buttons .btn{width:100%}
