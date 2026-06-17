@@ -1475,17 +1475,6 @@
       <a href="#livers"><img src="https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg" alt="きいち" loading="lazy"></a>
     </div>
 
-    <!-- ⑤ 信頼バー (人数 + 注釈) -->
-    <div class="hero-trust">
-      <div class="hero-trust-avatars">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg" alt="">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg" alt="">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg" alt="">
-        <img src="https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg" alt="">
-      </div>
-      <div class="hero-trust-text"><strong>○○名</strong>のライバーが活躍中 ／ ※月収は所属ライバーの実績ベース</div>
-    </div>
-
   </div>
 </section>
 
@@ -1593,7 +1582,7 @@
   <div class="section-inner">
     <span class="section-eyebrow">Why Live-Labo</span>
     <h2 class="section-title"><span class="accent">"本物のサポート"</span>がここにある</h2>
-    <p class="section-lead">「数字」だけじゃなく「人」を育てる。Live-Laboが10年間で築き上げてきた、5つの強みです。</p>
+    <p class="section-lead">「数字」だけじゃなく「人」を育てる。Live-Laboが築き上げてきた、5つの強みです。</p>
     <div class="reasons-grid">
 
       <article class="reason fade-in">
@@ -2142,18 +2131,24 @@
           <li>無料相談・キャンセル自由</li>
         </ul>
       </div>
-      <form class="qf-form" onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。担当者よりご連絡いたします。\n※ 本フォームはサンプルです。本番では実フォームに置き換えます。');">
+      <form class="qf-form" action="https://formsubmit.co/arigatou@live-labo.jp" method="POST">
+        <!-- 送信設定（FormSubmit）: 件名・整形・スパム対策。送信先=arigatou@live-labo.jp -->
+        <input type="hidden" name="_subject" value="【Live-Labo】無料相談の新規応募">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_autoresponse" value="お問い合わせありがとうございます。Live-Labo担当者より24時間以内にご連絡いたします。">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="qf-row">
           <label>お名前（ニックネーム可）<span class="req">必須</span></label>
-          <input type="text" required placeholder="例：山田 花子">
+          <input type="text" name="お名前" required placeholder="例：山田 花子">
         </div>
         <div class="qf-row">
           <label>連絡先（メール or 電話）<span class="req">必須</span></label>
-          <input type="text" required placeholder="例：hanako@example.com">
+          <input type="text" name="連絡先" required placeholder="例：hanako@example.com">
         </div>
         <div class="qf-row">
           <label>年齢</label>
-          <select>
+          <select name="年齢">
             <option>18-22歳</option>
             <option>23-29歳</option>
             <option>30-39歳</option>
@@ -2163,9 +2158,9 @@
         <div class="qf-row">
           <label>配信経験</label>
           <div class="qf-radio">
-            <label><input type="radio" name="exp" checked>未経験</label>
-            <label><input type="radio" name="exp">少しある</label>
-            <label><input type="radio" name="exp">経験者</label>
+            <label><input type="radio" name="配信経験" value="未経験" checked>未経験</label>
+            <label><input type="radio" name="配信経験" value="少しある">少しある</label>
+            <label><input type="radio" name="配信経験" value="経験者">経験者</label>
           </div>
         </div>
         <button type="submit" class="btn btn-secondary btn-arrow" style="width:100%;background:var(--black);color:#fff;margin-top:8px">無料相談を申し込む</button>
@@ -2184,7 +2179,6 @@
       <a href="#" class="btn btn-primary btn-large btn-arrow">LINEで無料相談</a>
       <a href="#form" class="btn btn-ghost btn-large btn-arrow">フォームから応募</a>
     </div>
-    <p class="cta-final-urgency">2026年5月 募集枠 残りわずか</p>
     <p class="cta-final-note">© 株式会社Live-Labo｜東京都渋谷区恵比寿南1-1-1 Humax Ebisu 8F</p>
   </div>
 </section>
