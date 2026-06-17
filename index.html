@@ -1129,6 +1129,16 @@
   .footer-links{display:flex;gap:32px;flex-wrap:wrap}
   .footer-links a{font-size:12.5px;letter-spacing:.04em;transition:color .2s var(--ease)}
   .footer-links a:hover{color:#fff}
+  .footer-right{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+  .footer-social{display:flex;gap:12px}
+  .footer-social a{
+    width:34px;height:34px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);
+    transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
+  }
+  .footer-social a:hover{background:#fff;color:#08080a;border-color:#fff}
+  .footer-social svg{width:17px;height:17px;display:block}
 
   /* ---------- Floating CTA (mobile / 旧版維持) ---------- */
   .float-cta{
@@ -1848,6 +1858,10 @@
         <div class="liver-name">都丸あかり🦙。</div>
       </div>
       <div class="liver-card is-extra">
+        <div class="liver-photo"><img src="assets/livers/emirin-monroe.jpg" alt="えみりんモンロー" loading="lazy"></div>
+        <div class="liver-name">💄えみりん🎙️モンロー👠</div>
+      </div>
+      <div class="liver-card is-extra">
         <div class="liver-photo"><img src="assets/livers/itsuki.jpg" alt="伊月" loading="lazy"></div>
         <div class="liver-name">𓂃𑁍ྀ伊月🥀ྀི🐕‍🦺ྀི</div>
       </div>
@@ -2167,11 +2181,21 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>© 2026 Live-Labo Inc. All rights reserved.</div>
-    <div class="footer-links">
-      <a href="https://live-labo.jp/">トップへ戻る</a>
-      <a href="https://live-labo.jp/about/">運営会社</a>
-      <a href="https://live-labo.jp/privacy-policy/">プライバシーポリシー</a>
-      <a href="https://live-labo.jp/contact/">お問い合わせ</a>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="https://live-labo.jp/">トップへ戻る</a>
+        <a href="https://live-labo.jp/about/">運営会社</a>
+        <a href="https://live-labo.jp/privacy-policy/">プライバシーポリシー</a>
+        <a href="https://live-labo.jp/contact/">お問い合わせ</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/livelabo__official" target="_blank" rel="noopener noreferrer" aria-label="Live-Labo 公式Instagram" title="公式Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.2"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://x.com/livelabo_oa" target="_blank" rel="noopener noreferrer" aria-label="Live-Labo 公式X（旧Twitter）" title="公式X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </footer>
