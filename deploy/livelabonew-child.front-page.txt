@@ -1345,6 +1345,8 @@
   .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{transition:transform .25s var(--ease),top .25s var(--ease),background .2s var(--ease)}
   /* 超小型端末 (iPhone SE等 ≤375px) 用ヒーロー保護 */
   @media (max-width:480px){
+    /* プレミアム特典タイトル: スマホでは「配信の先にある」を1行目、特典名を改行して読みやすく */
+    .premium-opps .section-title .premium-accent{display:block;margin-top:2px}
     .hero{padding:12px 0 16px}
     .hero-inner{padding:0 14px;gap:8px}
     .hero-badge{font-size:9px;padding:3px 9px}
@@ -1706,7 +1708,7 @@
 <section class="premium-opps" id="premium">
   <div class="section-inner">
     <span class="section-eyebrow">Premium Opportunities</span>
-    <h2 class="section-title"><span class="nb">配信の先にある</span><span class="accent">“Live-Laboオリジナルプレミアム特典”</span></h2>
+    <h2 class="section-title"><span class="nb">配信の先にある</span><span class="accent premium-accent"><span class="nb">“Live-Laboオリジナル</span><span class="nb">プレミアム特典”</span></span></h2>
     <p class="section-lead">Live-Laboは業界トップクラスの提携先ネットワークを保有。トップランカーには、配信だけでは届かない大舞台への扉が開かれます。</p>
 
     <div class="opps-grid">
@@ -1736,8 +1738,17 @@
         <div class="opp-body">
           <span class="opp-tag">SPORTS</span>
           <h3>プロ野球 始球式 出演権</h3>
-          <p>Live-Laboオリジナルプレミアム特典のひとつ。人気ライバーが始球式のマウンドに立つ“権利”。ファンへ“配信を超えた瞬間”を届けられます。</p>
+          <p>人気ライバーが始球式に立つチャンス。マウンドからファンへ“配信を超えた瞬間”を届けられます。</p>
         </div>
+      </article>
+
+      <article class="opp-card">
+        <div class="opp-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13v6l13 5V8L5 13z"/><path d="M18 11a6 6 0 0 1 0 10"/><path d="M9 20v4h4v-3"/></svg>
+        </div>
+        <span class="opp-tag">PROMOTION</span>
+        <h3>駅広告・アドトラック<br>掲載</h3>
+        <p>駅の大型広告や、街を走るアドトラックに掲載されるチャンス。街ゆく数万人の視線を集め、一気に知名度を高めます。</p>
       </article>
 
       <article class="opp-card">
@@ -1746,16 +1757,7 @@
         </div>
         <span class="opp-tag">MEDIA</span>
         <h3>TV番組・CM出演</h3>
-        <p>Live-Laboだけのオリジナルプレミアム特典。地上波バラエティ・配信ドラマ・企業CMへの出演オファーを、提携キャスティング会社と連携してお届けします。</p>
-      </article>
-
-      <article class="opp-card">
-        <div class="opp-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11l11-7 11 7v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M11 27V18h10v9"/></svg>
-        </div>
-        <span class="opp-tag">GOODS</span>
-        <h3>オリジナルグッズ<br>制作・販売</h3>
-        <p>Live-Laboならではのオリジナルプレミアム特典。あなたブランドのアパレル・アクセサリーを、企画から販売チャネルまで構築します。</p>
+        <p>地上波バラエティ、配信ドラマ、企業CMへの出演オファー。提携キャスティング会社と連携。</p>
       </article>
 
     </div>
