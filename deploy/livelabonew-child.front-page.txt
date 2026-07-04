@@ -1706,7 +1706,7 @@
 <section class="premium-opps" id="premium">
   <div class="section-inner">
     <span class="section-eyebrow">Premium Opportunities</span>
-    <h2 class="section-title"><span class="nb">配信の先にある</span><span class="accent nb">"プレミアム特典"</span></h2>
+    <h2 class="section-title"><span class="nb">配信の先にある</span><span class="accent">“Live-Laboオリジナルプレミアム特典”</span></h2>
     <p class="section-lead">Live-Laboは業界トップクラスの提携先ネットワークを保有。トップランカーには、配信だけでは届かない大舞台への扉が開かれます。</p>
 
     <div class="opps-grid">
@@ -1715,7 +1715,7 @@
         <div class="opp-body">
           <span class="opp-tag">RUNWAY</span>
           <h3>日本最大級ランウェイ<br>出演権</h3>
-          <p>ガールズアワード・TGC など国内最大級のファッションショー。数万人の観客とカメラの前で、ランウェイを歩くチャンス。</p>
+          <p>Live-Laboだけのオリジナルプレミアム特典。ガールズアワード・TGC など国内最大級のファッションショーで、数万人の観客とカメラの前でランウェイを歩く“権利”が開かれます。</p>
         </div>
       </article>
 
@@ -1727,7 +1727,7 @@
         <div class="opp-body">
           <span class="opp-tag">MAGAZINE</span>
           <h3>ファッション雑誌 掲載権</h3>
-          <p>人気ファッション誌の誌面を飾るチャンス。プロの撮影・スタイリングで、あなたの新たな魅力を引き出します。</p>
+          <p>Live-Laboならではのオリジナルプレミアム特典。人気ファッション誌の誌面を飾る“権利”を、プロの撮影・スタイリングとともに。あなたの新たな魅力を引き出します。</p>
         </div>
       </article>
 
@@ -1736,7 +1736,7 @@
         <div class="opp-body">
           <span class="opp-tag">SPORTS</span>
           <h3>プロ野球 始球式 出演権</h3>
-          <p>人気ライバーが始球式に立つチャンス。マウンドからファンへ"配信を超えた瞬間"を届けられます。</p>
+          <p>Live-Laboオリジナルプレミアム特典のひとつ。人気ライバーが始球式のマウンドに立つ“権利”。ファンへ“配信を超えた瞬間”を届けられます。</p>
         </div>
       </article>
 
@@ -1746,7 +1746,7 @@
         </div>
         <span class="opp-tag">MEDIA</span>
         <h3>TV番組・CM出演</h3>
-        <p>地上波バラエティ、配信ドラマ、企業CMへの出演オファー。提携キャスティング会社と連携。</p>
+        <p>Live-Laboだけのオリジナルプレミアム特典。地上波バラエティ・配信ドラマ・企業CMへの出演オファーを、提携キャスティング会社と連携してお届けします。</p>
       </article>
 
       <article class="opp-card">
@@ -1755,7 +1755,7 @@
         </div>
         <span class="opp-tag">GOODS</span>
         <h3>オリジナルグッズ<br>制作・販売</h3>
-        <p>あなたブランドのアパレル・アクセサリーを企画から販売チャネルまで構築。</p>
+        <p>Live-Laboならではのオリジナルプレミアム特典。あなたブランドのアパレル・アクセサリーを、企画から販売チャネルまで構築します。</p>
       </article>
 
     </div>
