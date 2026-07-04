@@ -772,8 +772,8 @@
   .premium-opps .section-title{margin-bottom:14px}
   .opps-grid{
     margin-top:48px;
-    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
-    grid-auto-rows:auto;grid-auto-flow:row dense;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+    grid-auto-rows:auto;
   }
   .opp-card{
     background:#fff;border-radius:var(--r-lg);padding:32px 26px 28px;
@@ -785,8 +785,8 @@
   .opp-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
   /* フィーチャー1枚目（始球式）は2列分使う */
   .opp-feature{
-    grid-column:span 2;
-    padding:0;display:grid;grid-template-columns:1.1fr 1fr;align-items:stretch;
+    grid-column:span 1;
+    padding:0;display:grid;grid-template-columns:1fr;align-items:stretch;
     background:#fff;
   }
   .opp-feature .opp-img{
@@ -1734,21 +1734,21 @@
       </article>
 
       <article class="opp-card opp-feature">
+        <div class="opp-img"><img src="<?php echo esc_url(llabo_img('ekikoukoku', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/ekikoukoku.jpg')); ?>" alt="Live-Labo 駅広告（ライバー募集）" loading="lazy"></div>
+        <div class="opp-body">
+          <span class="opp-tag">PROMOTION</span>
+          <h3>駅広告・アドトラック<br>掲載</h3>
+          <p>駅の大型広告や、街を走るアドトラックに掲載されるチャンス。街ゆく数万人の視線を集め、一気に知名度を高めます。</p>
+        </div>
+      </article>
+
+      <article class="opp-card opp-feature">
         <div class="opp-img"><img src="<?php echo esc_url(llabo_img('shikyushiki', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/shikyushiki-v2.jpg')); ?>" alt="プロ野球始球式 出演中の所属ライバー" loading="lazy"></div>
         <div class="opp-body">
           <span class="opp-tag">SPORTS</span>
           <h3>プロ野球 始球式 出演権</h3>
           <p>人気ライバーが始球式に立つチャンス。マウンドからファンへ“配信を超えた瞬間”を届けられます。</p>
         </div>
-      </article>
-
-      <article class="opp-card">
-        <div class="opp-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13v6l13 5V8L5 13z"/><path d="M18 11a6 6 0 0 1 0 10"/><path d="M9 20v4h4v-3"/></svg>
-        </div>
-        <span class="opp-tag">PROMOTION</span>
-        <h3>駅広告・アドトラック<br>掲載</h3>
-        <p>駅の大型広告や、街を走るアドトラックに掲載されるチャンス。街ゆく数万人の視線を集め、一気に知名度を高めます。</p>
       </article>
 
       <article class="opp-card">
