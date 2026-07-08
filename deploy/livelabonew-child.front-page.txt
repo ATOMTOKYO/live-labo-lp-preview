@@ -809,6 +809,8 @@
   }
   .opp-feature .opp-body{padding:36px 32px;display:flex;flex-direction:column;justify-content:center}
   .opp-feature h3{font-size:22px}
+  /* 見出し2行目：Live-Laboオリジナル特典の〜権（副題・小さめでスマホでも1行に収まる） */
+  .opp-feature h3 .opp-sub{display:block;margin-top:6px;font-size:15px;font-weight:800;color:var(--red);letter-spacing:.01em;line-height:1.5}
   .opp-feature p{margin-top:14px}
   .opp-icon{
     width:52px;height:52px;border-radius:14px;
@@ -1716,7 +1718,7 @@
         <div class="opp-img"><img src="<?php echo esc_url(llabo_img('runway', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/runway.jpg')); ?>" alt="ガールズアワード・TGC ランウェイ出演イメージ" loading="lazy"></div>
         <div class="opp-body">
           <span class="opp-tag">RUNWAY</span>
-          <h3>日本最大級ランウェイ<br>出演権</h3>
+          <h3>日本最大級ランウェイ<br><span class="opp-sub">Live-Laboオリジナル特典の出演権</span></h3>
           <p>Live-Laboだけのオリジナルプレミアム特典。ガールズアワード・TGC など国内最大級のファッションショーで、数万人の観客とカメラの前でランウェイを歩く“権利”が開かれます。</p>
         </div>
       </article>
@@ -1728,7 +1730,7 @@
         </div>
         <div class="opp-body">
           <span class="opp-tag">MAGAZINE</span>
-          <h3>ファッション雑誌 掲載権</h3>
+          <h3>ファッション雑誌<br><span class="opp-sub">Live-Laboオリジナル特典の掲載権</span></h3>
           <p>Live-Laboならではのオリジナルプレミアム特典。人気ファッション誌の誌面を飾る“権利”を、プロの撮影・スタイリングとともに。あなたの新たな魅力を引き出します。</p>
         </div>
       </article>
@@ -1737,7 +1739,7 @@
         <div class="opp-img"><img src="<?php echo esc_url(llabo_img('ekikoukoku', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/ekikoukoku.jpg')); ?>" alt="Live-Labo 駅広告（ライバー募集）" loading="lazy"></div>
         <div class="opp-body">
           <span class="opp-tag">PROMOTION</span>
-          <h3>駅広告・アドトラック<br>掲載</h3>
+          <h3>駅広告・アドトラック<br><span class="opp-sub">Live-Laboオリジナル特典の掲載権</span></h3>
           <p>駅の大型広告や、街を走るアドトラックに掲載されるチャンス。街ゆく数万人の視線を集め、一気に知名度を高めます。</p>
         </div>
       </article>
