@@ -210,3 +210,14 @@ add_action('acf/init', function () {
     'menu_order'=>0,'position'=>'normal','style'=>'default','label_placement'=>'top','instruction_placement'=>'label',
   ));
 });
+
+/* Live-Labo ファビコン：Google検索結果・ブラウザタブのアイコン。
+ * サイトアイコン（外観→カスタマイズ→サイト基本情報）が未設定のときだけ出力するので、
+ * 後から管理画面でサイトアイコンを設定してもそちらが優先され競合しない。デザインは不変。 */
+add_action('wp_head', function () {
+  if (function_exists('has_site_icon') && has_site_icon()) return;
+  $icon = 'https://atomtokyo.github.io/live-labo-lp-preview/assets/favicon-livelabo.png';
+  echo '<link rel="icon" type="image/png" sizes="512x512" href="' . esc_url($icon) . '">' . "\n";
+  echo '<link rel="shortcut icon" href="' . esc_url($icon) . '">' . "\n";
+  echo '<link rel="apple-touch-icon" sizes="512x512" href="' . esc_url($icon) . '">' . "\n";
+}, 5);
