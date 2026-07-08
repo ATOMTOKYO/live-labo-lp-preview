@@ -221,3 +221,15 @@ add_action('wp_head', function () {
   echo '<link rel="shortcut icon" href="' . esc_url($icon) . '">' . "\n";
   echo '<link rel="apple-touch-icon" sizes="512x512" href="' . esc_url($icon) . '">' . "\n";
 }, 5);
+
+/* /favicon.ico も Live-Labo アイコンへ（サイトアイコン未設定時のみ）。
+ * 既定では /favicon.ico が WordPress のWロゴ画像へ302されるため、
+ * ブラウザや一部クローラーの favicon.ico フォールバックも Live-Labo になるよう早期にリダイレクト。 */
+add_action('init', function () {
+  if (empty($_SERVER['REQUEST_URI'])) return;
+  $path = strtok($_SERVER['REQUEST_URI'], '?');
+  if ($path === '/favicon.ico' && !get_option('site_icon')) {
+    wp_redirect('https://atomtokyo.github.io/live-labo-lp-preview/assets/favicon-livelabo.png', 302);
+    exit;
+  }
+}, 0);
