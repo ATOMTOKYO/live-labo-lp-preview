@@ -190,10 +190,10 @@
     position:relative;display:block;aspect-ratio:1/1;
     overflow:hidden;border-radius:var(--r-md);
     background:#f0f0f3;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    box-shadow:0 4px 12px rgba(0,0,0,.08),0 0 0 1px rgba(17,17,23,.07) inset;
     transition:transform .25s var(--ease),box-shadow .25s var(--ease);
   }
-  .hero-photo-strip a:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.16)}
+  .hero-photo-strip a:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.16),0 0 0 1px rgba(17,17,23,.07) inset}
   .hero-photo-strip img{
     width:100%;height:100%;object-fit:cover;
     transition:transform .45s var(--ease);
@@ -548,6 +548,12 @@
     transition:color .2s var(--ease),border-color .2s var(--ease);
   }
   .ml:hover{color:var(--gray-900);border-color:var(--gray-700)}
+  .trust-claim{
+    text-align:center;color:var(--gray-900);
+    font-weight:900;letter-spacing:.01em;line-height:1.55;
+    font-size:clamp(17px,2.1vw,26px);
+  }
+  .trust-claim .tc-em{color:var(--red)}
 
   /* ---------- Other Support (9 icons) ---------- */
   .other-support{background:var(--cream)}
@@ -1498,13 +1504,13 @@
       <a href="#reasons" class="btn btn-ghost btn-arrow">選ばれる理由を見る</a>
     </div>
 
-    <!-- ④ 下部: 所属ライバー写真ストリップ (ONECARATスマホ下端の真似) -->
-    <div class="hero-photo-strip" aria-label="所属ライバー">
-      <a href="#livers"><img src="<?php echo esc_url(llabo_img('liver_02', 'https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg')); ?>" alt="あの" loading="lazy"></a>
-      <a href="#livers"><img src="<?php echo esc_url(llabo_img('liver_04', 'https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg')); ?>" alt="ゆいころ" loading="lazy"></a>
-      <a href="#livers"><img src="<?php echo esc_url(llabo_img('liver_03', 'https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg')); ?>" alt="なるみ" loading="lazy"></a>
-      <a href="#livers"><img src="<?php echo esc_url(llabo_img('liver_05', 'https://live-labo.jp/wp/wp-content/uploads/2026/06/%E3%81%95%E3%82%84%E3%81%8B-scaled.jpeg')); ?>" alt="さやか" loading="lazy"></a>
-      <a href="#livers"><img src="<?php echo esc_url(llabo_img('liver_10', 'https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg')); ?>" alt="きいち" loading="lazy"></a>
+    <!-- ④ 下部: 提携先プラットフォームのロゴストリップ (ONECARATスマホ下端の真似) -->
+    <div class="hero-photo-strip" aria-label="提携先プラットフォーム">
+      <a href="#platforms" title="TikTok LIVE"><img src="<?php echo esc_url(llabo_img('logo_tiktok', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/logos/app-tiktok.png')); ?>" alt="TikTok LIVE" loading="lazy"></a>
+      <a href="#platforms" title="Pococha"><img src="<?php echo esc_url(llabo_img('logo_pococha', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/logos/app-pococha.png')); ?>" alt="Pococha" loading="lazy"></a>
+      <a href="#platforms" title="17LIVE"><img src="<?php echo esc_url(llabo_img('logo_17live', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/logos/app-17live.png')); ?>" alt="17LIVE" loading="lazy"></a>
+      <a href="#platforms" title="BIGO LIVE"><img src="<?php echo esc_url(llabo_img('logo_bigo', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/logos/app-bigo.jpg')); ?>" alt="BIGO LIVE" loading="lazy"></a>
+      <a href="#platforms" title="ColorSing"><img src="<?php echo esc_url(llabo_img('logo_colorsing', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/logos/app-colorsing.jpg')); ?>" alt="ColorSing" loading="lazy"></a>
     </div>
 
   </div>
@@ -1574,14 +1580,7 @@
 <!-- ========== Trust Strip ========== -->
 <section class="media-strip">
   <div class="section-inner">
-    <p class="media-eyebrow">TRUSTED PARTNERS — 安心の取引・連携先</p>
-    <div class="media-logos">
-      <span class="ml">Pococha 公認</span>
-      <span class="ml">TikTok LIVE 提携</span>
-      <span class="ml">17LIVE 提携</span>
-      <span class="ml">提携税理士事務所</span>
-      <span class="ml">提携法律事務所</span>
-    </div>
+    <p class="trust-claim"><span class="tc-em">マンスリー1位</span>など、<span class="nb">数々のトップライバーを輩出</span></p>
   </div>
 </section>
 
