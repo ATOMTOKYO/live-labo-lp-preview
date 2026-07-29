@@ -1594,7 +1594,7 @@
     </div>
     <div class="stat">
       <div class="stat-num">1<small>位</small></div>
-      <div class="stat-label">Pococha マンスリー多数輩出</div>
+      <div class="stat-label">マンスリー多数輩出</div>
     </div>
     <div class="stat">
       <div class="stat-num">3<small>ヶ月</small></div>
