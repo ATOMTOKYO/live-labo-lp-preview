@@ -2059,7 +2059,7 @@
         <div class="voice-quote">"未経験から3ヶ月でS帯に。<br>マネージャーの存在が大きすぎる。"</div>
         <div class="voice-meta">
           <div class="voice-avatar" aria-hidden="true">R.S</div>
-          <div><strong>R.S さん</strong><span>Pococha / 在籍3年</span></div>
+          <div><strong>R.S さん</strong><span>在籍3年</span></div>
         </div>
         <p class="voice-body">最初は配信すら怖かったのに、専属マネージャーが企画から雑談ネタまで一緒に考えてくれて。今ではPocochaマンスリー上位の常連です。</p>
       </article>
@@ -2067,7 +2067,7 @@
         <div class="voice-quote">"還元率100%は伊達じゃない。<br>給料明細が透明で安心。"</div>
         <div class="voice-meta">
           <div class="voice-avatar" aria-hidden="true">M.A</div>
-          <div><strong>M.A さん</strong><span>Pococha / 在籍2年</span></div>
+          <div><strong>M.A さん</strong><span>在籍2年</span></div>
         </div>
         <p class="voice-body">前は別の事務所でしたが、計算根拠が不透明で。Live-Laboはダイヤがそのまま入ってきます。手数料の引き方も明朗で乗り換えて正解でした。</p>
       </article>
@@ -2075,7 +2075,7 @@
         <div class="voice-quote">"住所提供と確定申告サポートが<br>地方民にはありがたすぎる。"</div>
         <div class="voice-meta">
           <div class="voice-avatar" aria-hidden="true">Y.K</div>
-          <div><strong>Y.K さん</strong><span>17LIVE / 在籍4年</span></div>
+          <div><strong>Y.K さん</strong><span>在籍4年</span></div>
         </div>
         <p class="voice-body">地方在住なので、ファンレターを自宅に届けたくなくて。事務所住所が使えるのは本当に助かります。確定申告も提携税理士さんが半額で見てくれます。</p>
       </article>
