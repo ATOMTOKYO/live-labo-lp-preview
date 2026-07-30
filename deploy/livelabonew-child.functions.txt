@@ -231,11 +231,11 @@ add_action('init', function () {
 /* 一度だけ：Live-Laboアイコンをメディアライブラリに取り込み『サイトアイコン』として設定する。
  * これで同一ドメイン配信＋WordPress標準の複数サイズ(32/180/192/512)＋/favicon.ico がそろい、
  * Google検索でも確実に Live-Labo アイコンとして拾われる（上の暫定リンク/リダイレクトは自動で無効化）。
- * 完了フラグ llabo_site_icon_v1 が立てば二度と実行しない。管理画面アクセス時のみ動作。 */
+ * 完了フラグ llabo_site_icon_v2 が立てば二度と実行しない。管理画面アクセス時のみ動作。
+ * v2 = Live-Laboワードマーク版。既存のサイトアイコンがあっても上書きする。 */
 add_action('admin_init', function () {
-  if (get_option('llabo_site_icon_v1')) return;
+  if (get_option('llabo_site_icon_v2')) return;
   if (!current_user_can('manage_options')) return;
-  if (get_option('site_icon')) { update_option('llabo_site_icon_v1', 1); return; }
   if (!function_exists('media_handle_sideload')) {
     require_once ABSPATH . 'wp-admin/includes/media.php';
     require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -244,9 +244,9 @@ add_action('admin_init', function () {
   $url = 'https://atomtokyo.github.io/live-labo-lp-preview/assets/favicon-livelabo.png';
   $tmp = download_url($url);
   if (is_wp_error($tmp)) return;
-  $file = array('name' => 'live-labo-site-icon.png', 'tmp_name' => $tmp);
+  $file = array('name' => 'live-labo-site-icon-v2.png', 'tmp_name' => $tmp);
   $id = media_handle_sideload($file, 0, 'Live-Labo Site Icon');
   if (is_wp_error($id)) { if (file_exists($tmp)) @unlink($tmp); return; }
   update_option('site_icon', (int) $id);
-  update_option('llabo_site_icon_v1', 1);
+  update_option('llabo_site_icon_v2', 1);
 });
