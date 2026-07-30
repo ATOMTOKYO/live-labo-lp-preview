@@ -1516,6 +1516,46 @@
   </div>
 </section>
 
+<!-- ========== Liver Marquee (左に流れるライバー写真ストリップ) ========== -->
+<section class="liver-marquee" aria-label="活躍中の所属ライバー">
+  <div class="marquee-head">
+    <span class="marquee-eyebrow">ACTIVE LIVERS</span>
+    <h2 class="marquee-title">毎日、どこかで<span>輝いてる</span>。</h2>
+  </div>
+  <div class="marquee-viewport">
+    <div class="marquee-track">
+      <!-- セット1 -->
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_01', 'https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg')); ?>" alt="わらし。" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_02', 'https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg')); ?>" alt="あの" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_05', 'https://live-labo.jp/wp/wp-content/uploads/2026/06/%E3%81%95%E3%82%84%E3%81%8B-scaled.jpeg')); ?>" alt="さやか" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_04', 'https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg')); ?>" alt="ゆいころ" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_07', 'https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg')); ?>" alt="遊汰様" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_03', 'https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg')); ?>" alt="なるみ" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_15', 'https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg')); ?>" alt="おとうふ" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_12', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/livers/oten-v2.jpg')); ?>" alt="お天" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_10', 'https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg')); ?>" alt="きいち" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_09', 'https://live-labo.jp/wp/wp-content/uploads/2024/09/%E3%83%AC%E3%82%A4%E3%83%9F.jpg')); ?>" alt="レイミ" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_26', 'https://live-labo.jp/wp/wp-content/uploads/2023/10/yanchan-scaled.jpeg')); ?>" alt="やんちゃん" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_06', 'https://live-labo.jp/wp/wp-content/uploads/2025/07/%E3%82%86%E3%81%8D%E3%81%A1%E3%82%83%E3%82%93.jpeg')); ?>" alt="ゆきちゃん" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item"><img src="<?php echo esc_url(llabo_img('liver_16', 'https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg')); ?>" alt="鬼嫁Luna" loading="lazy"></a>
+      <!-- セット2 (シームレスループ用に完全複製 — aria-hiddenでスクリーンリーダーから除外) -->
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_01', 'https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_02', 'https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_05', 'https://live-labo.jp/wp/wp-content/uploads/2026/06/%E3%81%95%E3%82%84%E3%81%8B-scaled.jpeg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_04', 'https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_07', 'https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_03', 'https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_15', 'https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_12', 'https://atomtokyo.github.io/live-labo-lp-preview/assets/livers/oten-v2.jpg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_10', 'https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_09', 'https://live-labo.jp/wp/wp-content/uploads/2024/09/%E3%83%AC%E3%82%A4%E3%83%9F.jpg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_26', 'https://live-labo.jp/wp/wp-content/uploads/2023/10/yanchan-scaled.jpeg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_06', 'https://live-labo.jp/wp/wp-content/uploads/2025/07/%E3%82%86%E3%81%8D%E3%81%A1%E3%82%83%E3%82%93.jpeg')); ?>" alt="" loading="lazy"></a>
+      <a href="https://live-labo.jp/liver/" class="m-item" aria-hidden="true" tabindex="-1"><img src="<?php echo esc_url(llabo_img('liver_16', 'https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg')); ?>" alt="" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
 <!-- ========== Activity Tags (ライバーが目指せる7フィールド) ========== -->
 <section class="activity-tags">
   <div class="section-inner">
@@ -1578,7 +1618,7 @@
       <article class="reason fade-in">
         <div class="reason-num">REASON 02</div>
         <h3>還元率100%・余計な搾取なし</h3>
-        <p>Pocochaの場合、報酬ダイヤを100%ライバーへ。悪徳事務所にありがちな"見えない手数料"は一切いただきません。</p>
+        <p>報酬ダイヤを100%ライバーへ。"見えない手数料"は一切いただきません。</p>
       </article>
 
       <article class="reason fade-in">
