@@ -1772,7 +1772,7 @@
   <div class="section-inner">
     <span class="section-eyebrow">Active Livers</span>
     <h2 class="section-title"><span class="nb">活躍中の</span><span class="accent nb">所属ライバー</span></h2>
-    <p class="section-lead">Pococha・TikTok LIVE・17LIVEなど、複数プラットフォームでTOPランカーを多数輩出。</p>
+    <p class="section-lead">TikTok LIVE・Pococha・17LIVEなど、複数プラットフォームでTOPランカーを多数輩出。</p>
     <div class="livers-grid" id="liversGrid">
       <!-- ===== TOP 8（初期表示）= 事務所内ランキング順 1〜8 ===== -->
       <div class="liver-card">
