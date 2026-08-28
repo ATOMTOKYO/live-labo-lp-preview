@@ -422,6 +422,63 @@
   }
   .section-title .accent{color:var(--red)}
   .nb{white-space:nowrap}
+  /* ===== ライバー詳細モーダル ===== */
+  .lv-modal{
+    position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;
+    padding:clamp(14px,3vw,40px);background:rgba(14,14,16,.72);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s;
+  }
+  .lv-modal.open{opacity:1;visibility:visible}
+  .lv-panel{
+    background:#fff;max-width:860px;width:100%;max-height:86vh;overflow:auto;border-radius:var(--r-lg);
+    display:grid;grid-template-columns:minmax(0,42%) minmax(0,58%);align-items:stretch;
+    transform:translateY(24px) scale(.985);transition:transform .4s var(--ease);position:relative;
+  }
+  .lv-modal.open .lv-panel{transform:none}
+  .lv-close{
+    position:absolute;top:12px;right:12px;width:42px;height:42px;border:0;border-radius:50%;
+    background:rgba(14,14,16,.62);color:#fff;font-size:20px;cursor:pointer;z-index:5;line-height:1;
+    transition:background .25s;
+  }
+  .lv-close:hover{background:var(--red)}
+  .lv-ph{position:relative;min-height:340px;background:var(--gray-100)}
+  .lv-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+  .lv-body{padding:clamp(24px,3vw,38px)}
+  .lv-eyebrow{font-family:Inter,sans-serif;font-size:11px;letter-spacing:.28em;color:var(--red);font-weight:900}
+  .lv-name{font-size:clamp(18px,2.2vw,24px);font-weight:900;letter-spacing:.04em;margin-top:7px;line-height:1.5}
+  .lv-sub{margin-top:22px}
+  .lv-sub-t{
+    font-size:12px;font-weight:900;letter-spacing:.18em;color:var(--gray-700);
+    padding-bottom:8px;border-bottom:1px solid var(--red);display:inline-block;
+  }
+  .lv-prof{font-size:13.5px;line-height:1.95;letter-spacing:.02em;margin-top:14px;white-space:pre-line;color:var(--gray-700)}
+  .lv-sns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .lv-sns a{
+    display:inline-flex;align-items:center;gap:9px;padding:10px 18px 10px 12px;
+    border:1px solid var(--gray-300);border-radius:999px;font-size:12.5px;font-weight:700;
+    letter-spacing:.06em;color:var(--gray-900);background:#fff;
+    transition:border-color .25s,background .25s,transform .25s var(--ease);
+  }
+  .lv-sns a:hover{border-color:var(--red);background:#fff6f7;transform:translateY(-2px)}
+  .lv-sns img{width:26px;height:26px;display:block}
+  .lv-none{font-size:12.5px;color:var(--gray-500);margin-top:12px;line-height:1.9}
+  .liver-card,.m-item{cursor:pointer}
+  @media(max-width:720px){
+    /* gridだと写真(aspect-ratio)が行の高さを超えて名前に被るため、スマホは素直に縦積み */
+    .lv-panel{display:block;max-height:88vh}
+    .lv-ph{height:min(40vh,290px);min-height:0;aspect-ratio:auto}
+    .lv-body{padding:22px 20px 26px}
+    .lv-name{font-size:19px;margin-top:6px}
+    .lv-eyebrow{font-size:10px;letter-spacing:.24em}
+    .lv-sub{margin-top:18px}
+    .lv-prof{font-size:13px;line-height:1.9;margin-top:12px}
+    .lv-sns{gap:8px;margin-top:12px}
+    .lv-sns a{padding:8px 15px 8px 10px;font-size:12px;gap:7px}
+    .lv-sns img{width:22px;height:22px}
+    .lv-close{width:38px;height:38px;top:10px;right:10px;font-size:18px}
+  }
+
   .section-lead{margin-top:14px;color:var(--gray-700);font-size:16px;max-width:680px}
 
   /* ---------- Why (Reasons) ---------- */
@@ -2284,6 +2341,545 @@
   }
 </script>
 
+<!-- ライバー詳細モーダル -->
+<div class="lv-modal" id="lvModal" role="dialog" aria-modal="true" aria-label="ライバープロフィール">
+  <div class="lv-panel">
+    <button class="lv-close" id="lvClose" aria-label="閉じる">&times;</button>
+    <div class="lv-ph"><img id="lvImg" src="" alt=""></div>
+    <div class="lv-body">
+      <p class="lv-eyebrow">LIVER PROFILE</p>
+      <h3 class="lv-name" id="lvName"></h3>
+      <div class="lv-sub" id="lvProfWrap">
+        <span class="lv-sub-t">プロフィール</span>
+        <p class="lv-prof" id="lvProf"></p>
+      </div>
+      <div class="lv-sub">
+        <span class="lv-sub-t">SNS</span>
+        <div class="lv-sns" id="lvSns"></div>
+        <p class="lv-none" id="lvNone" hidden>このライバーのSNSは準備中です。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var LIVER_DATA = {
+ "わらし。": {
+  "name": "𖤐 わらし。🐻‍❄️໒꒱·̩͙",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%82%8F%E3%82%89%E3%81%97%E3%80%82.jpg",
+  "profile": "元手術室看護師\n\n2021.4.28 配信start\n\n‪‪♡趣味\n\n美容/映画鑑賞/犬/カフェ etc…\n\npocochaのTOPを目指して毎日楽しく配信中✨\n\nリスナーさんも優しくて面白い人達が集まってます🤝🏻\n\n沢山遊びに来てください🐻‍❄️✨️",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/42fe8b1a-1c31-4357-b7e2-27dc62bea546",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@18wrs",
+    "kind": "TikTok"
+   },
+   {
+    "url": "https://www.instagram.com/18wrs/?hl=ja",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "あの": {
+  "name": "あの",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2024/12/%E3%81%82%E3%81%AE%E2%91%A1.jpg",
+  "profile": "コメントなくても喋ってます😆あのです🥹",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/3f00fc3b-4dd7-4a26-9bea-5a5c86b00db8",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@anopoco16?_t=8ruAUQyxdx7&_r=1",
+    "kind": "TikTok"
+   },
+   {
+    "url": "https://www.instagram.com/anopoco1?igsh=MTlsZWs1aHlhNnF0eg==",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "なるみ": {
+  "name": "⋆✦🩵なるみ🩵⋆✦",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2025/01/IMG_9545-%E3%81%AA%E3%82%8B%E3%81%BF.jpeg",
+  "profile": "2025/1/2~所属しました。\n\nなるみです！\n\n1996/10/28 B型\n\n宇宙で一番好きな食べ物はマグロの赤身です🐟 \n\n気に明るく配信してます！🙋‍♀️︎ \n\n信には可愛い猫🐱も登場します。見に来てね👀",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/d16a1ed8-c716-4561-b24e-7df034f4b4ea",
+    "kind": "Pococha"
+   }
+  ]
+ },
+ "ゆいころ": {
+  "name": "ゆいころ𐄑𐅁̂ ⩊፟ 𐅀𐄑💜",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2022/03/%E3%82%86%E3%81%84%E3%81%93%E3%82%8D.jpg",
+  "profile": "🐱2020.5.13配信start💜\n\n➤➤➤2020.6〜S帯 2020.8/8〜S6🎖\n\n2020.6〜2022.2まで\n\nマンスリーバッチつけてました🎖\n\nS6MAXで旧垢finish❤️‍🔥",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/8d83d652-c695-4a5c-8bec-2fd7b8501de0",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/yui__0130",
+    "kind": "Instagram"
+   },
+   {
+    "url": "https://twitter.com/ykr_poco",
+    "kind": "X"
+   }
+  ]
+ },
+ "さやか": {
+  "name": "さやか🖤🐷",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2026/06/%E3%81%95%E3%82%84%E3%81%8B-scaled.jpeg",
+  "profile": "プロ野球がだいすき⚾️普段はグラビアやタレントのお仕事をしながらライブ配信もしています！雑談メインなので是非遊びに来てください✨",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/389651e5-aa03-4894-87c8-8e60d4ac819c",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/s.sayaka1105",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "ゆきちゃん": {
+  "name": "ゆきちゃん☃️",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2025/07/%E3%82%86%E3%81%8D%E3%81%A1%E3%82%83%E3%82%93.jpeg",
+  "profile": "楽しくお喋り配信してます😆",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/1d94de36-5f23-4d8b-b09a-9a08a0567cc5",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/yukichan_no613/",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "遊汰様": {
+  "name": "遊汰様🌙✞",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2021/12/%E3%83%A6%E3%82%A6%E3%82%BF.jpg",
+  "profile": "誕生日 6月26日\n\nゲーム、アニメ、オリジナルのコスプレもしつつ毎日深夜メインで配信中。\n\n毎日の出来事を語り合える雑談枠です。\n\n自枠イベントも開催しております。",
+  "sns": [
+   {
+    "url": "https://t.co/9GTS1nHpdb?ssr=true",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@yuta_empire",
+    "kind": "TikTok"
+   },
+   {
+    "url": "https://www.instagram.com/000ytatatatan000/?hl=ja",
+    "kind": "Instagram"
+   },
+   {
+    "url": "https://www.youtube.com/channel/UC_mOGuJII2H-WudvlNyZqQw",
+    "kind": "YouTube"
+   },
+   {
+    "url": "https://twitter.com/yuta_pococha",
+    "kind": "X"
+   }
+  ]
+ },
+ "ぴの": {
+  "name": "ぴの",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2026/05/%E3%81%B4%E3%81%AE.jpeg",
+  "profile": "まってます😺🌟",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/8811d002-fedc-458d-85db-75d242bdda86",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@pinochan07?_r=1&_t=ZS-965qzcq0LnL",
+    "kind": "TikTok"
+   }
+  ]
+ },
+ "レイミ": {
+  "name": "レイミ🕊️🎙️",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2024/09/%E3%83%AC%E3%82%A4%E3%83%9F.jpg",
+  "profile": "福岡在住、2児の母。マスクライバーとして活動しています🎙️🕊️\n\n楽しい時間も、心に響く一曲も、みんなと一緒だから生まれるもの。 \n\n支えてくれるリスナーさん、導いてくれる人たちへの感謝を忘れずに。\n\n今日も笑顔と歌を届けます！",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/2145cc3c-b671-44bc-a274-96f5065e905a",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@reimi0133",
+    "kind": "TikTok"
+   },
+   {
+    "url": "https://www.instagram.com/reimismiles/",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "きいち": {
+  "name": "きいち",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2025/02/%E3%81%8D%E3%81%84%E3%81%A1.jpg",
+  "profile": "リスナーは主をいじり倒せ🫵🏻かかってこい😆",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/553530b8-3df4-4bd4-895f-f80823f25876",
+    "kind": "Pococha"
+   }
+  ]
+ },
+ "えみりんモンロー": {
+  "name": "💄えみりん🎙️モンロー👠",
+  "photo": "assets/livers/emirin-monroe.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "お天": {
+  "name": "お天🍃",
+  "photo": "assets/livers/oten-v2.jpg",
+  "profile": "ほんとにまじでお天です🍃 \n\nほんとにまじで負けず嫌いです。。。 \n\nポコチャでほんとにまじで上目指してる人間なので最強目指して頑張ってます🫡",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/ac64d139-2851-4305-8880-9c031334709a",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/oten_the_oten_poco?igsh=MTJtb3ZvaWNnZWp0OA%3D%3D&utm_source=qr",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "みみみ": {
+  "name": "🖤みみみ🧸💋",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2022/02/S__8396837.jpg",
+  "profile": "2020.04.26〜ポコチャデビュー🧸\n\n2020.9.4 S6 突入(๑•̀ω-)و｡*\n\n感謝が止まらないよ😭❤️\n\nS帯キープして1年半以上経ちました🙇🏻‍♀️\n\n(6/16～)\n\n本当にありがとう🥰\n\n今は事務所に入り\n\n最短S帯目指してます🤭♥️\n \n🌸お花のアーチ🌼集めてます♥️\n \n💕ｼｭﾜｼｭﾜﾊｰﾄ💛\n\n5月4位 6月2位 7月3位\n\n8月3位 9月2位 10月2位\n\n11月1位18000個over\n\n🌸お花のアーチ🌼\n\n12月1位 1月2位 2月2位\n\n3月1位 4月1位 5月1位\n\n6月1位 7月1位 8月1位\n\n9月1位10月1位11月1位\n\n12月1位 1月1位\n\n11ヶ月連続1位😭♥️\n\nいつもありがとう♥️\n \n⚔️イベント⚔️\n\nキャンディイベ1位🥇\n\nないすぅ～プロフィール1位🥇\n\n加湿器イベ1位🥇\n\n福岡広告3位🥉\n\n九州・沖縄TVCMイベ4位🏅\n\nLINEイベ2位🥈\n\nココぬいぐるみ3位🥉\n\n九州CM1位🥇\n \n一人一人との出会いを大切に\n\n配信していきたいと思ってます🧸🖤\n\nですが、見てくださるﾘｽﾅｰ様が\n\n嫌な思いをするような\n\n発言・行動はお控えください。\n \n推しﾏ『🖤名前🧸💋』です♥️\n\n応援してくださると嬉しいです✨✨\n\n単推ししてもろてええええ\n \n❌嫌いなタイプ❌\n\n常識外れ、自己中\n\n妬み嫉妬がすごい人\n\n感謝が足りない人😂\n\n言葉が選べない人\n\nいちいち拗ねる人\n\nネガティブな人\n\n自分が！自分が！ってなる人\n\nあなたの行動一つ一つ見てます。\n\nお金がすべてではない。\n \n🍼頑張る理由🍼\n\n家族のため(結構ガチ)",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/df901b36-d202-45b3-8365-1e88266768cd",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/pkc_000426/",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "パルム": {
+  "name": "パルム🍨💖",
+  "photo": "assets/livers/palm.jpg",
+  "profile": "",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/7008b016-8e87-4064-91bb-4c3d411c5f9d",
+    "kind": "Pococha"
+   }
+  ]
+ },
+ "おとうふ": {
+  "name": "おとうふ☁️🎀",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2025/03/%E3%81%8A%E3%81%A8%E3%81%86%E3%81%B5-scaled.jpeg",
+  "profile": "大学を卒業して、専業ライバーになりました！おとうふです☁️🎀 \n\n皆に元気を与えます‼️",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/b59e2b92-4c3b-42b6-bb65-1d29dfcd9439",
+    "kind": "Pococha"
+   }
+  ]
+ },
+ "鬼嫁Luna": {
+  "name": "鬼嫁Luna",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2025/06/%E9%AC%BC%E5%AB%81Luna.jpeg",
+  "profile": "一児のシンママ\n\nポコチャで旦那(下僕)を集めてＳ6目指してます。\n\n全ては私のさじ加減で、気に入らないやつは即🥦\n\nタワマン並の賃料でなかなか埋まらない下僕寮(ファミリー)でみんなで従順なドMお待ちしております😈🖤",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/7a27861b-0990-42a3-ba4c-d2b77d3a0836",
+    "kind": "Pococha"
+   }
+  ]
+ },
+ "はに": {
+  "name": "はに",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2026/03/%E3%81%AF%E3%81%AB-scaled.jpeg",
+  "profile": "はに🦋.⋆☽です🫶\n\n雑談や歌、関西弁で\n\n楽しく配信してます！",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/c45b07f9-70b0-413a-aa50-18e0ecf5002c",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/hanni.hannichannel?igsh=MXgwYm4wNHRmbGg5bA%3D%3D&utm_source=qr",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "おれのれお": {
+  "name": "おれのれお",
+  "photo": "assets/livers/orenoreo.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "くるもん": {
+  "name": "🥂🐻卍くるもん卍🐻🥂",
+  "photo": "assets/livers/kurumon.jpg",
+  "profile": "はじめまして！みんなで楽しくをモットーにほぼ毎日配信してます！みなさん是非枠に遊びに来てくださいね！",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/9a8c5f9f-d5af-4c3b-9e85-dd7b2e8586b6",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/kurumi_and_co/",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "れなめろ": {
+  "name": "れなめろ",
+  "photo": "assets/livers/renamero.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "空希れいな": {
+  "name": "空希れいな",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2024/05/%E7%A9%BA%E5%B8%8C%E3%82%8C%E3%81%84%E3%81%AA%E2%91%A1.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "カエすも": {
+  "name": "カエすも",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2022/11/S__32292884.jpg",
+  "profile": "Jkミスコン元広島県代表の&#8221;カエすも🐴❤️‍🔥&#8221;です。雑談と歌枠やってます！トップライバー目指しながら強い枠を作っていきたいです🤩",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/70f7e651-28bc-4dcc-9a74-f64956aa76a4",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@svtxtw",
+    "kind": "TikTok"
+   }
+  ]
+ },
+ "かりんとう": {
+  "name": "かりんとう",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2025/10/S__98770953.jpg",
+  "profile": "・ポンコツ・シンママ・雑談",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/ja-jp/app/users/84f0fce4-b8fb-455e-8aec-7f587afc1926",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@karinto0312?_t=ZS-90MyzZrT8F6&_r=1",
+    "kind": "TikTok"
+   },
+   {
+    "url": "https://www.instagram.com/karin_to_0312",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "雲ちゃん": {
+  "name": "雲ちゃん",
+  "photo": "assets/livers/kumochan.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "はづた": {
+  "name": "はづた",
+  "photo": "assets/livers/hazuta.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "みきやん": {
+  "name": "みきやん",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2023/10/yanchan-scaled.jpeg",
+  "profile": "2022年9月1日からポコチャで配信してるみきやんです🫶気軽に【やん】って呼んでくださいっ！元々、仕事と配信の両立だったのを辞めて戻ってきて早1年経過！別れる人もいれば出会う人もいますっ🙋‍♀️もちろん、みんなも一生やんの配信を見るって人は少ないと思う😊だから毎日の配信を誇りをもって配信したいと思います🤤(もちろんわたしもね)始球式できるときが卒業だと思ってます⚾️✨️",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/216fc9b3-0a88-4786-9b47-f5a95e1fb3bf",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://instagram.com/yanchan0901?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr",
+    "kind": "Instagram"
+   },
+   {
+    "url": "https://twitter.com/p_yan0406",
+    "kind": "X"
+   }
+  ]
+ },
+ "なむ": {
+  "name": "なむ🪄ྀིᝰꪑ",
+  "photo": "assets/livers/namu.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "カリスマしょーま": {
+  "name": "🐱カリスマしょーま🍻",
+  "photo": "assets/livers/karisma-shoma-v2.jpg",
+  "profile": "なんかしらのカリスマです。 \n\nブチギレツッコミ歌枠という全米が泣いた国宝級の配信をしてます。\n\n185cmの長身を活かした斜め上からのツッコミでリアコリスナーを幾度となく失いましたが、 現在は穏やかな村を作り、\n\nドMな淑女とドMな紳士が日頃のストレスを発散する老人施設のような居心地の良い配信になりました。",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/ee77a749-6499-45ff-84db-a25ad34a9508",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.instagram.com/charisma_shoma?igsh=Njg3ZnoxdGt6azl5&utm_source=qr",
+    "kind": "Instagram"
+   }
+  ]
+ },
+ "チャレンジこう": {
+  "name": "チャレンジこう",
+  "photo": "assets/livers/challenge-kou.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "しゅんしゅん": {
+  "name": "しゅんしゅん",
+  "photo": "assets/livers/shunshun.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "まぅち": {
+  "name": "まぅち",
+  "photo": "assets/livers/mauchi.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "こゆたん": {
+  "name": "こゆたん🐱🎸あまねこゆ",
+  "photo": "assets/livers/koyutan-v2.jpg",
+  "profile": "ねこ好き夜型バンドマン\n\n佐賀から東京そして全国へ！\n\nライブ配信をしながら全国ツアーを目指しています。\n\nColorSing→https://colorsing.page.link/fJKFcPo8DjQPjzTo6",
+  "sns": [
+   {
+    "url": "https://www.tiktok.com/@koyutan.gtvo?_t=8a9KkMmm3e5&_r=1",
+    "kind": "TikTok"
+   },
+   {
+    "url": "https://www.instagram.com/koyutan.gtvo/",
+    "kind": "Instagram"
+   },
+   {
+    "url": "https://youtube.com/@user-vf6pf7je9m?si=7eEFR_qnz4eBsL5J",
+    "kind": "YouTube"
+   },
+   {
+    "url": "https://mobile.twitter.com/yuu_gtvo",
+    "kind": "X"
+   }
+  ]
+ },
+ "都丸あかり": {
+  "name": "都丸あかり🦙。",
+  "photo": "assets/livers/tomaru-akari.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "伊月": {
+  "name": "𓂃𑁍ྀ伊月🥀ྀི🐕‍🦺ྀི",
+  "photo": "assets/livers/itsuki-v2.jpg",
+  "profile": "🔰2023.10.07𝐬𝐭𝐚𝐫𝐭▷ 『どしたん、話聞こか』のただのええ人(ライバー)いつも沢山の笑顔をあべさだお🥹❤︎(ありがとう)❤︎ポコチャで日々成長痛❤︎枠の温かさは絶対負けません🍀無料応援(♡👏🏷️✍️🎁)が初見様👀を呼び、課金💰応援がランク📯を上げてくれる❣️💪🏻力強い💪🏻応援はあっても🤏🏻微力🤏🏻な応援なんてない.ᐟ‪",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/6fcb39e4-f1eb-40c4-a3ba-b2996b0a286a",
+    "kind": "Pococha"
+   },
+   {
+    "url": "https://www.tiktok.com/@itsuki___0116?_t=8hJrE65m0nP&_r=1",
+    "kind": "TikTok"
+   },
+   {
+    "url": "https://instagram.com/itsuki___0116?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr",
+    "kind": "Instagram"
+   },
+   {
+    "url": "https://x.com/itsuki_rosedog?s=21&t=xnWARJcVhQ6DYNsSP7-cpg",
+    "kind": "X"
+   }
+  ]
+ },
+ "MAHO": {
+  "name": "🔲🔳 M A😴H O 🔳🔲《は》",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2024/06/MAHO%E2%91%A0.jpg",
+  "profile": "",
+  "sns": []
+ },
+ "あがりちゃん": {
+  "name": "🍥あがりちゃん🍥",
+  "photo": "assets/livers/agari.jpg",
+  "profile": "民間企業に勤めるOL、社畜のあがりです\n\nラーメン大好き！もちろん二郎系も！\n\n平日は会社でせっせこ働きながら\n\n皆のおかげで楽しくライバーしてます🍀\n\n👑いつもありがとう🐣‪",
+  "sns": [
+   {
+    "url": "https://www.pococha.com/app/users/50f9bfd5-ef40-49b7-9878-f07b68fa5801",
+    "kind": "Pococha"
+   }
+  ]
+ },
+ "やんちゃん": {
+  "name": "やんちゃん",
+  "photo": "https://live-labo.jp/wp/wp-content/uploads/2023/10/yanchan-scaled.jpeg",
+  "profile": "",
+  "sns": []
+ }
+};
+var LV_ICON={
+  'Pococha':'liver_sns_p','TikTok':'liver_sns_tt','Instagram':'liver_sns_i',
+  'X':'liver_sns_t','YouTube':'liver_sns_y'
+};
+var LV_BASE='https://live-labo.jp/wp/wp-content/themes/livelabonew/images/';
+(function(){
+  var modal=document.getElementById('lvModal');
+  function open(key){
+    var d=LIVER_DATA[key]; if(!d) return;
+    var im=document.getElementById('lvImg'); im.src=d.photo||''; im.alt=d.name||key;
+    document.getElementById('lvName').textContent=d.name||key;
+    var pw=document.getElementById('lvProfWrap');
+    if(d.profile){ document.getElementById('lvProf').textContent=d.profile.replace(/\r/g,'').replace(/\n[ \t]*\n+/g,'\n'); pw.hidden=false; }
+    else { pw.hidden=true; }
+    var box=document.getElementById('lvSns'); box.innerHTML='';
+    var none=document.getElementById('lvNone');
+    if(d.sns && d.sns.length){
+      d.sns.forEach(function(s){
+        var a=document.createElement('a');
+        a.href=s.url; a.target='_blank'; a.rel='noopener';
+        var ic=LV_ICON[s.kind];
+        if(ic){ var i=document.createElement('img'); i.src=LV_BASE+ic+'.svg'; i.alt=''; a.appendChild(i); }
+        a.appendChild(document.createTextNode(s.kind));
+        box.appendChild(a);
+      });
+      none.hidden=true;
+    } else { none.hidden=false; }
+    modal.classList.add('open');
+    modal.querySelector('.lv-panel').scrollTop=0;
+    document.body.style.overflow='hidden';
+  }
+  function close(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+  /* 一覧カード */
+  Array.prototype.forEach.call(document.querySelectorAll('.liver-card'), function(c){
+    var img=c.querySelector('.liver-photo img'); if(!img) return;
+    var k=img.getAttribute('alt'); if(!LIVER_DATA[k]) return;
+    c.addEventListener('click', function(){ open(k); });
+  });
+  /* 活躍中のライバー（マーキー） */
+  Array.prototype.forEach.call(document.querySelectorAll('.m-item'), function(a){
+    var img=a.querySelector('img'); if(!img) return;
+    var k=img.getAttribute('alt'); if(!k || !LIVER_DATA[k]) return;
+    a.addEventListener('click', function(e){ e.preventDefault(); open(k); });
+  });
+  document.getElementById('lvClose').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if(e.target===modal) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
 <?php wp_footer(); ?>
 </body>
 </html>
